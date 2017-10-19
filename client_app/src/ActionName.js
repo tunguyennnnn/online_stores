@@ -2,3 +2,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAIL = 'SINGUP_FAIL'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
+
+// navigation
+
+export const NAVIGATE_TO_PERSONAL_PAGE = 'NAVIGATE_TO_PERSONAL_PAGE'
