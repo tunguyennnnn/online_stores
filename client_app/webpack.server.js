@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const config = require('./webpack.config')
-
+const port = 8000;
 new WebpackDevServer(webpack(config), {
   hot: true,
   historyApiFallback: true,
@@ -22,9 +22,9 @@ new WebpackDevServer(webpack(config), {
     // chunks: false
     // chunkModules: false
   }
-}).listen(8080, 'localhost', function (err) {
+}).listen(port, 'localhost', function (err) {
   if (err) {
     console.log(err)
   }
-  console.log('Listening at localhost:8080')
+  console.log(`Listening at localhost: ${port}`)
 })

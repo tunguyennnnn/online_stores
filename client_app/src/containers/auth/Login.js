@@ -3,6 +3,13 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {login} from '../../actions/auth-actions'
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    login
+  }, dispatch)
+}
+
+@connect(null, mapDispatchToProps)
 class Login extends React.Component {
   constructor (props) {
     super(props)
@@ -49,10 +56,5 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    login
-  }, dispatch)
-}
 
-export default connect(null, mapDispatchToProps)(Login)
+export { Login }
