@@ -4,10 +4,9 @@ import {browserHistory} from 'react-router'
 import { routerMiddleware, push } from 'react-router-redux'
 import AllReducers from './reducers/AllReducers'
 
-const middleware = routerMiddleware(browserHistory)
-
 const store = createStore(
   AllReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(routerMiddleware(browserHistory), thunk)
 )
 
