@@ -27,7 +27,8 @@ class MainPage extends React.Component {
     console.log(navigateToPersonalPage);
     return (
       <div>
-        <Navbar />
+        <Navbar userEmail={'tunguyen@gmail.com'}
+                navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')} />
       </div>
     )
   }
