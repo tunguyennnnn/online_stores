@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
       }
       break
     }
-    case AN.SINGUP_SUCCESS: {
+    case AN.SIGNUP_SUCCESS: {
       hashHistory.push('/')
       return {
         ...state,

@@ -1,6 +1,6 @@
 import React from 'react'
-import Login from './auth/Login'
-import Signup from './auth/Signup'
+import { Login } from './auth/Login'
+import { Signup } from './auth/Signup'
 
 export default class AuthPage extends React.Component {
   render () {
