@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as NavigationActions from '../actions/navigation-actions'
 // import Header from '../components/mainpage/Header'
-import Home from '../components/mainpage/Home'
+import Navbar from '../components/navbar/navbar'
 
 const mapStateToProps = (state) => {
   return {
@@ -46,11 +46,8 @@ class MainPage extends React.Component {
 
     return (
       <div>
-        {/* <Header userEmail={'tunguyen@gmail.com'}
-                navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}
-        /> */}
-        <Home data={data}/>
-
+        <Navbar userEmail={'tunguyen@gmail.com'}
+        navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}/>
       </div>
     )
   }
