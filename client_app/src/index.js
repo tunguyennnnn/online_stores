@@ -1,4 +1,5 @@
 import './styles/style.css'
+import 'rxjs'
 import React from 'react'
 import ReactDom from 'react-dom'
 import {Router, Route, IndexRoute, hashHistory, browserHistory} from 'react-router'
@@ -7,7 +8,8 @@ import {Provider} from 'react-redux'
 import MainPage from './containers/MainPage'
 import AuthPage from './containers/AuthPage'
 import PersonalPage from './containers/PersonalPage'
-import store from './Store'
+import configStore from './Store'
+const store = configStore()
 
 const app = document.getElementById('app')
 
