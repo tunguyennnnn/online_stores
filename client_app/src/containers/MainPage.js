@@ -2,7 +2,7 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as NavigationActions from '../actions/navigation-actions'
-import Header from '../components/mainpage/Header'
+import Navbar from '../components/mainpage/Navbar'
 
 const mapStateToProps = (state) => {
   return {
@@ -27,9 +27,7 @@ class MainPage extends React.Component {
     console.log(navigateToPersonalPage);
     return (
       <div>
-        <Header userEmail={'tunguyen@gmail.com'}
-                navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}
-        />
+        <Navbar />
       </div>
     )
   }
