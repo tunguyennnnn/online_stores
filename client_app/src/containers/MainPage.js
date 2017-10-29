@@ -2,12 +2,13 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as NavigationActions from '../actions/navigation-actions'
-import Header from '../components/mainpage/Header'
+// import Header from '../components/mainpage/Header'
 import Home from '../components/mainpage/Home'
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    items: state.items
   }
 }
 
@@ -23,26 +24,33 @@ class MainPage extends React.Component {
     super()
   }
 
+  componentWillMount () {
+    this.props.navigateToHomePage()
+  }
+
   render () {
+    console.log(this.props.items)
     const data = [
-      {"category":"Buy1&Sell",
-      "subCategories":["Clothing","Books", "Electronics","Cars"]
-    },
-    {"category":"Buy2&Sell",
-    "subCategories":["Clothing","Books", "Electronics","Cars"]
-    },
-    {"category":"Buy3&Sell",
-    "subCategories":["Clothing","Books", "Electronics","Cars"]
-    }       
+      {'category':'BuyandSell',
+      'subCategories':['Clothing','Books', 'Electronics','Cars']
+      },
+      {'category':'Rent',
+      'subCategories':['Clothing','Books', 'Electronics','Cars']
+      },
+      {'category':'Services',
+      'subCategories':['Clothing','Books', 'Electronics','Cars']
+      }
     ]
+
     const {navigateToPersonalPage} = this.props
-    console.log(navigateToPersonalPage);
+
     return (
       <div>
         {/* <Header userEmail={'tunguyen@gmail.com'}
                 navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}
         /> */}
         <Home data={data}/>
+
       </div>
     )
   }
