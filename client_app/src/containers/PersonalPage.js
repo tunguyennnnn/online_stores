@@ -6,7 +6,7 @@ export default class PersonalPage extends React.Component {
   render () {
     return (
       <div>
-        Personal page
+        
       </div>
     )
   }
