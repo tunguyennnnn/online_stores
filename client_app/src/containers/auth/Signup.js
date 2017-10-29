@@ -3,6 +3,13 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {signup} from '../../actions/auth-actions'
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    signup
+  }, dispatch)
+}
+
+@connect(null, mapDispatchToProps)
 class Signup extends React.Component {
   constructor () {
     super()
@@ -72,9 +79,4 @@ class Signup extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    signup
-  }, dispatch)
-}
-export default connect(null, mapDispatchToProps)(Signup)
+export { Signup }
