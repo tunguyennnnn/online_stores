@@ -5,11 +5,11 @@ export default class Navbar extends React.Component {
     const {userEmail, navigateToPersonalPage} = this.props
     return (
       <div>
-        <a data-beloworigin='true' class='dropdown-button btn'
+        <a data-hover='true' data-beloworigin='true' class='dropdown-button btn'
           href='#' data-activates='BuySell'> Buy & Sell </a>
-        <a data-beloworigin='true' class='dropdown-button btn'
+        <a data-hover='true' data-beloworigin='true' class='dropdown-button btn'
           href='#' data-activates='Rent'> Rent </a>
-        <a data-beloworigin='true' class='dropdown-button btn'
+        <a data-hover='true' data-beloworigin='true' class='dropdown-button btn'
           href='#' data-activates='Services'> Services </a>
         <ul id='BuySell' class='dropdown-content'>
           <li><a href=''>Clothing</a></li>
