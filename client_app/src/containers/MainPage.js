@@ -29,7 +29,6 @@ class MainPage extends React.Component {
   }
 
   render () {
-    console.log(this.props.items)
     const data = [
       {'category':'BuyandSell',
       'subCategories':['Clothing','Books', 'Electronics','Cars']

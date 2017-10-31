@@ -22,7 +22,6 @@ class Login extends React.Component {
     const {type, value} = event.target
     const {credentials} = this.state
     credentials[type] = value
-    console.log(credentials)
     return this.setState({credentials})
   }
 

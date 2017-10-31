@@ -27,14 +27,12 @@ class Signup extends React.Component {
     const {id, value} = event.target
     const {signupInfo} = this.state
     signupInfo[id] = value
-    console.log(signupInfo)
     return this.setState({signupInfo})
   }
 
   onSave (event) {
     event.preventDefault()
     const {signupInfo} = this.state
-    console.log(signupInfo)
     if (true) { //TODO check the fields
       this.props.signup(signupInfo)
     } else {
