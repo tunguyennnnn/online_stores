@@ -32,17 +32,35 @@ export default class NewPostForm extends React.Component {
     return (
       <div>
         <Form.Field>
-          <label>Title</label>
-          <Input id='title' type='text' onChange={this.onChange.bind(this)} />
-          <label>Image Url</label>
-          <Input id='imageUrl' type='text' onChange={this.onChange.bind(this)} />
-          <label>Description Url</label>
-          <TextArea id='description' onChange={this.onChange.bind(this)} />
-          <label>Price</label>
-          <Input id='price' type='text' onChange={this.onChange.bind(this)} />
-          <Select id='category' placeholder='Select Category' options={CATEGORY} onChange={this.onChange.bind(this)} />
-          <button class='btn waves-effect waves-light' onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</button>
-          <button class='btn' onClick={this.props.cancelPost}>Cancel</button>
+          <div>
+            <label>Title</label>
+            <br />
+            <Input id='title' type='text' onChange={this.onChange.bind(this)} />
+          </div>
+          <div>
+            <label>Image Url</label>
+            <br />
+            <Input id='imageUrl' type='text' onChange={this.onChange.bind(this)} />
+          </div>
+          <div>
+            <label>Description Url</label>
+            <br />
+            <TextArea id='description' onChange={this.onChange.bind(this)} />
+          </div>
+          <div>
+            <label>Price</label>
+            <br />
+            <Input id='price' type='text' onChange={this.onChange.bind(this)} />
+          </div>
+          <div>
+            <label>Category</label>
+            <br />
+            <Select id='category' placeholder='Select Category' options={CATEGORY} onChange={this.onChange.bind(this)} />
+          </div>
+          <div>
+            <button class='btn waves-effect waves-light' onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</button>
+            <button class='btn' onClick={this.props.cancelPost}>Cancel</button>
+          </div>
         </Form.Field>
       </div>
     )
