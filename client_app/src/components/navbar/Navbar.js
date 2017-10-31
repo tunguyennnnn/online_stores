@@ -1,42 +1,47 @@
 import React from 'react'
+import { Dropdown, Menu } from 'semantic-ui-react'
 
 export default class Navbar extends React.Component {
   render () {
     const {userEmail, navigateToPersonalPage} = this.props
     return (
-      <div>
-        <ul id='BuySell' class='dropdown-content'>
-          <li><a href=''>Clothing</a></li>
-          <li><a href=''>Books</a></li>
-          <li><a href=''>Electronics</a></li>
-          <li><a href=''>Cars</a></li>
-        </ul>
-        <ul id='Rent' class='dropdown-content'>
-          <li><a href=''>Clothing</a></li>
-          <li><a href=''>Books</a></li>
-          <li><a href=''>Electronics</a></li>
-          <li><a href=''>Cars</a></li>
-        </ul>
-        <ul id='Services' class='dropdown-content'>
-          <li><a href=''>Clothing</a></li>
-          <li><a href=''>Books</a></li>
-          <li><a href=''>Electronics</a></li>
-          <li><a href=''>Cars</a></li>
-        </ul>
-        <nav>
-          <div class='nav-wrapper'>
-            <ul>
-              <li><a data-hover='true' data-beloworigin='true' class='dropdown-button'
-                href='#' data-activates='BuySell'> Buy & Sell </a></li>
-              <li><a data-hover='true' data-beloworigin='true' class='dropdown-button'
-                href='#' data-activates='Rent'> Rent </a></li>
-              <li><a data-hover='true' data-beloworigin='true' class='dropdown-button'
-                href='#' data-activates='Services'> Services </a></li>
-              <li><a onClick={navigateToPersonalPage.bind(null)}>{userEmail}</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+      <Menu>
+        <Dropdown text='Buy&Sell' simple item icon='none'>
+          <Dropdown.Menu>
+            <Dropdown.Item>Clothing</Dropdown.Item>
+            <Dropdown.Item>Books</Dropdown.Item>
+            <Dropdown.Item>Electronics</Dropdown.Item>
+            <Dropdown.Item>Musical Instruments</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown text='Services' simple item icon='none'>
+          <Dropdown.Menu>
+            <Dropdown.Item>Tutors</Dropdown.Item>
+            <Dropdown.Item>Event Planners</Dropdown.Item>
+            <Dropdown.Item>Photographers</Dropdown.Item>
+            <Dropdown.Item>Personal trainers</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown text='Rent' simple item icon='none'>
+          <Dropdown.Menu>
+            <Dropdown.Item>Electronics</Dropdown.Item>
+            <Dropdown.Item>Car</Dropdown.Item>
+            <Dropdown.Item>Apartments</Dropdown.Item>
+            <Dropdown.Item>Wedding - dresses</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown text='Jobs' simple item icon='none'>
+          <Dropdown.Menu>
+            <Dropdown.Item>Accounting & Management</Dropdown.Item>
+            <Dropdown.Item>Bar, Food & Hospitality</Dropdown.Item>
+            <Dropdown.Item>Healthcare</Dropdown.Item>
+            <Dropdown.Item>Programmers & Computer</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Menu.Item onClick={navigateToPersonalPage.bind(null)} position='right'>
+          {userEmail}
+        </Menu.Item>
+      </Menu>
     )
   }
 }
