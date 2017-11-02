@@ -50,6 +50,14 @@ export default function (state = pageState, action) {
         showAll: false
       }
     }
+    case AN.EDIT_POST: {
+      return {
+        ...state,
+        newPost: true,
+        showAll: false,
+        postInfo: action.payload.postInfo
+      }
+    }
     case AN.CANCEL_POST: {
       return {
         ...state,

@@ -29,28 +29,29 @@ export default class NewPostForm extends React.Component {
   }
 
   render () {
+    const {itemId, title, imageUrl, description, price, category} = this.props.postInfo
     return (
       <div>
         <Form.Field>
           <div>
             <label>Title</label>
             <br />
-            <Input id='title' type='text' onChange={this.onChange.bind(this)} />
+            <Input id='title' type='text' value={title} onChange={this.onChange.bind(this)} />
           </div>
           <div>
             <label>Image Url</label>
             <br />
-            <Input id='imageUrl' type='text' onChange={this.onChange.bind(this)} />
+            <Input id='imageUrl' type='text' value={imageUrl} onChange={this.onChange.bind(this)} />
           </div>
           <div>
             <label>Description Url</label>
             <br />
-            <TextArea id='description' onChange={this.onChange.bind(this)} />
+            <TextArea id='description' value={description} onChange={this.onChange.bind(this)} />
           </div>
           <div>
             <label>Price</label>
             <br />
-            <Input id='price' type='text' onChange={this.onChange.bind(this)} />
+            <Input id='price' type='text' value={price} onChange={this.onChange.bind(this)} />
           </div>
           <div>
             <label>Category</label>

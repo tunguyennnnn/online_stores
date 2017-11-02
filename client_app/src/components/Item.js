@@ -25,7 +25,7 @@ export default class Item extends React.Component {
               <a href='#'>More</a>
               {
                 belongToCurrentUser
-                  ? completed ? null : <a href='#' onClick={editPost.bind(null, this.props.itemInfo)}>Edit</a>
+                  ? completed ? null : <a onClick={editPost.bind(null, this.props.itemInfo)}>Edit</a>
                   : <a href='#'>{ownerName}</a>
               }
             </div>
