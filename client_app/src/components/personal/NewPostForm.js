@@ -1,6 +1,5 @@
 import React from 'react'
-import {Form, Input, TextArea, Select} from 'semantic-ui-react'
-
+import {Form, Input, TextArea, Select, Button} from 'semantic-ui-react'
 const CATEGORY = [
   {key: 'Vehicle.Car', value: 'Vehicles - Car', text: 'Vehicles - Car'},
   {key: 'Vehicle.Bike', value: 'Vehicles - Bike', text: 'Vehicles - Bike'},
@@ -58,8 +57,8 @@ export default class NewPostForm extends React.Component {
             <Select id='category' placeholder='Select Category' options={CATEGORY} onChange={this.onChange.bind(this)} />
           </div>
           <div>
-            <button class='btn waves-effect waves-light' onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</button>
-            <button class='btn' onClick={this.props.cancelPost}>Cancel</button>
+            <Button onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</Button>
+            <Button onClick={this.props.cancelPost}>Cancel</Button>
           </div>
         </Form.Field>
       </div>
