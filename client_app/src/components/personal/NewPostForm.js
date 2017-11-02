@@ -29,7 +29,7 @@ export default class NewPostForm extends React.Component {
   }
 
   render () {
-    const {itemId, title, imageUrl, description, price, category} = this.props.postInfo
+    const {itemId, title, imageUrl, description, price, category} = this.props.postInfo || {}
     return (
       <div>
         <Form.Field>
