@@ -2,6 +2,7 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {signup} from '../../actions/auth-actions'
+import { Form } from 'semantic-ui-react'
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
@@ -41,38 +42,26 @@ class Signup extends React.Component {
   }
 
   render () {
+    const style = {
+      position: 'absolute',
+      width: '300px',
+      height: '200px',
+      zIndex: '15',
+      top: '40%',
+      left: '50%',
+      margin: '-100px 0 0 -150px',
+      textAlign: 'center'
+    }
     return (
-      <div class='row'>
-        <form class='col s12'>
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input id='firstName' type='text' class='validate' onChange={this.onChange}></input>
-              <label for='firstName'>First Name</label>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input id='lastName' type='text' class='validate' onChange={this.onChange}></input>
-              <label for='lastName'>Last Name</label>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input id='email' type='email' class='validate' onChange={this.onChange}></input>
-              <label for='email'>Email</label>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input id='password' type='password' class='validate' onChange={this.onChange}></input>
-              <label for='password'>Password</label>
-            </div>
-          </div>
-          <div class='row'>
-            <button class='waves-effect waves-light btn blue lighten-1' onClick={this.onSave}>Signup</button>
-          </div>
-        </form>
-      </div>
+      <Form style={style}>
+        <Form.Field>
+          <Form.Input placeholder='Firstname' type='text' onChange={this.onChange} />
+          <Form.Input placeholder='Lastname' type='text' onChange={this.onChange} />
+          <Form.Input placeholder='E-mail address' type='text' onChange={this.onChange} />
+          <Form.Input placeholder='***********' type='password' onChange={this.onChange} />
+          <Form.Button onClick={this.onSave}>Signup</Form.Button>
+        </Form.Field>
+      </Form>
     )
   }
 }
