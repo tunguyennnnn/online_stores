@@ -43,7 +43,7 @@ class Login extends React.Component {
       margin: '-100px 0 0 -150px',
       textAlign: 'center'
     }
-    const styleButton = {position: 'absolute'}
+    const styleButton = {left:'22%', position: 'absolute'}
     return (
       <div style={style}>
         <span><b><font size='16'>Online Store</font></b></span>
@@ -56,15 +56,10 @@ class Login extends React.Component {
               <Input type='password' placeholder='************' onChange={this.onChange} />
             </Form.Field>
             <div style={styleButton}>
-              <Grid columns={2}>
-                <Grid.Column>
-                  <Form.Button onClick={this.onSave}>Login</Form.Button>
-                </Grid.Column>
-                  <Divider vertical >OR</Divider>
-                <Grid.Column>
-                  <Form.Button onClick={this.props.navigateToSignupPage}>Register</Form.Button>
-                </Grid.Column>
-              </Grid>
+              <Form.Group>
+                <Form.Button onClick={this.onSave}>Login</Form.Button>
+                <Form.Button onClick={this.props.navigateToSignupPage}>Register</Form.Button>
+              </Form.Group>
             </div>
           </Form>
       </div>

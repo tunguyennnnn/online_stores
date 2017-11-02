@@ -8,8 +8,8 @@ export default class UserInfoContainer extends React.Component {
     const {data, newPost, showAll} = this.props.userInfo
     const {items} = data
     return (
-      <Grid container columns='equal'>
-        <Grid.Row centered columns={3}>
+      <Grid container>
+        <Grid.Row columns={3}>
           {newPost
             ? <NewPostForm submitPost={this.props.submitPost} cancelPost={this.props.cancelPost} />
             : items.map((d, i) => <Item key={i} itemInfo={d} />)}
