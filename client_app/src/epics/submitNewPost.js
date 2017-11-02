@@ -6,7 +6,7 @@ import { postItemSuccess } from '../actions/personalPageAction'
 export default function submitPost (action$, store) {
   return action$.ofType(AN.SUBMIT_NEW_POST)
     .map(action => action.payload.formInput)
-    .mergeMap(formInput => {
+    .switchMap(formInput => {
       const {userInfo} = store.getState()
       const {id} = userInfo.data
       const request = {
@@ -18,7 +18,7 @@ export default function submitPost (action$, store) {
         body: formInput
       }
       return ajax.post(request)
-        //.map(v => postItemSuccess(v))
+        .map(v => postItemSuccess(v))
         .catch(err => Observable.of({
           type: AN.POST_ITEM_SUCCESS,
           payload: {

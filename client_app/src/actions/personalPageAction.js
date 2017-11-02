@@ -6,6 +6,15 @@ export function addPost () {
   }
 }
 
+export function editPost (postInfo) {
+  return {
+    type: AN.EDIT_POST,
+    payload: {
+      postInfo
+    }
+  }
+}
+
 export function submitPost (formInput) {
   return {
     type: AN.SUBMIT_NEW_POST,

@@ -10,7 +10,10 @@ export default class UserInfoContainer extends React.Component {
       <div class='col s11'>
         {newPost
           ? <NewPostForm submitPost={this.props.submitPost} cancelPost={this.props.cancelPost} />
-          : items.map((d, i) => <Item key={i} itemInfo={d} />)}
+          : items.map((d, i) =>
+              <Item key={i} belongToCurrentUser={'true'} editPost={this.props.editPost} itemInfo={d} />
+            )
+        }
       </div>
     )
   }
