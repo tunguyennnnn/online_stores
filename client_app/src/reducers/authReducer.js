@@ -14,7 +14,6 @@ export default function (state = initialState, action) {
         ...state,
         user: action.payload.user
       }
-      break
     }
     case AN.LOGIN_FAIL: {
       hashHistory.push('/auth')
@@ -22,7 +21,6 @@ export default function (state = initialState, action) {
         ...state,
         error: action.payload.error
       }
-      break
     }
     case AN.SIGNUP_SUCCESS: {
       hashHistory.push('/')
@@ -30,7 +28,6 @@ export default function (state = initialState, action) {
         ...state,
         user: action.payload.user
       }
-      break
     }
     case AN.SIGNUP_FAIL: {
       hashHistory.push('/auth')
@@ -38,7 +35,6 @@ export default function (state = initialState, action) {
         ...state,
         error: action.payload.error
       }
-      break
     }
     default:
       return state

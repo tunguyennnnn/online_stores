@@ -1,6 +1,5 @@
 import React from 'react'
-import {Form, Input, TextArea, Select} from 'semantic-ui-react'
-
+import {Form, Input, TextArea, Select, Button} from 'semantic-ui-react'
 const CATEGORY = [
   {key: 'Vehicle.Car', value: 'Vehicles - Car', text: 'Vehicles - Car'},
   {key: 'Vehicle.Bike', value: 'Vehicles - Bike', text: 'Vehicles - Bike'},
@@ -30,37 +29,38 @@ export default class NewPostForm extends React.Component {
 
   render () {
     const {itemId, title, imageUrl, description, price, category} = this.props.postInfo || {}
+    const gStyle = {width: '100%'}
     return (
-      <div>
-        <Form.Field>
-          <div>
+      <div class='col s12'>
+        <Form.Field class='col s12'>
+          <div class='col s12'>
             <label>Title</label>
             <br />
-            <Input id='title' type='text' value={title} onChange={this.onChange.bind(this)} />
+            <Input style={gStyle} id='title' type='text' value={title} onChange={this.onChange.bind(this)} />
           </div>
-          <div>
+          <div class='col s12'>
             <label>Image Url</label>
             <br />
-            <Input id='imageUrl' type='text' value={imageUrl} onChange={this.onChange.bind(this)} />
+            <Input style={gStyle} id='imageUrl' type='text' value={imageUrl} onChange={this.onChange.bind(this)} />
           </div>
-          <div>
+          <div class='col s12'>
             <label>Description Url</label>
             <br />
-            <TextArea id='description' value={description} onChange={this.onChange.bind(this)} />
+            <TextArea style={gStyle} id='description' value={description} onChange={this.onChange.bind(this)} />
           </div>
-          <div>
+          <div class='col s12'>
             <label>Price</label>
             <br />
-            <Input id='price' type='text' value={price} onChange={this.onChange.bind(this)} />
+            <Input style={gStyle} id='price' type='text' value={price} onChange={this.onChange.bind(this)} />
           </div>
-          <div>
+          <div class='col s12'>
             <label>Category</label>
             <br />
-            <Select id='category' placeholder='Select Category' options={CATEGORY} onChange={this.onChange.bind(this)} />
+            <Select style={gStyle} id='category' placeholder='Select Category' options={CATEGORY} onChange={this.onChange.bind(this)} />
           </div>
-          <div>
-            <button class='btn waves-effect waves-light' onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</button>
-            <button class='btn' onClick={this.props.cancelPost}>Cancel</button>
+          <div class='col s12'>
+            <Button onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</Button>
+            <Button onClick={this.props.cancelPost}>Cancel</Button>
           </div>
         </Form.Field>
       </div>

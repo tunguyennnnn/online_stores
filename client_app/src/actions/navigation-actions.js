@@ -32,3 +32,9 @@ export function receivedAllContent (items) {
     }
   }
 }
+
+export function navigateToSignupPage () {
+  return {
+    type: AN.NAVIGATE_TO_SIGNUP_PAGE
+  }
+}

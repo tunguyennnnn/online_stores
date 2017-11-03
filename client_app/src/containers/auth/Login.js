@@ -2,10 +2,13 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {login} from '../../actions/auth-actions'
+import * as NavigationActions from '../../actions/navigation-actions'
+import { Form, Input, Grid, Divider, Segment } from 'semantic-ui-react'
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    login
+    login,
+    ...NavigationActions
   }, dispatch)
 }
 
@@ -17,7 +20,6 @@ class Login extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.onSave = this.onSave.bind(this)
   }
-
   onChange (event) {
     const {type, value} = event.target
     const {credentials} = this.state
@@ -31,25 +33,35 @@ class Login extends React.Component {
   }
 
   render () {
+    const style = {
+      position: 'absolute',
+      width: '300px',
+      height: '200px',
+      zIndex: '15',
+      top: '50%',
+      left: '50%',
+      margin: '-100px 0 0 -150px',
+      textAlign: 'center'
+    }
+    const styleButton = {left:'22%', position: 'absolute'}
     return (
-      <div class='row'>
-        <form class='col s12'>
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input id='email' type='email' class='validate' onChange={this.onChange}></input>
-              <label for='email'>Email</label>
+      <div style={style}>
+        <span><b><font size='16'>Online Store</font></b></span>
+        <Divider horizontal/>
+          <Form>
+            <Form.Field>
+              <Input type='email' placeholder='E-mail address'  onChange={this.onChange} />
+            </Form.Field>
+            <Form.Field>
+              <Input type='password' placeholder='************' onChange={this.onChange} />
+            </Form.Field>
+            <div style={styleButton}>
+              <Form.Group>
+                <Form.Button onClick={this.onSave}>Login</Form.Button>
+                <Form.Button onClick={this.props.navigateToSignupPage}>Register</Form.Button>
+              </Form.Group>
             </div>
-          </div>
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input id='password' type='password' class='validate' onChange={this.onChange}></input>
-              <label for='password'>Password</label>
-            </div>
-          </div>
-          <div class='row'>
-            <span class='waves-effect waves-light btn blue lighten-1' onClick={this.onSave}>Login</span>
-          </div>
-        </form>
+          </Form>
       </div>
     )
   }

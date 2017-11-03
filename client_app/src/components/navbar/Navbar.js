@@ -6,7 +6,7 @@ export default class Navbar extends React.Component {
     const {userEmail, navigateToPersonalPage} = this.props
     return (
       <Menu>
-        <Dropdown text='Buy&Sell' simple item icon='none'>
+        <Dropdown text='Buy&Sell' simple item>
           <Dropdown.Menu>
             <Dropdown.Item>Clothing</Dropdown.Item>
             <Dropdown.Item>Books</Dropdown.Item>
@@ -14,7 +14,7 @@ export default class Navbar extends React.Component {
             <Dropdown.Item>Musical Instruments</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Dropdown text='Services' simple item icon='none'>
+        <Dropdown text='Services' simple item>
           <Dropdown.Menu>
             <Dropdown.Item>Tutors</Dropdown.Item>
             <Dropdown.Item>Event Planners</Dropdown.Item>
@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
             <Dropdown.Item>Personal trainers</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Dropdown text='Rent' simple item icon='none'>
+        <Dropdown text='Rent' simple item>
           <Dropdown.Menu>
             <Dropdown.Item>Electronics</Dropdown.Item>
             <Dropdown.Item>Car</Dropdown.Item>
@@ -30,7 +30,7 @@ export default class Navbar extends React.Component {
             <Dropdown.Item>Wedding - dresses</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Dropdown text='Jobs' simple item icon='none'>
+        <Dropdown text='Jobs' simple item>
           <Dropdown.Menu>
             <Dropdown.Item>Accounting & Management</Dropdown.Item>
             <Dropdown.Item>Bar, Food & Hospitality</Dropdown.Item>
