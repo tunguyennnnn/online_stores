@@ -2,11 +2,12 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {signup} from '../../actions/auth-actions'
-import { Form } from 'semantic-ui-react'
+import * as NavigationActions from '../../actions/navigation-actions'
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    signup
+    signup,
+    ...NavigationActions
   }, dispatch)
 }
 
@@ -53,15 +54,28 @@ class Signup extends React.Component {
       textAlign: 'center'
     }
     return (
-      <Form style={style}>
-        <Form.Field>
-          <Form.Input placeholder='Firstname' type='text' onChange={this.onChange} />
-          <Form.Input placeholder='Lastname' type='text' onChange={this.onChange} />
-          <Form.Input placeholder='E-mail address' type='text' onChange={this.onChange} />
-          <Form.Input placeholder='***********' type='password' onChange={this.onChange} />
-          <Form.Button onClick={this.onSave}>Signup</Form.Button>
-        </Form.Field>
-      </Form>
+      <div style={style}>
+        <span><b><font size='16'>Online Store</font></b></span>
+        <div class="ui divider"></div>
+        <form class='ui form'>
+          <div class='field'>
+            <input placeholder='Firstname' type='text' onChange={this.onChange} />
+          </div>
+          <div class='field'>
+            <input placeholder='Lastname' type='text' onChange={this.onChange} />
+          </div>
+          <div class='field'>
+            <input placeholder='E-mail address' type='text' onChange={this.onChange} />
+          </div>
+          <div class='field'>
+            <input placeholder='***********' type='password' onChange={this.onChange} />
+          </div>
+          <div class='group'>
+            <button class='ui button' onClick={this.props.navigateToLoginPage}>Back</button>
+            <button class='ui button' onClick={this.onSave}>Signup</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

@@ -13,7 +13,11 @@ export default function (state = initialState, action) {
       return {
         ...state
       }
-      break
+    case AN.NAVIGATE_TO_LOGIN_PAGE:
+      hashHistory.push('/login')
+      return {
+        ...state
+      }
     default:
       return state
   }

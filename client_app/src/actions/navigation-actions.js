@@ -38,3 +38,9 @@ export function navigateToSignupPage () {
     type: AN.NAVIGATE_TO_SIGNUP_PAGE
   }
 }
+
+export function navigateToLoginPage () {
+  return {
+    type: AN.NAVIGATE_TO_LOGIN_PAGE
+  }
+}
