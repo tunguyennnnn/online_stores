@@ -7,10 +7,10 @@ import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-ro
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import { MainPage } from './containers/MainPage'
-import AuthPage from './containers/AuthPage'
 import PersonalPage from './containers/PersonalPage'
 import configStore from './Store'
 import { Signup } from './containers/auth/Signup'
+import { Login } from './containers/auth/Login'
 
 const store = configStore()
 
@@ -19,10 +19,10 @@ const app = document.getElementById('app')
 ReactDom.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path='/' component={MainPage}></Route>
-      <Route path='/signup' component={Signup}></Route>
-      <Route path='/auth' component={AuthPage}></Route>
-      <Route path='/:userId' component={PersonalPage}></Route>
+      <Route path='/' component={MainPage} />
+      <Route path='/login' component={Login} />
+      <Route path='/signup' component={Signup} />
+      <Route path='/:userId' component={PersonalPage} />
     </Router>
   </Provider>
 , app)

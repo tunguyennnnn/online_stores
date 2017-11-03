@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {login} from '../../actions/auth-actions'
 import * as NavigationActions from '../../actions/navigation-actions'
-import { Form, Input, Grid, Divider, Segment } from 'semantic-ui-react'
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
@@ -47,21 +46,19 @@ class Login extends React.Component {
     return (
       <div style={style}>
         <span><b><font size='16'>Online Store</font></b></span>
-        <Divider horizontal/>
-          <Form>
-            <Form.Field>
-              <Input type='email' placeholder='E-mail address'  onChange={this.onChange} />
-            </Form.Field>
-            <Form.Field>
-              <Input type='password' placeholder='************' onChange={this.onChange} />
-            </Form.Field>
-            <div style={styleButton}>
-              <Form.Group>
-                <Form.Button onClick={this.onSave}>Login</Form.Button>
-                <Form.Button onClick={this.props.navigateToSignupPage}>Register</Form.Button>
-              </Form.Group>
+        <div class='ui divider'/>
+        <form class='ui form'>
+          <div class='field'>
+            <input type='email' placeholder='E-mail address'  onChange={this.onChange} />
+          </div>
+          <div class='field'>
+            <input type='password' placeholder='************' onChange={this.onChange} />
+          </div>
+            <div class='group'>
+              <button class='ui button' onClick={this.onSave}>Login</button>
+              <button class='ui button' onClick={this.props.navigateToSignupPage}>Register</button>
             </div>
-          </Form>
+        </form>
       </div>
     )
   }
