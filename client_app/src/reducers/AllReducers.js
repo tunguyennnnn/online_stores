@@ -5,7 +5,7 @@ import allItemReducer from './allItemReducer'
 import navigationReducer from './navigationReducer'
 
 const allReducers = combineReducers({
-  items: allItemReducer,
+  allItems: allItemReducer,
   auth: authReducer,
   userInfo: userInfoReducer,
   navigation: navigationReducer

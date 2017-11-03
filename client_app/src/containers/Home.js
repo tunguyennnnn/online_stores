@@ -9,7 +9,7 @@ import Item from '../components/item'
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    items: state.items
+    data: state.allItems
   }
 }
 
@@ -31,12 +31,14 @@ export default class Home extends React.Component {
 
   render () {
     const style = {marginTop: '2vw', marginBottom: '2vw'}
-    const {navigateToPersonalPage, items} = this.props
+    console.log(this.props)
+    const {navigateToPersonalPage, data} = this.props
+    const {items} = data
     return (
       <div>
         <Navbar userEmail={'tunguyen@gmail.com'}
         navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}/>
-      <div class='ui four cards'>
+      <div class='ui four stackable cards'>
           {items.map((d, i) =><Item key={i} itemInfo={d} />)}
         </div>
       </div>
