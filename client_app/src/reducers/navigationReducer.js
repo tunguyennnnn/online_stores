@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
         ...state
       }
     case AN.NAVIGATE_TO_LOGIN_PAGE:
-      hashHistory.push('/auth')
+      hashHistory.push('/login')
       return {
         ...state
       }

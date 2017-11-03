@@ -19,10 +19,10 @@ const app = document.getElementById('app')
 ReactDom.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path='/' component={MainPage}></Route>
-      <Route path='/signup' component={Signup}></Route>
-      <Route path='/auth' component={AuthPage}></Route>
-      <Route path='/:userId' component={PersonalPage}></Route>
+      <Route path='/' component={MainPage} />
+      <Route path='/login' component={AuthPage} />
+      <Route path='/signup' component={Signup} />
+      <Route path='/:userId' component={PersonalPage} />
     </Router>
   </Provider>
 , app)
