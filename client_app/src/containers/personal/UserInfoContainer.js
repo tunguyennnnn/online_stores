@@ -1,7 +1,6 @@
 import React from 'react'
 import Item from '../../components/Item'
 import NewPostForm from '../../components/personal/NewPostForm'
-import {Grid } from 'semantic-ui-react'
 
 export default class UserInfoContainer extends React.Component {
   render () {
