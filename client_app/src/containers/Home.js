@@ -38,7 +38,7 @@ export default class Home extends React.Component {
       <div>
         <Navbar userEmail={'tunguyen@gmail.com'}
         navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}/>
-      <div class='ui four stackable cards'>
+      <div class='row col s12'>
           {items.map((d, i) =><Item key={i} itemInfo={d} />)}
         </div>
       </div>
