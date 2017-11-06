@@ -1,6 +1,12 @@
 import * as AN from '../ActionName'
 
-export function createAccount () {
+export function showItems () {
+  return {
+    type: AN.SHOW_ALL_ITEMS_ADMIN_PAGE
+  }
+}
+
+export function createAdminAccount () {
   return {
     type: AN.CREATE_ADMIN_ACCOUNT
   }
@@ -15,9 +21,12 @@ export function submitAccount (formInput) {
   }
 }
 
-export function createAdminAccountSuccess () {
+export function createAdminAccountSuccess (account) {
   return {
-    type: AN.CREATE_ADMIN_ACCOUNT_SUCCESS
+    type: AN.CREATE_ADMIN_ACCOUNT_SUCCESS,
+    payload: {
+      account
+    }
   }
 }
 

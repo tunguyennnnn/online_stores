@@ -22,8 +22,8 @@ ReactDom.render(
       <Route path='/' component={Home} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
-      <Route path='/:userId' component={PersonalPage} />
-      <Route path='/admin/:adminId' component={AdminPage} />
+      <Route path='/users/:userId' component={PersonalPage} />
+      <Route path='/admins/:adminId' component={AdminPage} />
     </Router>
   </Provider>
 , app)

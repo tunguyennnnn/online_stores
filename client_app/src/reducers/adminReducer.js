@@ -2,7 +2,7 @@ import {hashHistory} from 'react-router'
 import * as AN from '../ActionName'
 
 const initialState = {
-  items: false,
+  items: true,
   plan: false,
   promotion: false,
   account: false
@@ -10,6 +10,7 @@ const initialState = {
 
 export default function adminReducer (state = initialState, action) {
   switch (action.type) {
+    case AN.SHOW_ALL_ITEMS_ADMIN_PAGE:
     case AN.FETCH_ADMIN_ITEMS: {
       return {
         ...initialState,
