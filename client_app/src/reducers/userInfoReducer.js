@@ -133,7 +133,7 @@ export default function (state = pageState, action) {
     }
     case AN.FETCH_USER_INFO_REJECTED: {
       const {userId, data} = action.payload.userInfo
-      hashHistory.push(`/${userId}`)
+      hashHistory.push(`/users/${userId}`)
       mockData.data = action.payload
       return {
         data: mockData,

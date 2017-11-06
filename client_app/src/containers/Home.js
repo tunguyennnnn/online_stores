@@ -32,15 +32,16 @@ export default class Home extends React.Component {
   render () {
     const style = {marginTop: '2vw', marginBottom: '2vw'}
     console.log(this.props)
-    const {navigateToPersonalPage, data} = this.props
+    const {navigateToPersonalPage, navigateToHomePage, data} = this.props
     const {items} = data
     return (
       <div>
         <Navbar userEmail={'tunguyen@gmail.com'}
-        navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}/>
-      <div class='row col s12'>
+        navigateToHomePage={navigateToHomePage.bind(null)} navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}/>
+        <div class='ui three stackable cards'>
           {items.map((d, i) =><Item key={i} itemInfo={d} />)}
         </div>
+
       </div>
     )
   }
