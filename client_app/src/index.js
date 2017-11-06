@@ -11,7 +11,7 @@ import PersonalPage from './containers/PersonalPage'
 import configStore from './Store'
 import { Signup } from './containers/auth/Signup'
 import { Login } from './containers/auth/Login'
-
+import AdminPage from './containers/adminPage'
 const store = configStore()
 
 const app = document.getElementById('app')
@@ -23,6 +23,7 @@ ReactDom.render(
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
       <Route path='/:userId' component={PersonalPage} />
+      <Route path='/admin/:adminId' component={AdminPage} />
     </Router>
   </Provider>
 , app)

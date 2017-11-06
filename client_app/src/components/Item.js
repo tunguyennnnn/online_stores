@@ -6,7 +6,7 @@ export default class Item extends React.Component {
     const {belongToCurrentUser, ownerName, editPost} = this.props
     const {imageUrl, title, description, price, postDate, completed, address, phoneNumber, adType, forSaleBy} = this.props.itemInfo
     return (
-      <div class='card'>
+      <div class='card col s12'>
         <img class='ui large mini' src={imageUrl} />
         <div class='content'>
           <div class='header'>{title}</div>
