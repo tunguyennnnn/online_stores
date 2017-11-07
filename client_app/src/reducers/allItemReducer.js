@@ -14,8 +14,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'buyandsell',
-      subCategorie: 'clothing'
+      category: 'BUY_AND_SELL',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://static.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg',
@@ -28,8 +28,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'buyandsell',
-      subCategorie: 'clothing'
+      category: 'BUY_AND_SELL',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -42,8 +42,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -56,8 +56,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -70,8 +70,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -84,8 +84,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -98,8 +98,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -112,8 +112,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -126,8 +126,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -140,8 +140,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'RENT',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -154,8 +154,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'rent',
+      subCategory: 'clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -168,8 +168,8 @@ const mockData = {
       phoneNumber: '514-123-1234',
       adType: 'Buy',
       forSaleBy: 'Owner',
-      categorie: 'rent',
-      subCategorie: 'clothing'
+      category: 'rent',
+      subCategory: 'clothing'
     }
   ]
 }
@@ -189,20 +189,21 @@ export default function (state = mockData, action) {
     case AN.FILTER_ITEMS: {
       const { filterOptions } = action.payload
       switch (filterOptions.type) {
-        case 'CATEGORY_FILTER':
+        case 'CATEGORY':
+          console.log(mockData.items.filter((item) => item.category === filterOptions.category))
           return {
             ...state,
-            data: mockData.filter(item => item.category === filterOptions.category)
+            data: mockData.items.filter((item) => item.category === filterOptions.category)
           }
-        case 'SUBCATEGORY_FILTER':
+        case 'SUBCATEGORY':
           return {
             ...state,
-            data: mockData.filter(item => item.category === filterOptions.category && item.subCategorie === filterOptions.subCategorie)
+            data: mockData.items.filter(item => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
           }
-        case 'HOME_PAGE_FILTER':
+        case 'HOME':
           return {
             ...state,
-            data: mockData.filter(item => !item.isSold)
+            data: mockData.items.filter(item => !item.isSold)
           }
         default:
           return state

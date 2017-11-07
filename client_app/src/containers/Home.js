@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as NavigationActions from '../actions/navigation-actions'
 
 import { Grid, Divider } from 'semantic-ui-react'
+
+import * as NavigationActions from '../actions/navigation-actions'
+import * as FilterActions from '../actions/filter-actions'
 
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
@@ -18,7 +20,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    ...NavigationActions
+    ...NavigationActions,
+    ...FilterActions
   }, dispatch)
 }
 
@@ -44,7 +47,7 @@ export default class Home extends React.Component {
 
     const menu = () => (
       <Grid.Row centered>
-        <Categories />
+        <Categories filterItems={filterItems}/>
         <Divider hidden />
       </Grid.Row>
     )
@@ -57,7 +60,7 @@ export default class Home extends React.Component {
       </Grid.Row>
     )
 
-    const {navigateToPersonalPage, navigateToHomePage, data} = this.props
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
     const {items} = data
     const style = {paddingLeft: '3%', paddingRight: '3%'}
     return (
