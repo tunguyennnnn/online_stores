@@ -17,11 +17,7 @@ export const NAVIGATE_TO_SIGNUP_PAGE = 'NAVIGATE_TO_SIGNUP_PAGE'
 export const NAVIGATE_TO_LOGIN_PAGE = 'NAVIGATE_TO_LOGIN_PAGE'
 
 // home page
-
-export const FILTER_TO_BUY_AND_SELL = 'FILTER_TO_BUY_AND_SELL'
-export const FILTER_TO_RENT = 'FILTER_TO_RENT'
-export const FILTER_TO_SERVICES = 'FILTER_TO_SERVICES'
-export const FILTER_TO_JOBS = 'FILTER_TO_JOBS'
+export const FILTER_ITEMS = 'FILTER_ITEMS'
 
 // personal page
 export const ADD_NEW_POST = 'ADD_NEW_POST'
