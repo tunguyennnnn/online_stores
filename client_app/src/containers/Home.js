@@ -45,7 +45,7 @@ export default class Home extends React.Component {
       />
     )
 
-    const menu = () => (
+    const categories = () => (
       <Grid.Row centered>
         <Categories filterItems={filterItems}/>
         <Divider hidden />
@@ -60,16 +60,21 @@ export default class Home extends React.Component {
       </Grid.Row>
     )
 
+    const body = () => (
+      <Grid>
+        {categories()}
+        {listOfItems()}
+      </Grid>
+    )
+
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
     const {items} = data
     const style = {paddingLeft: '3%', paddingRight: '3%'}
+
     return (
       <div>
         {navbar()}
-        <Grid>
-          {menu()}
-          {listOfItems()}
-        </Grid>
+        {body()}
       </div>
     )
   }

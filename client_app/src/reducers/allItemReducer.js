@@ -173,6 +173,27 @@ const mockData = {
     }
   ]
 }
+function filterItems (state, filterOptions) {
+  switch (filterOptions.type) {
+    case 'CATEGORY':
+      return {
+        ...state,
+        items: mockData.items.filter((item) => item.category === filterOptions.category)
+      }
+    case 'SUBCATEGORY':
+      return {
+        ...state,
+        items: mockData.items.filter(item => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+      }
+    case 'HOME':
+      return {
+        ...state,
+        items: mockData.items.filter(item => !item.isSold)
+      }
+    default:
+      return state
+  }
+}
 
 export default function (state = mockData, action) {
   switch (action.type) {
@@ -187,27 +208,7 @@ export default function (state = mockData, action) {
       }
     }
     case AN.FILTER_ITEMS: {
-      const { filterOptions } = action.payload
-      switch (filterOptions.type) {
-        case 'CATEGORY':
-          console.log(mockData.items.filter((item) => item.category === filterOptions.category))
-          return {
-            ...state,
-            data: mockData.items.filter((item) => item.category === filterOptions.category)
-          }
-        case 'SUBCATEGORY':
-          return {
-            ...state,
-            data: mockData.items.filter(item => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
-          }
-        case 'HOME':
-          return {
-            ...state,
-            data: mockData.items.filter(item => !item.isSold)
-          }
-        default:
-          return state
-      }
+      return filterItems(state, action.payload.filterOptions)
     }
     default:
       return state
