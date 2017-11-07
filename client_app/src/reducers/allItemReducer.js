@@ -16,7 +16,7 @@ const mockData = {
       forSaleBy: 'Owner'
     },
     {
-      imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
+      imageUrl: 'https://static.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg',
       title: 'My house',
       description: 'From the outside this house looks gorgeous. It has been built with oak wood and has mahogany wooden decorations. ',
       price: 3000000000,
