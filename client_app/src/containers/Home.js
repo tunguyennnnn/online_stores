@@ -52,7 +52,7 @@ export default class Home extends React.Component {
       </Grid.Row>
     )
 
-    const listOfItems = () => (
+    const listOfItems = (items) => (
       <Grid.Row>
         <div style={style} class='ui three stackable cards'>
           {items.map((d, i) => <Item key={i} itemInfo={d} />)}
@@ -60,21 +60,23 @@ export default class Home extends React.Component {
       </Grid.Row>
     )
 
-    const body = () => (
+    const body = (items, filterItems) => (
       <Grid>
-        {categories()}
-        {listOfItems()}
+        {categories(filterItems)}
+        {listOfItems(items)}
       </Grid>
     )
 
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
     const {items} = data
+    console.log(typeof data)
+    console.log(typeof items.items)
     const style = {paddingLeft: '3%', paddingRight: '3%'}
 
     return (
       <div>
         {navbar()}
-        {body()}
+        {body(items, filterItems)}
       </div>
     )
   }

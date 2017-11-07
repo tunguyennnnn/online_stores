@@ -173,6 +173,7 @@ const mockData = {
     }
   ]
 }
+
 function filterItems (state, filterOptions) {
   switch (filterOptions.type) {
     case 'CATEGORY':
@@ -204,7 +205,7 @@ export default function (state = mockData, action) {
       hashHistory.push('/')
       return {
         ...state,
-        data: mockData
+        items: mockData.items
       }
     }
     case AN.FILTER_ITEMS: {

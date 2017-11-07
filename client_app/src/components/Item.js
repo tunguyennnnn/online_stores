@@ -12,9 +12,9 @@ export default class Item extends React.Component {
       display: 'inline-block',
       width: '100%',
       height: '400px',
-      'background-position': 'center center',
-      'background-size': 'cover',
-      'background-image': `url(${imageUrl})`
+      'backgroundPosition': 'center center',
+      'backgroundSize': 'cover',
+      'backgroundImage': `url(${imageUrl})`
     }
     return (
       <div class='ui card col s12 '>
