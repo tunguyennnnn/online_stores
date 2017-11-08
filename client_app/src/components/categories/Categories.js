@@ -28,19 +28,33 @@ export default class Categories extends React.Component {
     console.log(category)
     this.props.filterItems({type: 'CATEGORY', category, subCategory})
   }
-
+  getCategory (category) {
+    switch (category) {
+      case 'BUY_AND_SELL':
+        return 'Buy and Sell'
+      case 'RENT':
+        return 'Rent'
+      case 'SERVICES':
+        return 'Services'
+      case 'JOBS':
+        return 'Jobs'
+      default:
+        return 'No Category Found'
+    }
+  }
   mySubCategory () {
     const { navigateToHomePage } = this.props
     const myCategory = myCategories.categories.filter((allCategories, i) => allCategories.category === this.props.category)
+
     return (
       <Menu borderless compact>
         <Menu.Item name='All' onClick={navigateToHomePage.bind(null)} />
         <Menu.Item
-          name={this.props.category}
+          name={this.getCategory(this.props.category)}
           onClick={this.onClickHanlder.bind(this, {category: this.props.category})}
         />
         {
-          myCategory[0].subCategories.map((subCategory, i) => {
+          myCategory.first().subCategories.map((subCategory, i) => {
             return <Menu.Item key={i} name={subCategory} onClick={this.onClickHanlder.bind(this, {category: this.props.category, subCategory})} />
           })}
       </Menu>
