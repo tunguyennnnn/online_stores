@@ -14,7 +14,8 @@ import Categories from '../components/categories/Categories'
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    data: state.allItems
+    data: state.allItems,
+    pageState: state.mainPageState
   }
 }
 
@@ -36,6 +37,11 @@ export default class Home extends React.Component {
   }
 
   render () {
+    const {showSubcategory, category=''} = this.props.pageState
+    console.log('category', category)
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
+    const {items} = data
+    const style = {paddingLeft: '3%', paddingRight: '3%'}
 
     const navbar = () => (
       <Navbar
@@ -45,16 +51,16 @@ export default class Home extends React.Component {
       />
     )
 
-    const categories = () => (
+    const categories = (filterItems, navigateToHomePage) => (
       <Grid.Row centered>
-        <Categories filterItems={filterItems}/>
+        <Categories showSubcategory={showSubcategory}  navigateToHomePage={navigateToHomePage} category={category} filterItems={filterItems}/>
         <Divider hidden />
       </Grid.Row>
     )
 
     const listOfItems = (items) => (
       <Grid.Row>
-        <div style={style} class='ui three stackable cards'>
+        <div style={style} class='ui three stackable stretched cards'>
           {items.map((d, i) => <Item key={i} itemInfo={d} />)}
         </div>
       </Grid.Row>
@@ -62,16 +68,10 @@ export default class Home extends React.Component {
 
     const body = (items, filterItems) => (
       <Grid>
-        {categories(filterItems)}
+        {categories(filterItems, navigateToHomePage)}
         {listOfItems(items)}
       </Grid>
     )
-
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
-    const {items} = data
-    console.log(typeof data)
-    console.log(typeof items.items)
-    const style = {paddingLeft: '3%', paddingRight: '3%'}
 
     return (
       <div>

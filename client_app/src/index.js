@@ -15,7 +15,9 @@ import AdminPage from './containers/adminPage'
 const store = configStore()
 
 const app = document.getElementById('app')
-
+Array.prototype.first = function () {
+  return this[0]
+}
 ReactDom.render(
   <Provider store={store}>
     <Router history={hashHistory}>

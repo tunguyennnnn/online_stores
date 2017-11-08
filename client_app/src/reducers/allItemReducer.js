@@ -15,7 +15,7 @@ const mockData = {
       adType: 'Buy',
       forSaleBy: 'Owner',
       category: 'BUY_AND_SELL',
-      subCategory: 'clothing'
+      subCategory: 'Books'
     },
     {
       imageUrl: 'https://static.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg',
@@ -29,7 +29,7 @@ const mockData = {
       adType: 'Buy',
       forSaleBy: 'Owner',
       category: 'BUY_AND_SELL',
-      subCategory: 'clothing'
+      subCategory: 'Clothing'
     },
     {
       imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
@@ -177,14 +177,18 @@ const mockData = {
 function filterItems (state, filterOptions) {
   switch (filterOptions.type) {
     case 'CATEGORY':
-      return {
-        ...state,
-        items: mockData.items.filter((item) => item.category === filterOptions.category)
-      }
-    case 'SUBCATEGORY':
-      return {
-        ...state,
-        items: mockData.items.filter(item => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+      console.log('filterOptions.subCategory', filterOptions.subCategory)
+      if (filterOptions.subCategory) {
+        console.log('react')
+        return {
+          ...state,
+          items: mockData.items.filter((item) => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+        }
+      } else {
+        return {
+          ...state,
+          items: mockData.items.filter((item) => item.category === filterOptions.category)
+        }
       }
     case 'HOME':
       return {
