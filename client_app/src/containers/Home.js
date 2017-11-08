@@ -41,7 +41,7 @@ export default class Home extends React.Component {
     console.log('category', category)
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
     const {items} = data
-    const style = {paddingLeft: '3%', paddingRight: '3%'}
+
 
     const navbar = () => (
       <Navbar
@@ -59,18 +59,20 @@ export default class Home extends React.Component {
     )
 
     const listOfItems = (items) => (
-      <Grid.Row>
-        <div style={style} class='ui three stackable stretched cards'>
+        <Grid.Row columns={3}>
           {items.map((d, i) => <Item key={i} itemInfo={d} />)}
-        </div>
-      </Grid.Row>
+        </Grid.Row>
     )
 
     const body = (items, filterItems) => (
-      <Grid>
-        {categories(filterItems, navigateToHomePage)}
-        {listOfItems(items)}
-      </Grid>
+      <div>
+        <Grid>
+          {categories(filterItems, navigateToHomePage)}
+        </Grid>
+        <Grid stackable>
+          {listOfItems(items)}
+        </Grid>
+      </div>
     )
 
     return (
