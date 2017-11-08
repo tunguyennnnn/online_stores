@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from '../../components/Item'
 import NewPostForm from '../../components/personal/NewPostForm'
+import { Grid } from 'semantic-ui-react'
 
 export default class UserInfoContainer extends React.Component {
 
@@ -19,14 +20,13 @@ export default class UserInfoContainer extends React.Component {
     const {items} = data
     const {lst1, lst2, lst3} = this.groupItem(items)
     return (
-      <div class='col s11'>
-        <div class='ui three stackable cards'>
+      <Grid stackable>
+        <Grid.Row columns={3}>
           {newPost
             ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
             : items.map((d, i) => <Item key={i} belongToCurrentUser={'true'} editPost={this.props.editPost} itemInfo={d} />)}
-
-        </div>
-      </div>
+        </Grid.Row>
+      </Grid>
     )
   }
 }

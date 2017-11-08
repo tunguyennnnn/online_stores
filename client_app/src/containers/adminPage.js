@@ -5,7 +5,7 @@ import PromotionForm from '../components/admin/PromotionForm'
 import AccountForm from '../components/admin/AccountForm'
 import * as AdminActions from '../actions/admin-actions'
 import {connect} from 'react-redux'
-import {Menu} from 'semantic-ui-react'
+import { Menu, Grid } from 'semantic-ui-react'
 
 @connect((store) => ({
   pageState: store.adminPage,
@@ -44,9 +44,11 @@ export default class AdminPage extends React.Component {
             : pageState.account
             ? <AccountForm submitAccount={submitAccount} />
             : (
-                <div class='ui three stackable cards'>
+              <Grid stackable>
+                <Grid.Row columns={3}>
                   {items.map((info, i) => <Item key={i} itemInfo={info} />)}
-                </div>
+                </Grid.Row>
+              </Grid>
               )
           }
         }
