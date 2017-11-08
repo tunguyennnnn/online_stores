@@ -6,6 +6,14 @@ const winstonInstance = require('./config/winston')
 const config = require('./config/auth')
 const routes = require('./app/routes/index.route')
 const expressValidator = require('express-validator')
+const mysql = require('mysql')
+const settings = require('./config/')
+
+const {host, port, user, password, database} = settings.db
+const connection = mysql.createConnection({
+  host, port, user, password, database
+})
+connection.connect()
 
 const app = express()
 app.use(bodyParser.json())
