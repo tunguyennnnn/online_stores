@@ -40,8 +40,8 @@ export default class Home extends React.Component {
     const {showSubcategory, category=''} = this.props.pageState
     console.log('category', category)
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
-    const {items} = data
-
+    const {items} = this.props.data
+    console.log(this.props)
 
     const navbar = () => (
       <Navbar

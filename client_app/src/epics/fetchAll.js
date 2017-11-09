@@ -13,9 +13,11 @@ export default function fetchAll (action$, store) {
           authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         }
       }
-      console.log(request)
       return ajax(request)
-        .map(v => receivedAllContent(mock))
+        .map(v => {
+          console.log(v)
+          return receivedAllContent(v.response.items)
+        })
         .catch(error => Observable.of({
           type: AN.FETCH_ALL_REJECTED,
           payload: {
