@@ -5,6 +5,14 @@ module.exports = {
   context: __dirname + '/src',
   devtool: debug ? "inline-sourcemap" : null,
   entry: './index.js',
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        secure: false
+      }
+    }
+  },
   module: {
     loaders: [
       {
