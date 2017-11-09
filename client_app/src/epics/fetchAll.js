@@ -7,12 +7,13 @@ export default function fetchAll (action$, store) {
   return action$.ofType(AN.NAVIGATE_TO_HOME_PAGE)
     .switchMap(() => {
       const request = {
-        url: '/api/',
-        crossDomain: true,
-        header: {
-          Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
+        url: '/api/items',
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         }
       }
+      console.log(request)
       return ajax(request)
         .map(v => receivedAllContent(mock))
         .catch(error => Observable.of({

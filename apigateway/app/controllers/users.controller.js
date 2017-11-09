@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 function createUser (req, res, next) {
   const {email, password, firstName, lastName} = req.body
   const apiToken = jwt.sign({email, password}, superSecret, {expiresIn: 60 * 60 * 24})
-  res.json({apiToken, expiresIn: 60 * 60 * 24})
+  res.json({apiToken, expiresIn: 60 * 60 * 24, userId: '1'})
 }
 
 module.exports = {createUser}

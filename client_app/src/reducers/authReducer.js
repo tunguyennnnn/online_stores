@@ -10,10 +10,11 @@ export default function (state = initialState, action) {
   console.log(action)
   switch (action.type) {
     case AN.LOGIN_SUCCESS: {
-      hashHistory.push('/')
+      const {userId} = action.payload.user
+      hashHistory.push(`/users/${userId}`)
       return {
         ...state,
-        user: action.payload.user
+        user: userId
       }
     }
     case AN.LOGIN_FAIL: {
@@ -24,11 +25,11 @@ export default function (state = initialState, action) {
       }
     }
     case AN.SIGNUP_SUCCESS: {
-      console.log('REach')
-      hashHistory.push('/users/1')
+      const {userId} = action.payload.user
+      hashHistory.push(`/users/${userId}`)
       return {
         ...state,
-        user: action.payload.user
+        user: userId
       }
     }
     case AN.SIGNUP_FAIL: {

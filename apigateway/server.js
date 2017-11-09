@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const expressWinston = require('express-winston')
+const path = require('path')
 const helmet = require('helmet')
 const winstonInstance = require('./config/winston')
 const config = require('./config/auth')
@@ -13,13 +14,13 @@ const {host, port, user, password, database} = settings.db
 const connection = mysql.createConnection({
   host, port, user, password, database
 })
-connection.connect()
+// connection.connect()
 
 const app = express()
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Headers', 'Origin, authorization, X-Requested-With, Content-Type, Accept')
   next()
 })
 
@@ -29,7 +30,6 @@ app.use(expressValidator())
 app.use(helmet())
 expressWinston.requestWhitelist.push('body')
 expressWinston.responseWhitelist.push('body')
-
 app.use(expressWinston.logger({
   winstonInstance,
   meta: true,
@@ -38,6 +38,7 @@ app.use(expressWinston.logger({
 }))
 app.set('superSecret', config.auth)
 
+app.use(express.static(path.join(__dirname, '../client_app/dist')))
 app.use('/api', routes)
 
 app.listen(4000, () => {
