@@ -1,3 +1,4 @@
+const axios = require('axios')
 class Auth {
   constructor () {
     this.login = this.login.bind(this)
@@ -19,10 +20,9 @@ class Auth {
   }
 
   setSession (authResult) {
-    console.log(authResult)
-    let expiresAt = JSON.stringify((authResult.expiresAt * 1000) + new Date().getTime())
-    localStorage.setItem('access_token', authResult.accessToken)
-    localStorage.setItem('expires_at', expiresAt)
+    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
+    localStorage.setItem('apiToken', authResult.apiToken)
+    localStorage.setItem('expiresAt', expiresAt)
   }
 
   logout () {
@@ -53,7 +53,6 @@ class Auth {
         callback(true, res.data)
       })
       .catch((err) => {
-        console.log(err)
         callback(false, err)
       })
     }
@@ -71,6 +70,7 @@ class Auth {
   }
 
   register ({firstName, lastName, email, password}, callback) {
+    console.log('getCalled')
     axios({
       method: 'post',
       url: 'http://localhost:4000/api/users',
