@@ -1,14 +1,16 @@
 import { combineEpics } from 'redux-observable'
-import fetchPersonalInfo from './fetchPersonalInfo'
+import {fetchUserInfo, fetchUser, submitPost} from './userEpics'
 import fetchAll from './fetchAll'
-import submitPost from './submitNewPost'
 import {submitAccount, submitPlan, submitPromotion, deleteItem} from './adminEpics'
-
+import {login, signup} from './authEpics'
 export default combineEpics(
   submitPost,
   fetchAll,
-  fetchPersonalInfo,
+  login,
+  signup,
+  fetchUserInfo,
   submitAccount,
+  fetchUser,
   submitPlan,
   submitPromotion,
   deleteItem

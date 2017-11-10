@@ -1,4 +1,6 @@
 // auth
+export const LOGIN = 'LOGIN'
+export const SIGNUP = 'SIGNUP'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAIL = 'SINGUP_FAIL'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -26,7 +28,7 @@ export const POST_ITEM_SUCCESS = 'POST_ITEM_SUCCESS'
 export const POST_ITEM_FAILED = 'POST_ITEM_FAILED'
 export const CANCEL_POST = 'CANCEL_POST'
 export const EDIT_POST = 'EDIT_POST'
-
+export const FETCH_USER_ITEMS = 'FETCH_USER_ITEMS'
 
 // admin page
 export const SHOW_ALL_ITEMS_ADMIN_PAGE = 'SHOW_ALL_ITEMS_ADMIN_PAGE'

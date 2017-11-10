@@ -1,5 +1,14 @@
 import * as AN from '../ActionName'
 
+export function fetchUser (userId) {
+  return {
+    type: AN.FETCH_USER_ITEMS,
+    payload: {
+      userId
+    }
+  }
+}
+
 export function addPost () {
   return {
     type: AN.ADD_NEW_POST

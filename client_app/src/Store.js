@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import thunk from 'redux-thunk'
 import rootEpics from './epics'
-import {browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
 import { routerMiddleware } from 'react-router-redux'
 import rootReducer from './reducers/AllReducers'
 
@@ -14,7 +14,7 @@ const store = createStore(
 )
 
 export default function configureStore (initialState) {
-  const routingMiddleware = routerMiddleware(browserHistory)
+  const routingMiddleware = routerMiddleware(hashHistory)
   let enhancer = {}
   if (process.env.NODE_ENV === 'production') {
     enhancer = compose(

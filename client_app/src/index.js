@@ -18,6 +18,11 @@ const app = document.getElementById('app')
 Array.prototype.first = function () {
   return this[0]
 }
+
+Array.prototype.last = function () {
+  return this[this.length - 1]
+}
+
 ReactDom.render(
   <Provider store={store}>
     <Router history={hashHistory}>

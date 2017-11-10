@@ -1,55 +1,37 @@
 import auth from '../utils/auth'
 import * as AN from '../ActionName'
 
-function signupSuccess (user) {
+export function signupSuccess (user) {
+  auth.setSession(user)
   return {
     type: AN.SIGNUP_SUCCESS,
     payload: {user}
   }
 }
 
-function signupFail (error) {
-  return {
-    type: AN.SIGNUP_FAIL,
-    payload: {error}
-  }
-}
-
-function loginSuccess (user) {
+export function loginSuccess (user) {
+  auth.setSession(user)
   return {
     type: AN.LOGIN_SUCCESS,
     payload: {user}
   }
 }
 
-function loginFail (error) {
+export function signup (formInput) {
   return {
-    type: AN.LOGIN_FAIL,
-    payload: {error}
-  }
-}
-
-export function signup (user) {
-  return (dispatch) => {
-    return auth.register(user, (success, res) => {
-      if (success) {
-        dispatch(signupSuccess(res))
-      } else {
-        dispatch(signupFail(res))
-      }
-    })
+    type: AN.SIGNUP,
+    payload: {
+      formInput
+    }
   }
 }
 
 
-export function login (user) {
-  return (dispatch) => {
-    return auth.login(user, (success, res) => {
-      if (success) {
-        dispatch(loginSuccess(res))
-      } else {
-        dispatch(loginFail(res))
-      }
-    })
+export function login (formInput) {
+  return {
+    type: AN.LOGIN,
+    payload: {
+      formInput
+    }
   }
 }

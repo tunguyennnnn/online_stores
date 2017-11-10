@@ -7,8 +7,14 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-  console.log(action)
   switch (action.type) {
+    case AN.RECEIVED_USER_INFO: {
+      const {userId} = action.payload.userInfo
+      return {
+        userId,
+        ...state
+      }
+    }
     case AN.LOGIN_SUCCESS: {
       const {userId} = action.payload.user
       hashHistory.push(`/users/${userId}`)
@@ -33,7 +39,6 @@ export default function (state = initialState, action) {
       }
     }
     case AN.SIGNUP_FAIL: {
-      console.log('reachhhhhh')
       hashHistory.push('/')
       return {
         ...state,
