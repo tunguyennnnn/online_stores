@@ -8,6 +8,20 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case AN.RECEIVED_ALL_ITEM: {
+      const {userId, email} = action.payload
+      return {
+        ...state,
+        userId,
+        email
+      }
+    }
+    case AN.NAVIGATE_TO_PERSONAL_PAGE: {
+      hashHistory.push(`/users/${state.userId}`)
+      return {
+        ...state
+      }
+    }
     case AN.NAVIGATE_TO_SIGNUP_PAGE:
       hashHistory.push('/signup')
       return {

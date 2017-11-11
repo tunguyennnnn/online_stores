@@ -6,6 +6,21 @@ export function showItems () {
   }
 }
 
+export function fetchAdmin () {
+  return {
+    type: AN.FETCH_ADMIN
+  }
+}
+
+export function receivedAdminInfo (response) {
+  return {
+    type: AN.RECEIVED_ADMIN_INFO,
+    payload: {
+      ...response
+    }
+  }
+}
+
 export function createAdminAccount () {
   return {
     type: AN.CREATE_ADMIN_ACCOUNT

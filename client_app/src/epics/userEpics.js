@@ -8,10 +8,8 @@ export function fetchUser (action$, store) {
   return action$.ofType(AN.FETCH_USER_ITEMS)
     .map(action => action.payload.userEmail)
     .switchMap(userEmail => {
-      console.log(store.getState())
       const {auth} = store.getState()
       const userId = auth.userId || window.location.href.split('/').last()
-      console.log(userId)
       let request = {
         url: `/api/users/${userId}`,
         crossDomain: true,
@@ -30,39 +28,14 @@ export function fetchUser (action$, store) {
     })
 }
 
-export function fetchUserInfo (action$, store) {
-  return action$.ofType(AN.NAVIGATE_TO_PERSONAL_PAGE)
-    .map(action => action.payload.userEmail)
-    .switchMap(userEmail => {
-      const {auth} = store
-      const userId = auth.userId || window.location.href.split('/').last()
-      console.log(userId)
-      let request = {
-        url: `/api/users/${userId}`,
-        crossDomain: true,
-        header: {
-          Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
-        }
-      }
-      return ajax(request)
-        .map(v => receivedUserInfo(mock))
-        .catch(error => Observable.of({
-          type: AN.FETCH_USER_INFO_REJECTED,
-          payload: {
-            userInfo: mock
-          }
-        }))
-    })
-}
-
 export function submitPost (action$, store) {
   return action$.ofType(AN.SUBMIT_NEW_POST)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const {userInfo} = store.getState()
-      const {id} = userInfo.data
+      const {userId} = store.getState().auth || window.location.href.split('/').last()
       const request = {
-        url: `/api/users/${id}/items`,
+        url: `/api/users/${userId}/items`,
         crossDomain: true,
         method: 'POST',
         header: {
@@ -71,7 +44,7 @@ export function submitPost (action$, store) {
         body: formInput
       }
       return ajax(request)
-        .map(v => postItemSuccess(v))
+        .map(v => postItemSuccess(v.response))
         .catch(err => Observable.of({
           type: AN.POST_ITEM_SUCCESS,
           payload: {

@@ -10,6 +10,10 @@ const initialState = {
 
 export default function adminReducer (state = initialState, action) {
   switch (action.type) {
+    case AN.RECEIVED_ADMIN_INFO: {
+      console.log(action.payload.info)
+      return state
+    }
     case AN.SHOW_ALL_ITEMS_ADMIN_PAGE:
     case AN.FETCH_ADMIN_ITEMS: {
       return {

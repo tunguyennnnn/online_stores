@@ -24,11 +24,11 @@ export function navigateToHomePage () {
   }
 }
 
-export function receivedAllContent (items) {
+export function receivedAllContent (data) {
   return {
     type: AN.RECEIVED_ALL_ITEM,
     payload: {
-      items
+      ...data
     }
   }
 }

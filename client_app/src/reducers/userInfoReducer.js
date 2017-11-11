@@ -38,9 +38,8 @@ export default function (state = pageState, action) {
       }
     }
     case AN.POST_ITEM_SUCCESS: {
-      const {formInput} = action.payload
-      const {title, imageUrl, description, price} = formInput
-      mockData.items = _.uniqBy(_.concat({title, imageUrl, description, price}, mockData.items), (o) => o.itemId)
+      const {itemId, title, imageUrl, description, price, category} = action.payload
+      fetchedData.items = _.concat({title, imageUrl, description, price}, fetchedData.items)
       return {
         ...state,
         showAll: true,

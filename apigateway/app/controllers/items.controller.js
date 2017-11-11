@@ -172,7 +172,8 @@ const items = [
 ]
 
 function get (req, res, next) {
-  res.json({items})
+  const {userId = '1', email} = res.decoded
+  res.json({userId, email, items})
 }
 
 function getUserItems (req, res, next) {
@@ -180,7 +181,9 @@ function getUserItems (req, res, next) {
 }
 
 function create (req, res, next) {
-  res.status(202)
+  const {decoded} = res
+  const {title, imageUrl, description, price, category} = req.body
+  res.json({itemId: 1, title, imageUrl, description, price, category})
 }
 
 function update (req, res, next) {

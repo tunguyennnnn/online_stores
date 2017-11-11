@@ -16,7 +16,7 @@ export default function fetchAll (action$, store) {
       return ajax(request)
         .map(v => {
           console.log(v)
-          return receivedAllContent(v.response.items)
+          return receivedAllContent(v.response)
         })
         .catch(error => Observable.of({
           type: AN.FETCH_ALL_REJECTED,

@@ -39,11 +39,11 @@ export function cancelPost () {
   }
 }
 
-export function postItemSuccess (formInput) {
+export function postItemSuccess (response) {
   return {
     type: AN.POST_ITEM_SUCCESS,
     payload: {
-      formInput
+      ...response
     }
   }
 }

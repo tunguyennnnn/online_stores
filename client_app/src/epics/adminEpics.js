@@ -2,7 +2,7 @@ import * as AN from '../ActionName'
 import * as Actions from '../actions/admin-actions'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
-
+import {receivedAdminInfo} from '../actions/admin-actions'
 
 export function submitAccount (action$, store) {
   return action$.ofType(AN.SUBMIT_ADMIN_ACCOUNT)
@@ -67,7 +67,7 @@ export function deleteItem (action$, store) {
     .switchMap(itemId => {
       const request = {
         url: `/api/items/${itemId}`,
-        header: {
+        headers: {
           Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
         }
       }
@@ -76,5 +76,26 @@ export function deleteItem (action$, store) {
         .catch(err => Observable.of({
           type: AN.DELETE_ITEM_FAILED
         }))
+    })
+}
+
+export function fetchAdmin (action$, store) {
+  return action$.ofType(AN.FETCH_ADMIN)
+    .switchMap(() => {
+      console.log('reach')
+      const {userId} = store.getState().auth || window.location.href.split('/').last()
+      const request = {
+        url: `/api/users/${userId}`,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        }
+      }
+      return ajax(request)
+        .map(v => receivedAdminInfo(v.response))
+        .catch(err => Observable.of({
+          type: AN.FETCH_ADMIN_FAILED
+        }))
+
     })
 }

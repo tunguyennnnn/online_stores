@@ -15,8 +15,12 @@ import { Menu, Grid } from 'semantic-ui-react'
 )
 
 export default class AdminPage extends React.Component {
+  componentWillMount () {
+    this.props.fetchAdmin()
+  }
+
   render () {
-    const {showItems, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion} = this.props
+    const {showItems, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion} = this.props
     const {pageState} = this.props
     const {items} = this.props.itemList
     console.log(pageState, items)

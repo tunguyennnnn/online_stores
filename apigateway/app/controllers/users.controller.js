@@ -41,13 +41,8 @@ const mock = {
 }
 
 function show (req, res, next) {
-  const {userId} = req.params
   const {decoded} = res
-  if (userId === String(mock.userId)) {
-    res.json({info: mock})
-  } else {
-    res.status(404).send()
-  }
+  res.json({info: mock})
 }
 
 module.exports = {createUser, show}
