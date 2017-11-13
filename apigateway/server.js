@@ -7,14 +7,10 @@ const winstonInstance = require('./config/winston')
 const config = require('./config/auth')
 const routes = require('./app/routes/index.route')
 const expressValidator = require('express-validator')
-const mysql = require('mysql')
 const settings = require('./config/')
+const sqlConnection = require('./config/sqlConnection')
 
 const {host, port, user, password, database} = settings.db
-const connection = mysql.createConnection({
-  host, port, user, password, database
-})
-// connection.connect()
 
 const app = express()
 
@@ -37,8 +33,8 @@ app.use(expressWinston.logger({
   colorStatus: true
 }))
 app.set('superSecret', config.auth)
-
 app.use(express.static(path.join(__dirname, '../client_app/dist')))
+app.use(sqlConnection)
 app.use('/api', routes)
 
 app.listen(4000, () => {

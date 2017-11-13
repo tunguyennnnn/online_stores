@@ -173,6 +173,7 @@ const items = [
 
 function get (req, res, next) {
   const {userId = '1', email} = res.decoded
+  console.log(res.pExec)
   res.json({userId, email, items})
 }
 
