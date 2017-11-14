@@ -7,6 +7,7 @@ const settings = {
     port: '8889',
     user: 'root',
     password : 'root',
+    database: 'project',
     socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   }
 }

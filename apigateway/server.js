@@ -8,7 +8,7 @@ const config = require('./config/auth')
 const routes = require('./app/routes/index.route')
 const expressValidator = require('express-validator')
 const settings = require('./config/')
-const sqlConnection = require('./config/sqlConnection')
+const {connect, setUpDb} = require('./config/sqlConnection')
 
 const {host, port, user, password, database} = settings.db
 
@@ -34,7 +34,8 @@ app.use(expressWinston.logger({
 }))
 app.set('superSecret', config.auth)
 app.use(express.static(path.join(__dirname, '../client_app/dist')))
-app.use(sqlConnection)
+setUpDb()
+app.use(connect)
 app.use('/api', routes)
 
 app.listen(4000, () => {
