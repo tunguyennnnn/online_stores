@@ -1,8 +1,11 @@
 import {hashHistory} from 'react-router'
 import * as AN from '../ActionName'
 
+
 const initialState = {
-  items: true,
+  items: [],
+  promotions: [],
+  plans: [],
   plan: false,
   promotion: false,
   account: false
@@ -11,22 +14,33 @@ const initialState = {
 export default function adminReducer (state = initialState, action) {
   switch (action.type) {
     case AN.RECEIVED_ADMIN_INFO: {
-      console.log(action.payload.info)
-      return state
+      console.log(action.payload)
+      const {userId, email, items = [], plans = [], promotions = []} = action.payload.info
+      return {
+        ...state,
+        items,
+        plans,
+        promotions
+      }
     }
     case AN.SHOW_ALL_ITEMS_ADMIN_PAGE:
     case AN.FETCH_ADMIN_ITEMS: {
       return {
-        ...initialState,
-        items: true
+        ...state,
+        plan: false,
+        promotion: false,
+        account: false
       }
+
     }
     case AN.FETCH_TRACTION_DETAIL: {
 
     }
     case AN.CREATE_ADMIN_ACCOUNT: {
       return {
-        ...initialState,
+        ...state,
+        plan: false,
+        promotion: false,
         account: true
       }
     }
@@ -35,7 +49,9 @@ export default function adminReducer (state = initialState, action) {
     }
     case AN.CREATE_PROMOTIONAL_PLAN: {
       return {
-        ...initialState,
+        ...state,
+        plan: false,
+        account: false,
         promotion: true
       }
     }
@@ -47,7 +63,9 @@ export default function adminReducer (state = initialState, action) {
     }
     case AN.CREATE_PLAN: {
       return {
-        ...initialState,
+        ...state,
+        promotion: false,
+        account: false,
         plan: true
       }
     }

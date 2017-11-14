@@ -15,7 +15,7 @@ export function submitAccount (action$, store) {
         },
         body: formInput
       }
-      return ajax.post(request)
+      return ajax(request)
         .map(v => AN.createAdminAccountSuccess(v))
         .catch(err => Observable.of({
           type: AN.SUBMIT_ADMIN_ACCOUNT_FAILED

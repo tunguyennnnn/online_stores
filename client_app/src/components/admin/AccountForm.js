@@ -6,6 +6,7 @@ export default class AccountForm extends React.Component {
     super()
     this.state = {
       formInput: {
+        isAdmin: true,
         email: '',
         firstName: '',
         lastName: '',

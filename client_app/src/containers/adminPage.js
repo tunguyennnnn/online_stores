@@ -1,6 +1,8 @@
 import React from 'react'
 import Item from '../components/Item'
 import PlanForm from '../components/admin/PlanForm'
+import PromotionList from '../components/admin/PromotionList'
+import PlanList from '../components/admin/PlanList'
 import PromotionForm from '../components/admin/PromotionForm'
 import AccountForm from '../components/admin/AccountForm'
 import * as AdminActions from '../actions/admin-actions'
@@ -20,10 +22,10 @@ export default class AdminPage extends React.Component {
   }
 
   render () {
+    console.log(this.props.pageState)
     const {showItems, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion} = this.props
     const {pageState} = this.props
-    const {items} = this.props.itemList
-    console.log(pageState, items)
+    const {items, promotions, plans} = this.props.pageState
     return (
       <div class='row'>
         <Menu>
@@ -42,9 +44,15 @@ export default class AdminPage extends React.Component {
         </Menu>
         {
           pageState.plan
-            ? <PlanForm submitPlan={submitPlan} />
+            ? <div>
+                <PlanList plans={plans} />
+                <PlanForm submitPlan={submitPlan} />
+              </div>
             : pageState.promotion
-            ? <PromotionForm submitPromotion={submitPromotion} />
+            ? <div>
+                <PromotionList promotions={promotions}/>
+                <PromotionForm submitPromotion={submitPromotion} />
+              </div>
             : pageState.account
             ? <AccountForm submitAccount={submitAccount} />
             : (
