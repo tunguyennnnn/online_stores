@@ -17,7 +17,14 @@ function setUpDb () {
 function connect (req, res, next) {
   res.db = mysql.createConnection(db)
   res.db.connect()
-  res.pExec = Promise.promisify(res.db.query)
+  res.pExec = (query) => {
+    return new Promise((resolve, reject) => {
+      res.db.query(query, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  }
   next()
 }
 

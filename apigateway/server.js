@@ -9,7 +9,7 @@ const routes = require('./app/routes/index.route')
 const expressValidator = require('express-validator')
 const settings = require('./config/')
 const {connect, setUpDb} = require('./config/sqlConnection')
-
+require('./config/extend-objects')
 const {host, port, user, password, database} = settings.db
 
 const app = express()
