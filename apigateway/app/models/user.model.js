@@ -1,7 +1,7 @@
 const uuid = require('uuid/v1')
 
 function login ({exec, email, password}) {
-  return exec(`SELECT * FROM users AS u WHERE u.email = '${email}' AND u.password = '${password}'`)
+  return exec(`SELECT * FROM users AS u WHERE u.email = '${email}' AND u.password = '${password}';`)
 }
 
 function create ({exec, id, email, password, firstName, lastName, province, city, isAdmin = false}) {
@@ -9,4 +9,8 @@ function create ({exec, id, email, password, firstName, lastName, province, city
                `VALUES('${uuid()}', '${email}', '${password}', '${firstName}', '${lastName}', '${province}', '${city}', ${isAdmin ? 1 : 0});`].join(' '))
 }
 
-module.exports = {login, create}
+function getAllMyAds ({exec, user_id}) {
+  return exec(`SELECT * FROM ads WHERE ads.user_id = ${user_id};`)
+}
+
+module.exports = {login, create, getAllMyAds}

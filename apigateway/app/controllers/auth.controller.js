@@ -15,8 +15,7 @@ function login (req, res, next) {
         const {id, province, city, isAdmin} = user
         const apiToken = jwt.sign({userId: id, email, password, isAdmin}, superSecret, {expiresIn: 60 * 60 * 24})
         res.json({userId: id, email, province, city, isAdmin, apiToken})
-      }
-      else res.status(404).send()
+      } else res.status(404).send()
     })
     .catch(err => {
       console.log(err)
@@ -24,4 +23,18 @@ function login (req, res, next) {
     })
 }
 
-module.exports = {login}
+function getAllMyAds (req, res, next) {
+  const { user_id } = req.params
+  User.getAllMyAds({exec: res.pExec, user_id})
+  .then(r => {
+    if (r) {
+      res.json({r})
+    } else res.status(404).send()
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send()
+  })
+}
+
+module.exports = {login, getAllMyAds}
