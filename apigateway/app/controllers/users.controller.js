@@ -1,13 +1,20 @@
-const Promise = require('bluebird')
-const _ = require('lodash')
 const settings = require('../../config/')
 const {superSecret} = settings.auth
 const jwt = require('jsonwebtoken')
+const User = require('../models/user.model')
 
 function createUser (req, res, next) {
-  const {email, password, firstName, lastName} = req.body
-  const apiToken = jwt.sign({email, password}, superSecret, {expiresIn: 60 * 60 * 24})
-  res.json({apiToken, expiresIn: 60 * 60 * 24, userId: '1'})
+  const {email, password, firstName, lastName, isAdmin, province, city} = req.body
+  User.create({exec: res.pExec, email, password, firstName, lastName, province, city, isAdmin})
+    .then(user => {
+      const userId = user.id
+      const apiToken = jwt.sign({userId, email, password, isAdmin}, superSecret, {expiresIn: 60 * 60 * 24})
+      res.json({userId, firstName, lastName, email, apiToken})
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send()
+    })
 }
 
 const mock = {
