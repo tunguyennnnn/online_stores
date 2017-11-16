@@ -15,15 +15,15 @@ function timestamp_url_key($url) {
 
 
 /* # 0. Configure the proxy */
-/*
+
 stream_context_set_default(
 	array("http" => array(
-			"proxy" => "tcp://your.proxy.com:8080",
+			"proxy" => "http://localhost:4000",
 			"request_fulluri" => TRUE,
 			),
 	)
 );
-*/
+
 
 
 /* 1. Check the URL to retrieve */
