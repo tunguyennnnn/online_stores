@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS transaction(
 );
 
 CREATE TABLE IF NOT EXISTS ads(
-    id varchar(36) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     user_id varchar(36),
-    title varchar(32),
+    title varchar(255),
     price float,
     imageUrl varchar (255),
     category varchar(32),
@@ -62,8 +62,11 @@ CREATE TABLE IF NOT EXISTS ads(
     createdAt datetime,
     updatedAt datetime,
     forSaleBy varchar(32),
+    description varchar(255),
     PRIMARY KEY(id)
 );
+
+-- ALTER TABLE ads MODIFY COLUMN description varchar(255);
 
 CREATE TABLE IF NOT EXISTS promotion(
     id varchar(36) NOT NULL,

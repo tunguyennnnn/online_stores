@@ -23,18 +23,4 @@ function login (req, res, next) {
     })
 }
 
-function getAllMyAds (req, res, next) {
-  const { user_id } = req.params
-  User.getAllMyAds({exec: res.pExec, user_id})
-  .then(r => {
-    if (r) {
-      res.json({r})
-    } else res.status(404).send()
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).send()
-  })
-}
-
-module.exports = {login, getAllMyAds}
+module.exports = {login}

@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const itemCtrl = require('../controllers/items.controller')
+const adCtrl = require('../controllers/ads.controller')
 const authCheck = require('../../config/auth')
 
 router.route('/')
   .all(authCheck)
-  .get(itemCtrl.get)
+  .get(adCtrl.get)
 
 module.exports = router

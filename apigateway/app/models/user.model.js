@@ -9,8 +9,16 @@ function create ({exec, id, email, password, firstName, lastName, province, city
                `VALUES('${uuid()}', '${email}', '${password}', '${firstName}', '${lastName}', '${province}', '${city}', ${isAdmin ? 1 : 0});`].join(' '))
 }
 
-function getAllMyAds ({exec, user_id}) {
-  return exec(`SELECT * FROM ads WHERE ads.user_id = ${user_id};`)
+function getAllMyAds ({exec, userId}) {
+  console.log(userId)
+  return exec(`SELECT * FROM ads WHERE ads.user_id = ${userId};`)
 }
 
-module.exports = {login, create, getAllMyAds}
+function createAd ({exec, title, imageUrl, description, price, category}) {
+  // we need title, description, price, postData, completed, address, phoneNumber, adType, forSaleBy, category, subCategory
+  // we currently have  title, imageUrl, description, price, category
+  return exec(['INSERT INTO ads( title, imageUrl, description, price, category)',
+    `VALUES('${title}', '${imageUrl}', '${description}', '${price}', '${category}');`].join(' '))
+}
+
+module.exports = {login, create, getAllMyAds, createAd}

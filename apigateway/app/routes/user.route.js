@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userCtrl = require('../controllers/users.controller')
-const itemCtrl = require('../controllers/items.controller')
+const adCtrl = require('../controllers/ads.controller')
 const authCheck = require('../../config/auth')
 
 router.route('/')
@@ -9,10 +9,11 @@ router.route('/')
 
 router.route('/:userId')
   .all(authCheck)
-  .get(userCtrl.show)
+  .get(userCtrl.getAds)
+
 
 router.route('/:userId/items')
-  .get(itemCtrl.getUserItems)
-  .post(itemCtrl.create)
+  // .get(adCtrl.getItems)
+  .post(userCtrl.createAd)
 
 module.exports = router

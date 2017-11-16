@@ -2,6 +2,7 @@ const settings = require('../../config/')
 const {superSecret} = settings.auth
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
+const uuidv1 = require('uuid/v1')
 
 function createUser (req, res, next) {
   const {email, password, firstName, lastName, isAdmin, province, city} = req.body
@@ -15,6 +16,44 @@ function createUser (req, res, next) {
       console.log(err)
       res.status(500).send()
     })
+}
+
+function getAds (req, res, next) {
+  const {decoded} = res
+  console.log(res)
+  const {userId} = decoded
+  User.getAllMyAds({exec: res.pExec, userId})
+  .then(r => {
+    if (r) {
+      console.log(r)
+      res.json({info: r})
+    } else res.status(404).send()
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send()
+  })
+}
+
+
+function createAd (req, res, next) {
+  const {decoded} = res
+  console.log(res)
+  const {title, imageUrl, description, price, category} = req.body
+  console.log(title)
+  // const {title, imageUrl, description, price, category} = data
+  // console.log()
+  User.createAd({exec: res.pExec, title, imageUrl, description, price, category})
+  .then(r => {
+    if (r) {
+      console.log(`successfully created an ad for ${userId}`)
+      res.status(200).send()
+    } else res.status(400).send()
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send()
+  })
 }
 
 const mock = {
@@ -262,4 +301,4 @@ function show (req, res, next) {
   res.json({info: adminMock})
 }
 
-module.exports = {createUser, show}
+module.exports = {createUser, show, getAds, createAd}
