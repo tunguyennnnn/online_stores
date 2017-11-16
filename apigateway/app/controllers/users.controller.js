@@ -7,7 +7,6 @@ const Promotion = require('../models/promotion.model')
 const Plan = require('../models/plan.model')
 const Promise = require('bluebird')
 
-
 function createUser (req, res, next) {
   const {email, password, firstName, lastName, isAdmin, province, city} = req.body
   User.create({exec: res.pExec, email, password, firstName, lastName, province, city, isAdmin})
@@ -20,6 +19,44 @@ function createUser (req, res, next) {
       console.log(err)
       res.status(500).send()
     })
+}
+
+function getAds (req, res, next) {
+  const {decoded} = res
+  console.log(res)
+  const {userId} = decoded
+  User.getAllMyAds({exec: res.pExec, userId})
+  .then(r => {
+    if (r) {
+      console.log(r)
+      res.json({info: r})
+    } else res.status(404).send()
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send()
+  })
+}
+
+
+function createAd (req, res, next) {
+  const {decoded} = res
+  console.log(res)
+  const {title, imageUrl, description, price, category} = req.body
+  console.log(title)
+  // const {title, imageUrl, description, price, category} = data
+  // console.log()
+  User.createAd({exec: res.pExec, title, imageUrl, description, price, category})
+  .then(r => {
+    if (r) {
+      console.log(`successfully created an ad for ${userId}`)
+      res.status(200).send()
+    } else res.status(400).send()
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send()
+  })
 }
 
 const mock = {
@@ -269,6 +306,7 @@ function show (req, res, next) {
   const promises = [Ad.getAds({exec, isAdmin, userId}), Promotion.getSet({exec, isAdmin}), Plan.getSet({exec, isAdmin})]
   Promise.all(promises)
     .then(data => {
+      console.log(data)
       const [items, promotions, plans] = data
       res.json({userId, email, isAdmin, items, promotions, plans})
     })
@@ -278,4 +316,4 @@ function show (req, res, next) {
     })
 }
 
-module.exports = {createUser, show}
+module.exports = {createUser, show, getAds, createAd}

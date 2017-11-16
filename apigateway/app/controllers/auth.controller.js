@@ -5,9 +5,6 @@ const User = require('../models/user.model')
 
 function login (req, res, next) {
   const {email, password} = req.body
-  console.log(email, password)
-  // const apiToken = jwt.sign({email, password}, superSecret, {expiresIn: 60 * 60 * 24})
-  // res.json({apiToken, expiresIn: 60 * 60 * 24, userId: '1'})
   User.login({exec: res.pExec, email, password})
     .then(r => {
       const user = r.first()
@@ -23,18 +20,4 @@ function login (req, res, next) {
     })
 }
 
-function getAllMyAds (req, res, next) {
-  const { user_id } = req.params
-  User.getAllMyAds({exec: res.pExec, user_id})
-  .then(r => {
-    if (r) {
-      res.json({r})
-    } else res.status(404).send()
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).send()
-  })
-}
-
-module.exports = {login, getAllMyAds}
+module.exports = {login}

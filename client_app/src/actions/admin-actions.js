@@ -13,6 +13,7 @@ export function fetchAdmin () {
 }
 
 export function receivedAdminInfo (response) {
+  console.log(response)
   return {
     type: AN.RECEIVED_ADMIN_INFO,
     payload: {
@@ -51,11 +52,11 @@ export function createPlan () {
   }
 }
 
-export function createPlanSuccess (plan) {
+export function createPlanSuccess (response) {
   return {
     type: AN.CREATE_PLAN_SUCCESS,
     payload: {
-      plan
+      ...response
     }
   }
 }
@@ -75,11 +76,11 @@ export function createPromotion () {
   }
 }
 
-export function createPromotionSuccess (promotion) {
+export function createPromotionSuccess (response) {
   return {
     type: AN.CREATE_PROMOTION_SUCCESS,
     payload: {
-      promotion
+      ...response
     }
   }
 }

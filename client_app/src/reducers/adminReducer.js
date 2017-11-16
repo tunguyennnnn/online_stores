@@ -33,6 +33,24 @@ export default function adminReducer (state = initialState, action) {
       }
 
     }
+    case AN.CREATE_PROMOTION_SUCCESS: {
+      const {promotions} = action.payload
+      return {
+        ...state,
+        plan: false,
+        promotion: true,
+        promotions
+      }
+    }
+    case AN.CREATE_PLAN_SUCCESS: {
+      const {plans} = action.payload
+      return {
+        ...state,
+        plans,
+        promotion: false,
+        plan: true
+      }
+    }
     case AN.FETCH_TRACTION_DETAIL: {
 
     }

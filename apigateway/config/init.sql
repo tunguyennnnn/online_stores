@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS mPlans (
 
 CREATE TABLE IF NOT EXISTS planSet (
 	id varchar(36),
-  planName varchar(32),
+  name varchar(32),
+  price float,
   duration varchar(32),
   PRIMARY KEY(id)
 );
@@ -52,9 +53,9 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 CREATE TABLE IF NOT EXISTS ads(
-    id varchar(36) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     user_id varchar(36),
-    title varchar(32),
+    title varchar(255),
     price float,
     imageUrl varchar (255),
     category varchar(32),
@@ -62,6 +63,7 @@ CREATE TABLE IF NOT EXISTS ads(
     createdAt datetime,
     updatedAt datetime,
     forSaleBy varchar(32),
+    description varchar(255),
     PRIMARY KEY(id)
 );
 

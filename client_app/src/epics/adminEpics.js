@@ -9,7 +9,7 @@ export function submitAccount (action$, store) {
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
-        url: '/api/users/',
+        url: '/apiapi/users/',
         header: {
           Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
         },
@@ -28,14 +28,14 @@ export function submitPlan (action$, store) {
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
-        url: '/api/plans/',
+        url: '/apiapi/planSet/',
         header: {
-          Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: formInput
       }
-      return ajax.post(request)
-        .map(v => AN.createPlanSuccess(v))
+      return ajax(request)
+        .map(v => Actions.createPlanSuccess(v.response))
         .catch(err => Observable.of({
           type: AN.SUBMIT_PLAN_FAILED
         }))
@@ -43,18 +43,20 @@ export function submitPlan (action$, store) {
 }
 
 export function submitPromotion (action$, store) {
+  console.log('reachhhhhhh')
   return action$.ofType(AN.SUBMIT_PROMOTIONAL_PLAN)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
-        url: '/api/promotions/',
+        url: '/apiapi/promotionSet/',
+        method: 'POST',
         header: {
-          Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: formInput
       }
-      return ajax.post(request)
-        .map(v => AN.createPromotionSuccess(v))
+      return ajax(request)
+        .map(v => Actions.createPromotionSuccess(v.response))
         .catch(err => Observable.of({
           type: AN.SUBMIT_PROMOTION_FAILED
         }))
@@ -66,7 +68,7 @@ export function deleteItem (action$, store) {
     .map(action => action.payload.itemId)
     .switchMap(itemId => {
       const request = {
-        url: `/api/items/${itemId}`,
+        url: `/apiapi/items/${itemId}`,
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
         }
@@ -85,7 +87,7 @@ export function fetchAdmin (action$, store) {
       console.log('reach')
       const {userId} = store.getState().auth || window.location.href.split('/').last()
       const request = {
-        url: `/api/users/${userId}`,
+        url: `/apiapi/users/${userId}`,
         method: 'GET',
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
