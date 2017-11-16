@@ -15,7 +15,7 @@ export default function adminReducer (state = initialState, action) {
   switch (action.type) {
     case AN.RECEIVED_ADMIN_INFO: {
       console.log(action.payload)
-      const {userId, email, items = [], plans = [], promotions = []} = action.payload.info
+      const {userId, email, items = [], plans = [], promotions = []} = action.payload
       return {
         ...state,
         items,

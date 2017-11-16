@@ -2,6 +2,11 @@ const settings = require('../../config/')
 const {superSecret} = settings.auth
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
+const Ad = require('../models/ads.models')
+const Promotion = require('../models/promotion.model')
+const Plan = require('../models/plan.model')
+const Promise = require('bluebird')
+
 
 function createUser (req, res, next) {
   const {email, password, firstName, lastName, isAdmin, province, city} = req.body
@@ -259,7 +264,18 @@ const adminMock = {
 
 function show (req, res, next) {
   const {decoded} = res
-  res.json({info: adminMock})
+  const exec = res.pExec
+  const {userId, isAdmin, email} = decoded
+  const promises = [Ad.getAds({exec, isAdmin, userId}), Promotion.getSet({exec, isAdmin}), Plan.getSet({exec, isAdmin})]
+  Promise.all(promises)
+    .then(data => {
+      const [items, promotions, plans] = data
+      res.json({userId, email, isAdmin, items, promotions, plans})
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send()
+    })
 }
 
 module.exports = {createUser, show}

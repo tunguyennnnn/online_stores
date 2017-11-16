@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users(
 INSERT IGNORE INTO users (id, firstName, lastName, email, password, isAdmin, userType)
 VALUES ('00000000000000000000000000000000', 'Super Admin', '', 'admin@bestseller.com', 'admin', true, null);
 
-CREATE TABLE IF NOT EXISTS location(
+CREATE TABLE IF NOT EXISTS locations (
     province varchar(32),
     city varchar(32),
     PRIMARY KEY(city, province)
@@ -27,7 +27,7 @@ VALUES ('Montreal', 'Quebec'),
                 ('Ottawa', 'Ontario'),
                 ('Winnipeg', 'Manitoba');
 
-CREATE TABLE IF NOT EXISTS mPlans(
+CREATE TABLE IF NOT EXISTS mPlans (
     startDate date,
     lastDate date,
     price float(32),
@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS mPlans(
     planSet_id varchar(36)
 );
 
-CREATE TABLE IF NOT EXISTS planSet(
+CREATE TABLE IF NOT EXISTS planSet (
 	id varchar(36),
   planName varchar(32),
   duration varchar(32),
   PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS transaction(
+CREATE TABLE IF NOT EXISTS transactions (
     user_id varchar(36),
     ad_id varchar(36),
     amount float,
@@ -65,16 +65,23 @@ CREATE TABLE IF NOT EXISTS ads(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS promotion(
+CREATE TABLE IF NOT EXISTS promotionSet (
     id varchar(36) NOT NULL,
-    startDate date,
-    endDate date,
-    ad_id varchar(36),
-    user_id varchar(36),
+    price float,
+    duration int,
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS rate(
+CREATE TABLE IF NOT EXISTS promotions (
+    id varchar(36) NOT NULL,
+    startDate date,
+    endDate date,
+    set_id varchar(36),
+    ad_id varchar(36),
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS rates (
     id varchar(36) NOT NULL,
     score int,
     ad_id varchar(36),

@@ -9,6 +9,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case AN.RECEIVED_USER_INFO: {
+      console.log(action.payload)
       const {userId} = action.payload.userInfo
       return {
         userId,
@@ -16,8 +17,8 @@ export default function (state = initialState, action) {
       }
     }
     case AN.LOGIN_SUCCESS: {
-      const {userId} = action.payload.user
-      hashHistory.push(`/users/${userId}`)
+      const {userId, isAdmin} = action.payload.user
+      hashHistory.push(`/${isAdmin ? 'admins' : 'users'}/${userId}`)
       return {
         ...state,
         user: userId

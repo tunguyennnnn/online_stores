@@ -7,4 +7,9 @@ function createAd ({exec, title, description, price, postDate, completed, addres
     `VALUES('${title}', '${description}', '${price}', '${postDate}', '${completed}', '${address}', '${adType}', '${forSaleBy}', '${category}', '${subCategory}');`].join(' '))
 }
 
-module.exports = {getAllAds, createAd}
+
+function getAds ({exec, userId, isAdmin}) {
+  const where = isAdmin ? '' : userId ? `WHERE user_id = '${userId}'` : 'WHERE item.isSold = 0'
+  return exec(`SELECT * FROM ads ${where}`)
+}
+module.exports = {getAllAds, createAd, getAds}

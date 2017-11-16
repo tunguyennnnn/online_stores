@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const settings = require('./index')
-const _ = require('lodash')
 // const authCheck = jwt({
 //   secret: settings.auth.superSecret,
 //   getToken (req) {

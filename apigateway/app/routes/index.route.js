@@ -5,6 +5,8 @@ const authRouter = require('./auth.route')
 const itemRouter = require('./item.route')
 const promotionRouter = require('./promotion.route')
 const planRouter = require('./plan.route')
+const promotionSet = require('./promotionSet.route')
+const planSet = require('./planSet.route')
 
 router.post('/health-check', (req, res) => {
   console.log(req.body)
@@ -14,7 +16,9 @@ router.post('/health-check', (req, res) => {
 router.use('/users', userRouter)
 router.use('/auth', authRouter)
 router.use('/items', itemRouter)
-router.use('/promostion', promotionRouter)
-router.use('/plan', planRouter)
+router.use('/promotions', promotionRouter)
+router.use('/plans', planRouter)
+router.use('/promotionSet', promotionSet)
+router.use('/planSet', planSet)
 
 module.exports = router

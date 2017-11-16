@@ -7,4 +7,7 @@ router.route('/')
   .all(authCheck)
   .get(itemCtrl.get)
 
+router.route('/rates/')
+  .all(authCheck)
+
 module.exports = router
