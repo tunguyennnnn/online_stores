@@ -32,13 +32,11 @@ export function submitPost (action$, store) {
   return action$.ofType(AN.SUBMIT_NEW_POST)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
-      const {auth} = store.getState()
-      const userId = auth.userId || window.location.href.split('/').last()
       const request = {
         url: `/api/ads`,
         crossDomain: true,
         method: 'POST',
-        header: {
+        headers: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: formInput

@@ -2,7 +2,7 @@ const settings = require('../../config/')
 const {superSecret} = settings.auth
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
-const Ad = require('../models/ads.models')
+const Ad = require('../models/ad.model')
 const Promotion = require('../models/promotion.model')
 const Plan = require('../models/plan.model')
 const Promise = require('bluebird')
@@ -12,7 +12,6 @@ function createUser (req, res, next) {
   console.log('reachhhhhhhhhhh')
   User.create({exec: res.pExec, email, password, firstName, lastName, province, city, isAdmin})
     .then(user => {
-      console.log(user)
       const userId = user.id
       const apiToken = jwt.sign({userId, email, password, isAdmin}, superSecret, {expiresIn: 60 * 60 * 24})
       res.json({userId, firstName, lastName, email, apiToken})

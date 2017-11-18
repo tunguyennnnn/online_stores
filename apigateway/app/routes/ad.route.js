@@ -5,9 +5,10 @@ const authCheck = require('../../config/auth')
 
 router.route('/')
   .all(authCheck)
-  .get(adCtrl.get)
+  .get(adCtrl.index)
+  .post(adCtrl.create)
 
-router.route('/rates/')
-  .all(authCheck)
+// router.route('/rates/')
+//   .all(authCheck)
 
 module.exports = router
