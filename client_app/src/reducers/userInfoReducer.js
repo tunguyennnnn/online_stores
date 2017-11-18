@@ -9,6 +9,7 @@ let fetchedData = {
 let pageState = {
   data: fetchedData,
   newPost: false,
+  newRent: false,
   showAll: true
 }
 
@@ -19,6 +20,15 @@ export default function (state = pageState, action) {
       return {
         ...state,
         newPost: true,
+        newRent: false,
+        showAll: false
+      }
+    }
+    case AN.ADD_NEW_RENT: {
+      return {
+        ...state,
+        newPost: false,
+        newRent: true,
         showAll: false
       }
     }
@@ -26,7 +36,7 @@ export default function (state = pageState, action) {
       return {
         ...state,
         newPost: true,
-        showAll: false,
+        newRent: false,
         postInfo: action.payload.postInfo
       }
     }

@@ -8,7 +8,7 @@ const settings = {
     user: 'root',
     password : 'root',
     database: 'project',
-    // socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   }
 }
 

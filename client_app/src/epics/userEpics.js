@@ -5,7 +5,6 @@ import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
 
 export function fetchUser (action$, store) {
-  console.log('reachhhhhh')
   return action$.ofType(AN.FETCH_USER_ITEMS)
     .map(action => action.payload.userEmail)
     .switchMap(userEmail => {
@@ -36,7 +35,7 @@ export function submitPost (action$, store) {
       const {auth} = store.getState()
       const userId = auth.userId || window.location.href.split('/').last()
       const request = {
-        url: `/api/users/${userId}/items`,
+        url: `/api/ads`,
         crossDomain: true,
         method: 'POST',
         header: {

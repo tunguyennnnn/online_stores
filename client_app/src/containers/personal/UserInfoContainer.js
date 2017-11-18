@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from '../../components/Item'
 import NewPostForm from '../../components/personal/NewPostForm'
+import NewRentForm from '../../components/personal/NewRentForm'
 import { Grid } from 'semantic-ui-react'
 
 export default class UserInfoContainer extends React.Component {
@@ -16,7 +17,7 @@ export default class UserInfoContainer extends React.Component {
   }
 
   render () {
-    const {data, newPost, showAll, postInfo} = this.props.userInfo
+    const {data, newPost, showAll, newRent, postInfo} = this.props.userInfo
     const {items} = data
     const {lst1, lst2, lst3} = this.groupItem(items)
     return (
@@ -24,7 +25,11 @@ export default class UserInfoContainer extends React.Component {
         <Grid.Row columns={3}>
           {newPost
             ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
-            : items.map((d, i) => <Item key={i} belongToCurrentUser={'true'} editPost={this.props.editPost} itemInfo={d} />)}
+            :
+            newRent
+             ? <NewRentForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
+            : items.map((d, i) => <Item key={i} belongToCurrentUser={'true'} editPost={this.props.editPost} itemInfo={d} />)
+          }
         </Grid.Row>
       </Grid>
     )

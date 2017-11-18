@@ -7,7 +7,7 @@ export default function fetchAll (action$, store) {
   return action$.ofType(AN.NAVIGATE_TO_HOME_PAGE)
     .switchMap(() => {
       const request = {
-        url: '/apiapi/items',
+        url: '/api/items',
         method: 'GET',
         headers: {
           authorization: `Bearer ${window.localStorage.getItem('apiToken')}`

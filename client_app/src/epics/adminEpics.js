@@ -9,7 +9,7 @@ export function submitAccount (action$, store) {
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
-        url: '/apiapi/users/',
+        url: '/api/users/',
         header: {
           Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
         },
@@ -28,7 +28,7 @@ export function submitPlan (action$, store) {
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
-        url: '/apiapi/planSet/',
+        url: '/api/planSet/',
         header: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
@@ -48,7 +48,7 @@ export function submitPromotion (action$, store) {
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
-        url: '/apiapi/promotionSet/',
+        url: '/api/promotionSet/',
         method: 'POST',
         header: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
@@ -68,7 +68,7 @@ export function deleteItem (action$, store) {
     .map(action => action.payload.itemId)
     .switchMap(itemId => {
       const request = {
-        url: `/apiapi/items/${itemId}`,
+        url: `/api/items/${itemId}`,
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
         }
@@ -87,7 +87,7 @@ export function fetchAdmin (action$, store) {
       console.log('reach')
       const {userId} = store.getState().auth || window.location.href.split('/').last()
       const request = {
-        url: `/apiapi/users/${userId}`,
+        url: `/api/users/${userId}`,
         method: 'GET',
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`

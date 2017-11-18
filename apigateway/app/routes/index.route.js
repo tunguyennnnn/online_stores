@@ -15,7 +15,7 @@ router.post('/health-check', (req, res) => {
 
 router.use('/users', userRouter)
 router.use('/auth', authRouter)
-router.use('/items', adRouter)
+router.use('/ads', adRouter)
 router.use('/promotions', promotionRouter)
 router.use('/plans', planRouter)
 router.use('/promotionSet', promotionSet)

@@ -15,6 +15,12 @@ export function addPost () {
   }
 }
 
+export function addRent () {
+  return {
+    type: AN.ADD_NEW_RENT
+  }
+}
+
 export function editPost (postInfo) {
   return {
     type: AN.EDIT_POST,

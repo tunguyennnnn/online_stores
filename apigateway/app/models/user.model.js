@@ -4,9 +4,15 @@ function login ({exec, email, password}) {
   return exec(`SELECT * FROM users AS u WHERE u.email = '${email}' AND u.password = '${password}';`)
 }
 
-function create ({exec, id, email, password, firstName, lastName, province, city, isAdmin = false}) {
-  return exec(['INSERT INTO users(id, email, password, firstName, lastName, province, city, isAdmin)',
-               `VALUES('${uuid()}', '${email}', '${password}', '${firstName}', '${lastName}', '${province}', '${city}', ${isAdmin ? 1 : 0});`].join(' '))
+function create ({exec, email, password, firstName, lastName, province, city, isAdmin = false}) {
+  return exec(['INSERT INTO users(email, password, firstName, lastName, province, city, isAdmin)',
+               `VALUES('${email}', '${password}', '${firstName}', '${lastName}', '${province}', '${city}', ${isAdmin ? 1 : 0});`].join(' '))
+          .then(() => getUser({exec, email}))
+          .then(users => users.first())
+}
+
+function getUser ({exec, email}) {
+  return exec(`SELECT * FROM users AS u WHERE u.email = '${email}'`)
 }
 
 function getAllMyAds ({exec, userId}) {

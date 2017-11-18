@@ -9,7 +9,7 @@ function createAd ({exec, title, description, price, postDate, completed, addres
 
 
 function getAds ({exec, userId, isAdmin}) {
-  const where = isAdmin ? '' : userId ? `WHERE user_id = '${userId}'` : 'WHERE item.isSold = 0'
+  const where = isAdmin ? '' : `WHERE user_id = '${userId}'`
   return exec(`SELECT * FROM ads ${where}`)
 }
 module.exports = {getAllAds, createAd, getAds}

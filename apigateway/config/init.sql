@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users(
-    id varchar(36) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     firstName varchar(32),
     lastName varchar(32),
     email varchar(64),
@@ -31,12 +31,12 @@ CREATE TABLE IF NOT EXISTS mPlans (
     startDate date,
     lastDate date,
     price float(32),
-    user_id varchar(36),
-    planSet_id varchar(36)
+    user_id int,
+    planSet_id int
 );
 
 CREATE TABLE IF NOT EXISTS planSet (
-	id varchar(36),
+	id int NOT NULL AUTO_INCREMENT,
   name varchar(32),
   price float,
   duration varchar(32),
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS planSet (
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
-    user_id varchar(36),
-    ad_id varchar(36),
+    user_id int,
+    ad_id int,
     amount float,
     cardDetail varchar(32),
     dateOfPayment date,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 CREATE TABLE IF NOT EXISTS ads(
     id int NOT NULL AUTO_INCREMENT,
-    user_id varchar(36),
+    user_id int,
     title varchar(255),
     price float,
     imageUrl varchar (255),
@@ -68,25 +68,25 @@ CREATE TABLE IF NOT EXISTS ads(
 );
 
 CREATE TABLE IF NOT EXISTS promotionSet (
-    id varchar(36) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     price float,
     duration int,
     PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS promotions (
-    id varchar(36) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     startDate date,
     endDate date,
-    set_id varchar(36),
-    ad_id varchar(36),
+    set_id int,
+    ad_id int,
     PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS rates (
-    id varchar(36) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     score int,
-    ad_id varchar(36),
-    user_id varchar(36),
+    ad_id int,
+    user_id int,
     PRIMARY KEY(id)
 );

@@ -7,7 +7,7 @@ module.exports = {
   entry: './index.js',
   devServer: {
     proxy: {
-      '/apiapi': {
+      '/api': {
         target: 'http://localhost:4000',
         secure: false
       }

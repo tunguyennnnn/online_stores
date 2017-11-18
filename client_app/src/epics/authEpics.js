@@ -9,7 +9,7 @@ export function login (action$, store) {
     .switchMap(formInput => {
       console.log(formInput)
       const request = {
-        url: '/apiapi/auth',
+        url: '/api/auth',
         method: 'POST',
         body: {
           ...formInput
@@ -33,7 +33,7 @@ export function signup (action$, store) {
     .switchMap(formInput => {
       console.log(formInput)
       const request = {
-        url: '/apiapi/users',
+        url: '/api/users',
         method: 'POST',
         body: {
           ...formInput

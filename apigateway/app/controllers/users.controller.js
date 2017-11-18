@@ -9,8 +9,10 @@ const Promise = require('bluebird')
 
 function createUser (req, res, next) {
   const {email, password, firstName, lastName, isAdmin, province, city} = req.body
+  console.log('reachhhhhhhhhhh')
   User.create({exec: res.pExec, email, password, firstName, lastName, province, city, isAdmin})
     .then(user => {
+      console.log(user)
       const userId = user.id
       const apiToken = jwt.sign({userId, email, password, isAdmin}, superSecret, {expiresIn: 60 * 60 * 24})
       res.json({userId, firstName, lastName, email, apiToken})
