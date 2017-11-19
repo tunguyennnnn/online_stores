@@ -1,92 +1,131 @@
-CREATE TABLE IF NOT EXISTS users(
-    id int NOT NULL AUTO_INCREMENT,
-    firstName varchar(32),
-    lastName varchar(32),
-    email varchar(64),
-    password varchar (32),
-    isAdmin tinyint(1),
-    userType varchar(32),
-    province varchar(255),
-    city varchar(255),
-    PRIMARY KEY(id)
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `ads`;
+DROP TABLE IF EXISTS `physicalAds`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `promotionPackages`;
+DROP TABLE IF EXISTS `promotedBy`;
+DROP TABLE IF EXISTS `stores`;
+DROP TABLE IF EXISTS `deliveries`;
+DROP TABLE IF EXISTS `rate`;
+DROP TABLE IF EXISTS `transactions`;
+DROP TABLE IF EXISTS `membershipPlans`;
+DROP TABLE IF EXISTS `subscribeTo`;
+
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT NOT NULL,
+    firstName VARCHAR (32),
+    lastName VARCHAR (32),
+    password VARCHAR (32),
+    email VARCHAR (64),
+    address VARCHAR (128),
+    type VARCHAR (32),
+    PRIMARY KEY (id)
 );
 
-INSERT IGNORE INTO users (id, firstName, lastName, email, password, isAdmin, userType)
-VALUES ('00000000000000000000000000000000', 'Super Admin', '', 'admin@bestseller.com', 'admin', true, null);
+INSERT IGNORE INTO users (id, firstName, lastName, password, email, address, type)
+VALUES (1111, 'Thursday', 'McAdmin', 'thursdaysunbreakablepassword','thursday.mcadmin@sellme.com', '22 St Admin, Montreal, QC', 'admin'),
+			(1112, 'Monday', 'McAdministrator', 'supermondaypassword', 'monday.mcadministrator@sellme.com', '33 St Admin, Montreal, QC', 'admin'),
+			(2222, 'Sunday', 'McUser', 'password', 'sunday.mcuser@veryfreemail.com', '21 Users Street, Toronto, ON', 'user'),
+            (2223, 'Saturday', 'Managerson', 'password', 'saturday.managerson@veryfreemail.com', '5 Managers Street, Montreal, QC', 'store manager');
 
-CREATE TABLE IF NOT EXISTS locations (
-    province varchar(32),
-    city varchar(32),
-    PRIMARY KEY(city, province)
+CREATE TABLE IF NOT EXISTS ads (
+  id INT,
+  user_id INT,
+  title VARCHAR (64),
+  description VARCHAR (128),
+  price FLOAT,
+  city VARCHAR (32),
+  province VARCHAR (32),
+  PRIMARY KEY (id)
 );
 
-INSERT IGNORE INTO location (city, province)
-VALUES ('Montreal', 'Quebec'),
-				('Toronto', 'Ontario'),
-				('Vancouver', 'British Columbia'),
-                ('Ottawa', 'Ontario'),
-                ('Winnipeg', 'Manitoba');
-
-CREATE TABLE IF NOT EXISTS mPlans (
-    startDate date,
-    lastDate date,
-    price float(32),
-    user_id int,
-    planSet_id int
+CREATE TABLE IF NOT EXISTS physicalAds (
+  id INT,
+  timeSlot INT,
+  startDate DATE,
+  endDate DATE,
+  delivery BOOLEAN,
+  PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS planSet (
-	id int NOT NULL AUTO_INCREMENT,
-  name varchar(32),
-  price float,
-  duration varchar(32),
-  PRIMARY KEY(id)
+CREATE TABLE IF NOT EXISTS categories (
+  name VARCHAR (16),
+  subcategory VARCHAR (16),
+  PRIMARY KEY (name, subcategory)
 );
 
-CREATE TABLE IF NOT EXISTS transactions (
-    user_id int,
-    ad_id int,
-    amount float,
-    cardDetail varchar(32),
-    dateOfPayment date,
+CREATE TABLE IF NOT EXISTS promotionPackages (
+  days INT,
+  price FLOAT,
+  PRIMARY KEY (days)
+);
+
+CREATE TABLE IF NOT EXISTS promotedBy(
+  ad_id INT,
+  promotion_days INT,
+  startDate DATE,
+  endDate DATE,
+  PRIMARY KEY (ad_id, promotion_days, startDate)
+);
+
+CREATE TABLE IF NOT EXISTS stores (
+  id INT,
+  strategicLocation VARCHAR (8),
+  address VARCHAR (128),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS deliveries (
+  id INT,
+  store_id INT NOT NULL,
+  ad_id INT NOT NULL,
+  buyer_id INT NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS rate (
+    user_id INT NOT NULL,
+    ad_id INT NOT NULL,
+    rating INT,
     PRIMARY KEY(user_id, ad_id)
 );
 
-CREATE TABLE IF NOT EXISTS ads(
-    id int NOT NULL AUTO_INCREMENT,
-    user_id int,
-    title varchar(255),
-    price float,
-    imageUrl varchar (255),
-    category varchar(32),
-    subCategory varchar(32),
-    createdAt datetime,
-    updatedAt datetime,
-    forSaleBy varchar(32),
-    description varchar(255),
-    PRIMARY KEY(id)
+CREATE TABLE IF NOT EXISTS transactions (
+  id INT,
+  user_id INT NOT NULL,
+  item_id INT NOT NULL,
+  date DATETIME NOT NULL,
+  type VARCHAR (16) NOT NULL,
+  paymentMethod VARCHAR (32) NOT NULL,
+  price FLOAT NOT NULL,
+  cardDetails VARCHAR (64) NOT NULL,
+  PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS promotionSet (
-    id int NOT NULL AUTO_INCREMENT,
-    price float,
-    duration int,
-    PRIMARY KEY(id)
+CREATE TABLE IF NOT EXISTS membershipPlans (
+  name VARCHAR (16),
+  price FLOAT,
+  PRIMARY KEY (name)
 );
 
-CREATE TABLE IF NOT EXISTS promotions (
-    id int NOT NULL AUTO_INCREMENT,
-    startDate date,
-    endDate date,
-    set_id int,
-    ad_id int,
-    PRIMARY KEY(id)
+CREATE TABLE IF NOT EXISTS subscribeTo (
+  user_id INT,
+  membershipPlan_name VARCHAR (16),
+  startDate DATE,
+  endDate DATE,
+  PRIMARY KEY (user_id, membershipPlan_name, startDate)
 );
 
-CREATE TABLE IF NOT EXISTS rates (
-    id int NOT NULL AUTO_INCREMENT,
-    score int,
-    ad_id int,
-    user_id int,
-    PRIMARY KEY(id)
-);
+SELECT * FROM users;
+SELECT * FROM ads;
+SELECT * FROM physicalAds;
+SELECT * FROM categories;
+SELECT * FROM promotionPackages;
+SELECT * FROM promotedBy;
+SELECT * FROM stores;
+SELECT * FROM deliveries;
+SELECT * FROM rate;
+SELECT * FROM transactions;
+SELECT * FROM membershipPlans;
+SELECT * FROM subscribeTo;
