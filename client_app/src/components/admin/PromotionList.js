@@ -12,7 +12,7 @@ export default class PromotionList extends React.Component {
             promotions.map((promotion, i) =>
               <List.Item key={i}>
                 <List.Icon name={promotion.available ? 'checkmark' : 'remove'} />
-                <List.Content>{`${promotion.title} - ${promotion.price} CAD - ${promotion.duration} days`}</List.Content>
+                <List.Content>{`${promotion.price} CAD - ${promotion.duration} days`}</List.Content>
               </List.Item>
             )
           }

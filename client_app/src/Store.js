@@ -8,11 +8,6 @@ import rootReducer from './reducers/AllReducers'
 
 const epicMiddleware = createEpicMiddleware(rootEpics)
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(epicMiddleware)
-)
-
 export default function configureStore (initialState) {
   const routingMiddleware = routerMiddleware(hashHistory)
   let enhancer = {}

@@ -6,7 +6,7 @@ export default class PlanForm extends React.Component {
     super()
     this.state = {
       formInput: {
-        planName: '',
+        name: '',
         price: '',
         duration: ''
       }
@@ -30,7 +30,7 @@ export default class PlanForm extends React.Component {
           <div class='col s12'>
             <label>Name</label>
             <br />
-            <Input style={gStyle} id='planName' type='text' value={planName} onChange={this.onChange.bind(this)} />
+            <Input style={gStyle} id='name' type='text' value={planName} onChange={this.onChange.bind(this)} />
           </div>
           <div class='col s12'>
             <label>Price</label>

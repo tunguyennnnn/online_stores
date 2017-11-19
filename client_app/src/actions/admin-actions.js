@@ -53,6 +53,7 @@ export function createPlan () {
 }
 
 export function createPlanSuccess (response) {
+  console.log(response)
   return {
     type: AN.CREATE_PLAN_SUCCESS,
     payload: {

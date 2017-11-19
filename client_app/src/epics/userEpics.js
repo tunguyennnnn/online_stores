@@ -1,6 +1,6 @@
 import * as AN from '../ActionName'
 import {receivedUserInfo} from '../actions/navigation-actions'
-import { postItemSuccess } from '../actions/personalPageAction'
+import { postItemSuccess, purchasePlanSuccess, purchasePromotionSuccess } from '../actions/personalPageAction'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
 
@@ -48,6 +48,51 @@ export function submitPost (action$, store) {
           payload: {
             formInput
           }
+        }))
+    })
+}
+
+export function purchasePlan (action$, store) {
+  return action$.ofType(AN.USER_PURCHASE_PLAN)
+    .map(action => action.payload.planId)
+    .switchMap(planId => {
+      const request = {
+        url: `/api/plans/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        },
+        body: {
+          planId
+        }
+      }
+      return ajax(request)
+        .map(v => purchasePlanSuccess(v.response))
+        .catch(err => Observable.of({
+          type: AN.USER_PURCHASED_PLAN_FAILED
+        }))
+    })
+}
+
+export function purchasePromotion (action$, store) {
+  return action$.ofType(AN.USER_PURCHASE_PLAN)
+    .map(action => action.payload)
+    .switchMap(({promotionId, itemId}) => {
+      const request = {
+        url: `/api/promotions/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        },
+        body: {
+          promotionId,
+          itemId
+        }
+      }
+      return ajax(request)
+        .map(v => purchasePromotionSuccess(v.response))
+        .catch(err => Observable.of({
+          type: AN.USER_PURCHASED_PROMOTION_FAILED
         }))
     })
 }

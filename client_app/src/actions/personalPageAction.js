@@ -9,6 +9,39 @@ export function fetchUser (userId) {
   }
 }
 
+export function purchasePromotionSuccess (promotion) {
+  return {
+    type: AN.USER_PURCHASED_PROMOTION_SUCCESS
+  }
+}
+
+export function purchasePlanSuccess (plans) {
+  return {
+    type: AN.USER_PURCHASED_PLAN_SUCCESS,
+    payload: {
+      plans
+    }
+  }
+}
+
+export function purchasePlan (planId) {
+  return {
+    type: AN.USER_PURCHASE_PLAN,
+    payload: {
+      planId
+    }
+  }
+}
+
+export function purchasePromotion (promotionId, itemId) {
+  return {
+    type: AN.USER_PURCHASE_PROMOTION,
+    payload: {
+      itemId, promotionId
+    }
+  }
+}
+
 export function addPost () {
   return {
     type: AN.ADD_NEW_POST

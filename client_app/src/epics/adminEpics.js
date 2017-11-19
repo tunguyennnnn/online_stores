@@ -25,11 +25,17 @@ export function submitAccount (action$, store) {
 
 export function submitPlan (action$, store) {
   return action$.ofType(AN.SUBMIT_PLAN)
-    .map(action => action.payload.formInput)
-    .switchMap(formInput => {
+    .map(action => {
+      console.log('reachhhhhh')
+      return action.payload.formInput
+    })
+    .debounceTime(250)
+    .mergeMap(formInput => {
+      console.log(formInput)
       const request = {
         url: '/api/planSet/',
-        header: {
+        method: 'POST',
+        headers: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: formInput
@@ -43,14 +49,13 @@ export function submitPlan (action$, store) {
 }
 
 export function submitPromotion (action$, store) {
-  console.log('reachhhhhhh')
   return action$.ofType(AN.SUBMIT_PROMOTIONAL_PLAN)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
       const request = {
         url: '/api/promotionSet/',
         method: 'POST',
-        header: {
+        headers: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: formInput

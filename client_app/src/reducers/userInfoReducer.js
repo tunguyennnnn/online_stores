@@ -67,12 +67,34 @@ export default function (state = pageState, action) {
     }
     case AN.FETCH_USER_INFO_REJECTED: {
       const {userId, data} = action.payload.userInfo
-      hashHistory.push(`/users/${userId}`)
-      mockData.data = action.payload
+      hashHistory.push(`/login`)
+
       return {
         ...state,
         showAll: true,
         newPost: false
+      }
+    }
+    case AN.USER_PURCHASED_PLAN_SUCCESS: {
+      const {plans} = action.payload
+      return {
+        ...state,
+        plans
+      }
+    }
+    case AN.USER_PURCHASED_PLAN_FAILED: {
+      return {
+        ...state
+      }
+    }
+    case AN.USER_PURCHASED_PROMOTION_SUCCESS: {
+      return {
+        ...state
+      }
+    }
+    case AN.USER_PURCHASED_PROMOTION_FAILED: {
+      return {
+        ...state
       }
     }
   }

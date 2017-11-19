@@ -1,6 +1,6 @@
 import {hashHistory} from 'react-router'
 import * as AN from '../ActionName'
-
+const _ = require('lodash')
 
 const initialState = {
   items: [],
@@ -14,7 +14,6 @@ const initialState = {
 export default function adminReducer (state = initialState, action) {
   switch (action.type) {
     case AN.RECEIVED_ADMIN_INFO: {
-      console.log(action.payload)
       const {userId, email, items = [], plans = [], promotions = []} = action.payload
       return {
         ...state,
@@ -43,10 +42,9 @@ export default function adminReducer (state = initialState, action) {
       }
     }
     case AN.CREATE_PLAN_SUCCESS: {
-      const {plans} = action.payload
       return {
         ...state,
-        plans,
+        plans: _.values(action.payload),
         promotion: false,
         plan: true
       }

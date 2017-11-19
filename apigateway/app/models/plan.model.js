@@ -2,8 +2,8 @@ const Moment = require('moment')
 const uuid = require('uuid/v1')
 
 function createSet ({exec, name, price, duration}) {
-  return exec(['INSERT INTO planSet(id, name, price, duration)',
-               `VALUES('${uuid()}', '${name}', ${price}, ${duration})`].join(' '))
+  return exec(['INSERT INTO planSet(name, price, duration)',
+               `VALUES('${name}', ${price}, ${duration})`].join(' '))
         .then(() => getSet({exec}))
 }
 
