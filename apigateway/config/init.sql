@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS users(
     userType varchar(32),
     province varchar(255),
     city varchar(255),
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    UNIQUE (email)
 );
 
 INSERT IGNORE INTO users (firstName, lastName, email, password, isAdmin, userType)
@@ -19,13 +20,6 @@ CREATE TABLE IF NOT EXISTS locations (
     city varchar(32),
     PRIMARY KEY(city, province)
 );
-
-INSERT IGNORE INTO location (city, province)
-VALUES ('Montreal', 'Quebec'),
-				('Toronto', 'Ontario'),
-				('Vancouver', 'British Columbia'),
-                ('Ottawa', 'Ontario'),
-                ('Winnipeg', 'Manitoba');
 
 CREATE TABLE IF NOT EXISTS mPlans (
     startDate date,
@@ -40,7 +34,8 @@ CREATE TABLE IF NOT EXISTS planSet (
   name varchar(32),
   price float,
   duration varchar(32),
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
@@ -58,12 +53,15 @@ CREATE TABLE IF NOT EXISTS ads(
     title varchar(255),
     price float,
     imageUrl varchar (255),
+    description varchar(255),
+    phone varchar(30),
+    address varchar (255),
     category varchar(32),
     subCategory varchar(32),
+    type varchar(36) DEFAULT 'ONLINE_AD',
     createdAt datetime,
-    updatedAt datetime,
-    forSaleBy varchar(32),
-    description varchar(255),
+    updatedAt datetime DEFAULT CURRENT_TIMESTAMP,
+    forBuySale tinyint(1) DEFAULT 0,
     PRIMARY KEY(id)
 );
 

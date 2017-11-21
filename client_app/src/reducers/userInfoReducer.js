@@ -48,8 +48,8 @@ export default function (state = pageState, action) {
       }
     }
     case AN.POST_ITEM_SUCCESS: {
-      const {itemId, title, imageUrl, description, price, category} = action.payload
-      fetchedData.items = _.concat({title, imageUrl, description, price}, fetchedData.items)
+      console.log(action.payload)
+      fetchedData.items = _.values(action.payload)
       return {
         ...state,
         showAll: true,

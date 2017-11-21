@@ -1,4 +1,5 @@
 import {hashHistory} from 'react-router'
+const _ = require('lodash')
 import * as AN from '../ActionName'
 
 const fetchedItems = {items: []}
@@ -30,11 +31,11 @@ function filterItems (state, filterOptions) {
 export default function (state = fetchedItems, action) {
   switch (action.type) {
     case AN.RECEIVED_ALL_ITEM: {
-      hashHistory.push('/')
-      fetchedItems.items = action.payload.items
+      console.log(action.payload)
+      fetchedItems.items = _.values(action.payload)
       return {
         ...state,
-        items: action.payload.items
+        items: fetchedItems.items
       }
     }
     case AN.FETCH_ALL_REJECTED: {

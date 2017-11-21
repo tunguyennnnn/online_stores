@@ -8,7 +8,7 @@ router.route('/')
   .get(adCtrl.index)
   .post(adCtrl.create)
 
-// router.route('/rates/')
-//   .all(authCheck)
+router.route('/rates/')
+  .all(authCheck)
 
 module.exports = router
