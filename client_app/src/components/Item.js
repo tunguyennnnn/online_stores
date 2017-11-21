@@ -1,12 +1,13 @@
-
 import React from 'react'
 import { Grid, Card, Image, Divider } from 'semantic-ui-react'
+import UserItemAction from './personal/ItemAction'
+import AdminItemAction from './admin/ItemAction'
+import MainItemAction from './mainpage/ItemAction'
 
 export default class Item extends React.Component {
   render () {
-
-    const {belongToCurrentUser, ownerName, editPost} = this.props
-    const {imageUrl, title, description, price, postDate, completed, address, phoneNumber, adType, forSaleBy} = this.props.itemInfo
+    const {belongToCurrentUser, ownerName, editPost, promotionSet, purchasePromotion, page} = this.props
+    const {id, imageUrl, title, description, price, postDate, completed, address, phoneNumber, adType, forSaleBy, promotion, available} = this.props.itemInfo
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
     const cardStyle = {padding: '0px'}
     const myStyle = {
@@ -44,7 +45,13 @@ export default class Item extends React.Component {
               }
             </span>
           </div>
-          <div class='ui button'>More</div>
+          {
+            page === 'USER_PAGE'
+            ? <UserItemAction promotionSet={promotionSet} available={available} purchasePromotion={purchasePromotion.bind(null, id)} promotion={promotion} />
+            : page === 'ADMIN_PAGE'
+            ? <AdminItemAction />
+            : <MainItemAction />
+          }
         </div>
       </Grid.Column>
     )

@@ -60,7 +60,7 @@ export default class Home extends React.Component {
 
     const listOfItems = (items) => (
         <Grid.Row columns={3}>
-          {items.map((d, i) => <Item key={i} itemInfo={d} />)}
+          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} />)}
         </Grid.Row>
     )
 

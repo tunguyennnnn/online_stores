@@ -14,7 +14,6 @@ let pageState = {
 }
 
 export default function (state = pageState, action) {
-  console.log(action.type)
   switch (action.type) {
     case AN.ADD_NEW_POST: {
       return {

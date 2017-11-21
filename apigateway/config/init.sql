@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS locations (
     PRIMARY KEY(city, province)
 );
 
-CREATE TABLE IF NOT EXISTS mPlans (
+CREATE TABLE IF NOT EXISTS plans (
     startDate date,
     lastDate date,
     price float(32),

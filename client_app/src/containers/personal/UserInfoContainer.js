@@ -7,7 +7,6 @@ import PlanPurchase from '../../components/personal/PlanPurchase'
 import { Grid } from 'semantic-ui-react'
 
 export default class UserInfoContainer extends React.Component {
-
   groupItem (items) {
     const lst1 = [], lst2 = [], lst3 = []
     items.forEach((item, i) => {
@@ -20,8 +19,9 @@ export default class UserInfoContainer extends React.Component {
 
   render () {
     const {data, newPost, showAll, newRent, postInfo} = this.props.userInfo
+    const {promotions} = data
+    const {purchasePromotion} = this.props
     const {items} = data
-    const {lst1, lst2, lst3} = this.groupItem(items)
     return (
       newPost
         ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
@@ -31,7 +31,7 @@ export default class UserInfoContainer extends React.Component {
           <PlanPurchase purchase={() => {}} />
           <Grid.Row columns={3}>
             {
-             items.map((d, i) => <Item key={i} belongToCurrentUser={'true'} editPost={this.props.editPost} itemInfo={d} />)
+             items.map((d, i) => <Item key={i} page='USER_PAGE' belongToCurrentUser={'true'} purchasePromotion={purchasePromotion} promotionSet={promotions} editPost={this.props.editPost} itemInfo={d} />)
             }
           </Grid.Row>
         </Grid>

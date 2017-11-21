@@ -31,7 +31,6 @@ function filterItems (state, filterOptions) {
 export default function (state = fetchedItems, action) {
   switch (action.type) {
     case AN.RECEIVED_ALL_ITEM: {
-      console.log(action.payload)
       fetchedItems.items = _.values(action.payload)
       return {
         ...state,

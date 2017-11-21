@@ -14,22 +14,26 @@ function get (req, res, next) {
 }
 
 function create (req, res, next) {
-  const {itemId, setId, duration} = req.body
-  const now = Moment(new Date())
-  const startDate = now.format('YYYY-MM-DD HH:mm:ss')
-  const endDate = now.add(duration, 'days').format('YYYY-MM-DD HH:mm:ss')
-  return Promotion.create({exec: res.pExec, itemId, setId, startDate, endDate})
-    .then(r => {
-      const promotion = r.first()
-      if (promotion) {
-        res.json(promotion)
-      } else {
-        res.status(404).send()
-      }
-    })
-    .catch(err => {
-      console.log(err)
-      res.json(500)
+  const {itemId, promotionId} = req.body
+  const now = Moment()
+  Promotion.getPromotionSet({exec: res.pExec, setId: promotionId})
+    .then(set => {
+      const {duration} = set
+      const startDate = now.format('YYYY-MM-DD HH:mm:ss')
+      const endDate = now.add(duration, 'days').format('YYYY-MM-DD HH:mm:ss')
+      Promotion.create({exec: res.pExec, itemId, setId: promotionId, startDate, endDate})
+        .then(r => {
+          const promotion = r.first()
+          if (promotion) {
+            res.json(promotion)
+          } else {
+            res.status(404).send()
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          res.json(500)
+        })
     })
 }
 

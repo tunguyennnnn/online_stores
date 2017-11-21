@@ -58,7 +58,7 @@ export default class AdminPage extends React.Component {
             : (
               <Grid stackable>
                 <Grid.Row columns={3}>
-                  {items.map((info, i) => <Item key={i} itemInfo={info} />)}
+                  {items.map((info, i) => <Item key={i} page='ADMIN_PAGE' itemInfo={info} />)}
                 </Grid.Row>
               </Grid>
               )

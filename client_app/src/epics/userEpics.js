@@ -75,7 +75,7 @@ export function purchasePlan (action$, store) {
 }
 
 export function purchasePromotion (action$, store) {
-  return action$.ofType(AN.USER_PURCHASE_PLAN)
+  return action$.ofType(AN.USER_PURCHASE_PROMOTION)
     .map(action => action.payload)
     .switchMap(({promotionId, itemId}) => {
       const request = {

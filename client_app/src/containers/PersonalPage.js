@@ -4,13 +4,13 @@ import {connect} from 'react-redux'
 import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
 import {navigateToHomePage} from '../actions/navigation-actions'
-import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent} from '../actions/personalPageAction'
+import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion} from '../actions/personalPageAction'
 import { Menu, Grid } from 'semantic-ui-react'
 
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent}
+  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion}
 )
 
 export default class PersonalPage extends React.Component {
@@ -20,7 +20,7 @@ export default class PersonalPage extends React.Component {
 
   render () {
     const style = {marginTop: '2vw'}
-    const {userInfo, navigateToHomePage, addPost, cancelPost, submitPost, editPost, addRent} = this.props
+    const {userInfo, navigateToHomePage, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion} = this.props
     return (
       <div class='row' style={style}>
         <Menu>
@@ -37,7 +37,7 @@ export default class PersonalPage extends React.Component {
             Home
           </Menu.Item>
         </Menu>
-        <UserInfoContainer userInfo={userInfo} submitPost={submitPost} cancelPost={cancelPost} editPost={editPost} />
+        <UserInfoContainer userInfo={userInfo} submitPost={submitPost} purchasePromotion={purchasePromotion} cancelPost={cancelPost} editPost={editPost} />
       </div>
     )
   }
