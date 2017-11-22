@@ -5,6 +5,7 @@ const User = require('../models/user.model')
 
 function login (req, res, next) {
   const {email, password} = req.body
+  console.log('email', email)
   User.login({exec: res.pExec, email, password})
     .then(r => {
       const user = r.first()

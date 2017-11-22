@@ -41,9 +41,11 @@ export default function (state = pageState, action) {
       }
     }
     case AN.CANCEL_POST: {
+      console.log('reached cancel post')
       return {
         ...state,
         newPost: false,
+        newRent: false,
         showAll: true
       }
     }
@@ -66,9 +68,7 @@ export default function (state = pageState, action) {
       }
     }
     case AN.FETCH_USER_INFO_REJECTED: {
-      const {userId, data} = action.payload.userInfo
       hashHistory.push(`/login`)
-
       return {
         ...state,
         showAll: true,

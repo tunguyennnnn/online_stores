@@ -1,14 +1,16 @@
 import React from 'react'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 export default class Navbar extends React.Component {
   render () {
     const {userEmail, navigateToHomePage, navigateToPersonalPage} = this.props
+    console.log(this.props)
     return (
       <Menu fluid>
         <Menu.Item header onClick={navigateToHomePage.bind(null)}> Online Store</Menu.Item>
         <Menu.Item onClick={navigateToPersonalPage.bind(null)} position='right'>
           {userEmail}
+          <Icon disabled name='setting' />
         </Menu.Item>
       </Menu>
 

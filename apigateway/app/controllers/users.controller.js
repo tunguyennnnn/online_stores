@@ -22,74 +22,6 @@ function createUser (req, res, next) {
     })
 }
 
-function getAds (req, res, next) {
-  const {decoded} = res
-  console.log(res)
-  const {userId} = decoded
-  User.getAllMyAds({exec: res.pExec, userId})
-  .then(r => {
-    if (r) {
-      console.log(r)
-      res.json({info: r})
-    } else res.status(404).send()
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).send()
-  })
-}
-
-
-function createAd (req, res, next) {
-  const {decoded} = res
-  console.log(res)
-  const {title, imageUrl, description, price, category} = req.body
-  console.log(title)
-  // const {title, imageUrl, description, price, category} = data
-  // console.log()
-  User.createAd({exec: res.pExec, title, imageUrl, description, price, category})
-  .then(r => {
-    if (r) {
-      console.log(`successfully created an ad for ${userId}`)
-      res.status(200).send()
-    } else res.status(400).send()
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).send()
-  })
-}
-
-const mock = {
-  userId: 1,
-  email: 'tunguyenuni@gmail.com',
-  firstName: 'Tu',
-  lastName: 'Nguyen',
-  items: [
-    {
-      itemId: '100',
-      price: 30,
-      imageUrl: 'https://i.ebayimg.com/00/s/MjM2WDMxNQ==/z/n1sAAOSwYIxX89W6/$_57.JPG',
-      title: 'Motocycle',
-      description: 'It is free'
-    },
-    {
-      itemId: '101',
-      price: 30,
-      imageUrl: 'https://i.pinimg.com/736x/32/c1/4f/32c14ff606e5430916f8b77115baf648--my-dream-house-dream-houses.jpg',
-      title: 'My House',
-      description: 'It is far'
-    },
-    {
-      itemId: '102',
-      price: 20,
-      imageUrl: 'https://i.pinimg.com/originals/fa/79/dd/fa79dd9f9974c993719cb1c17ef125ff.jpg',
-      title: 'My Wife',
-      description: 'She is invaluable'
-    }
-  ]
-}
-
 function show (req, res, next) {
   const {decoded} = res
   const exec = res.pExec
@@ -107,4 +39,4 @@ function show (req, res, next) {
     })
 }
 
-module.exports = {createUser, show, getAds, createAd}
+module.exports = {createUser, show}

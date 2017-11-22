@@ -13,7 +13,7 @@ import Categories from '../components/categories/Categories'
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    userInfo: state.userInfo,
     data: state.allItems,
     pageState: state.mainPageState
   }
@@ -38,16 +38,16 @@ export default class Home extends React.Component {
 
   render () {
     const {showSubcategory, category=''} = this.props.pageState
-    console.log('category', category)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
+    console.log('this.props',this.props)
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo} = this.props
     const {items} = this.props.data
-    console.log(this.props)
-
+    const {email} = userInfo.data
+    console.log(email)
     const navbar = () => (
       <Navbar
-      userEmail={'tunguyen@gmail.com'}
+      userEmail={email}
       navigateToHomePage={navigateToHomePage.bind(null)}
-      navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}
+      navigateToPersonalPage={navigateToPersonalPage.bind(null, email)}
       />
     )
 

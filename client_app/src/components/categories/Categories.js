@@ -23,7 +23,6 @@ const myCategories = {
 }
 
 export default class Categories extends React.Component {
-
   onClickHanlder ({category, subCategory}) {
     console.log(category)
     this.props.filterItems({type: 'CATEGORY', category, subCategory})

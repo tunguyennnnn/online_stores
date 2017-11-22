@@ -30,7 +30,6 @@ export default function adminReducer (state = initialState, action) {
         promotion: false,
         account: false
       }
-
     }
     case AN.CREATE_PROMOTION_SUCCESS: {
       const {promotions} = action.payload

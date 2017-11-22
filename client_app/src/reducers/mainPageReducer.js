@@ -1,4 +1,5 @@
 import * as AN from '../ActionName'
+import {hashHistory} from 'react-router'
 
 const initialState = {
   showSubcategory: false,
@@ -22,6 +23,7 @@ export default function (state = initialState, action) {
       return state
     }
     case AN.NAVIGATE_TO_HOME_PAGE: {
+      hashHistory.push('/')
       return {
         ...state,
         showSubcategory: false
