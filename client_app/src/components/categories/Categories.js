@@ -42,12 +42,10 @@ export default class Categories extends React.Component {
     }
   }
   mySubCategory () {
-    const { navigateToHomePage } = this.props
     const myCategory = myCategories.categories.filter((allCategories, i) => allCategories.category === this.props.category)
 
     return (
-      <Menu borderless compact>
-        <Menu.Item name='All' onClick={navigateToHomePage.bind(null)} />
+      <Menu>
         <Menu.Item
           name={this.getCategory(this.props.category)}
           onClick={this.onClickHanlder.bind(this, {category: this.props.category})}
@@ -62,10 +60,9 @@ export default class Categories extends React.Component {
 
   render () {
     const { showSubcategory } = this.props
-
     if (!showSubcategory) {
       return (
-        <Menu borderless compact>
+        <Menu fluid>
           <Menu.Item
             name='Buy and Sell'
             onClick={this.onClickHanlder.bind(this, {category: 'BUY_AND_SELL'})}

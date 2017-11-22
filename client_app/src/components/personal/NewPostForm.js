@@ -1,9 +1,10 @@
 import React from 'react'
 import {Form, Input, TextArea, Select, Button} from 'semantic-ui-react'
 const CATEGORY = [
-  {key: 'Vehicle.Car', value: 'Vehicles-Car', text: 'Vehicles - Car'},
-  {key: 'Vehicle.Bike', value: 'Vehicles-Bike', text: 'Vehicles - Bike'},
-  {key: 'Others', value: 'Others', text: 'Others'}
+  {key: 'buyandsell.clothing', value: 'BUY_AND_SELL-Clothing', text: 'Buy and Sell - Clothing'},
+  {key: 'buyandsell.books', value: 'BUY_AND_SELL-Books', text: 'Buy and Sell - Books'},
+  {key: 'buyandsell.electronics', value: 'BUY_AND_SELL-Electronics', text: 'Buy and Sell - Electronics'},
+  {key: 'buyandsell.electronics', value: 'BUY_AND_SELL-Musical Instruments', text: 'Buy and Sell - Musical Instruments'}
 ]
 
 export default class NewPostForm extends React.Component {
@@ -71,7 +72,7 @@ export default class NewPostForm extends React.Component {
             <br />
             <select id='category' class='ui dropdown' onChange={this.onChange.bind(this)}>
               {
-                CATEGORY.map((category, i) => <option key={i} value={category.value}>{category.value}</option>)
+                CATEGORY.map((category, i) => <option key={i} value={category.value}>{category.text}</option>)
               }
             </select>
           </div>

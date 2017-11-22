@@ -9,7 +9,6 @@ import * as FilterActions from '../actions/filter-actions'
 
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
-import Categories from '../components/categories/Categories'
 
 const mapStateToProps = (state) => {
   return {
@@ -43,19 +42,17 @@ export default class Home extends React.Component {
     const {items} = this.props.data
     const {email} = userInfo.data
     console.log(email)
+
     const navbar = () => (
       <Navbar
       userEmail={email}
       navigateToHomePage={navigateToHomePage.bind(null)}
       navigateToPersonalPage={navigateToPersonalPage.bind(null, email)}
+      showSubcategory={showSubcategory}
+      navigateToHomePage={navigateToHomePage}
+      category={category}
+      filterItems={filterItems}
       />
-    )
-
-    const categories = (filterItems, navigateToHomePage) => (
-      <Grid.Row centered>
-        <Categories showSubcategory={showSubcategory}  navigateToHomePage={navigateToHomePage} category={category} filterItems={filterItems}/>
-        <Divider hidden />
-      </Grid.Row>
     )
 
     const listOfItems = (items) => (
@@ -66,9 +63,6 @@ export default class Home extends React.Component {
 
     const body = (items, filterItems) => (
       <div>
-        <Grid>
-          {categories(filterItems, navigateToHomePage)}
-        </Grid>
         <Grid stackable>
           {listOfItems(items)}
         </Grid>
