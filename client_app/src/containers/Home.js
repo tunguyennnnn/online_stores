@@ -36,7 +36,7 @@ export default class Home extends React.Component {
   }
 
   render () {
-    const {showSubcategory, category=''} = this.props.pageState
+    const {showSubcategory, category, province} = this.props.pageState
     console.log('this.props',this.props)
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo} = this.props
     const {items} = this.props.data
@@ -50,6 +50,7 @@ export default class Home extends React.Component {
       navigateToPersonalPage={navigateToPersonalPage.bind(null, email)}
       showSubcategory={showSubcategory}
       navigateToHomePage={navigateToHomePage}
+      province={province}
       category={category}
       filterItems={filterItems}
       />

@@ -7,6 +7,29 @@ const CATEGORY = [
   {key: 'buyandsell.electronics', value: 'BUY_AND_SELL-Musical Instruments', text: 'Buy and Sell - Musical Instruments'}
 ]
 
+const PROVINCE = [
+  {
+    key: 'MQ',
+    value: 'Montreal-Quebec',
+    text: 'Montreal - Quebec'
+  },
+  {
+    key: 'VBC',
+    value: 'Vancouver-British Columbia',
+    text: 'Vancouver - British Columbia'
+  },
+  {
+    key: 'OO',
+    value: 'Ottawa-Ontario',
+    text: 'Ottawa - Ontario'
+  },
+  {
+    key: 'WM',
+    value: 'Winnipeg-Manitoba',
+    text: 'Winnipeg - Manitoba'
+  }
+]
+
 export default class NewPostForm extends React.Component {
   constructor () {
     super()
@@ -18,7 +41,9 @@ export default class NewPostForm extends React.Component {
         phone: '',
         price: '',
         category: CATEGORY.first().value.split('-')[0],
-        subCategory: CATEGORY.first().value.split('-')[1]
+        subCategory: CATEGORY.first().value.split('-')[1],
+        province: PROVINCE.first().value.split('-')[0],
+        city: PROVINCE.first().value.split('-')[1]
       }
     }
   }
@@ -29,6 +54,9 @@ export default class NewPostForm extends React.Component {
     if (id === 'category') {
       formInput.category = value.split('-')[0]
       formInput.subCategory = value.split('-')[1]
+    } else if (id === 'province') {
+      formInput.province = value.split('-')[0]
+      formInput.city = value.split('-')[1]
     } else {
       formInput[id] = value
     }
@@ -74,6 +102,11 @@ export default class NewPostForm extends React.Component {
               {
                 CATEGORY.map((category, i) => <option key={i} value={category.value}>{category.text}</option>)
               }
+            </select>
+            <select id='province' class='ui dropdown' onChange={this.onChange.bind(this)}>
+            {
+              PROVINCE.map((province, i) => <option key={i} value={province.value}>{province.text}</option>)
+            }
             </select>
           </div>
           <br />

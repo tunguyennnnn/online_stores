@@ -1,6 +1,5 @@
 import React from 'react'
-import { Menu, Icon } from 'semantic-ui-react'
-import Categories from '../categories/Categories'
+import { Menu, Icon, Dropdown } from 'semantic-ui-react'
 
 const myCategories = {
   categories: [
@@ -22,11 +21,47 @@ const myCategories = {
     }
   ]
 }
+
+const provinceOptions = [
+  {
+    key: 'MQ',
+    value: 'Montreal-Quebec',
+    text: 'Montreal - Quebec'
+  },
+  {
+    key: 'VBC',
+    value: 'Vancouver-British Columbia',
+    text: 'Vancouver - British Columbia'
+  },
+  {
+    key: 'OO',
+    value: 'Ottawa-Ontario',
+    text: 'Ottawa - Ontario'
+  },
+  {
+    key: 'WM',
+    value: 'Winnipeg-Manitoba',
+    text: 'Winnipeg - Manitoba'
+  }
+]
 export default class Navbar extends React.Component {
   onClickHanlder ({category, subCategory}) {
     console.log(category)
     this.props.filterItems({type: 'CATEGORY', category, subCategory})
   }
+  onChangeHandler (event, data) {
+    event.preventDefault()
+    console.log(event)
+    console.log('province')
+    console.log(data.value)
+    const province = data.value.split('-')[0]
+    const city = data.value.split('-')[1]
+    console.log('province', province)
+    console.log('city', city)
+    console.log(this.props)
+    this.props.filterItems({type: 'PROVINCE', province, city})
+  }
+
   getCategory (category) {
     switch (category) {
       case 'BUY_AND_SELL':
@@ -40,6 +75,16 @@ export default class Navbar extends React.Component {
       default:
         return 'No Category Found'
     }
+  }
+  location () {
+    return (
+      <Dropdown
+        onChange={this.onChangeHandler.bind(this)}
+        placeholder='Select Province'
+        fluid search selection
+        options={provinceOptions}
+      />
+    )
   }
   mySubCategory () {
     const myCategory = myCategories.categories.filter((allCategories, i) => allCategories.category === this.props.category)
@@ -55,6 +100,7 @@ export default class Navbar extends React.Component {
           myCategory.first().subCategories.map((subCategory, i) => {
             return <Menu.Item key={i} name={subCategory} onClick={this.onClickHanlder.bind(this, {category: this.props.category, subCategory})} />
           })}
+        {this.location()}
         <Menu.Item onClick={this.props.navigateToPersonalPage.bind(null)} position='right'>
           {this.props.userEmail}
           <Icon disabled name='setting' />
@@ -63,7 +109,7 @@ export default class Navbar extends React.Component {
     )
   }
   render () {
-    const {userEmail, navigateToHomePage, navigateToPersonalPage, showSubcategory} = this.props
+    const {userEmail, navigateToHomePage, navigateToPersonalPage, showSubcategory, province} = this.props
     console.log(this.props)
     if (!showSubcategory) {
       return (
@@ -84,6 +130,7 @@ export default class Navbar extends React.Component {
           <Menu.Item
             name='Jobs'
             onClick={this.onClickHanlder.bind(this, {category: 'JOBS'})} />
+          {this.location()}
           <Menu.Item onClick={navigateToPersonalPage.bind(null)} position='right'>
             {userEmail}
             <Icon disabled name='setting' />

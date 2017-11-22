@@ -62,6 +62,8 @@ CREATE TABLE IF NOT EXISTS ads(
     createdAt datetime DEFAULT CURRENT_TIMESTAMP,
     updatedAt datetime,
     forBuySale tinyint(1) DEFAULT 0,
+    province varchar(255),
+    city varchar(255),
     PRIMARY KEY(id)
 );
 

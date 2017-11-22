@@ -3,21 +3,27 @@ import {hashHistory} from 'react-router'
 
 const initialState = {
   showSubcategory: false,
-  category: ''
+  category: '',
+  province: ''
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case AN.FILTER_ITEMS: {
       const { filterOptions } = action.payload
-      const { type, category } = filterOptions
-      console.log('category', category)
+      const { type, category, province } = filterOptions
       if (type === 'CATEGORY') {
         console.log('in if category statement', category)
         return {
           ...state,
           showSubcategory: true,
           category: category
+        }
+      } else if (type === 'PROVINCE') {
+        console.log('in if provice statement', province)
+        return {
+          ...state,
+          province: province
         }
       }
       return state

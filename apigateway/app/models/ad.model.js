@@ -2,9 +2,9 @@ function getAllAds (exec) {
   return exec('SELECT * FROM ads;')
 }
 
-function createAd ({exec, userId, title, description, price, imageUrl, phone, category, subCategory}) {
-  return exec(['INSERT INTO ads(user_id, title, description, price, imageUrl, phone, category, subCategory)',
-    `VALUES(${userId}, '${title}', '${description}', '${price}', '${imageUrl}', '${phone}', '${category}', '${subCategory}');`].join(' '))
+function createAd ({exec, userId, title, description, price, imageUrl, phone, category, subCategory, province, city}) {
+  return exec(['INSERT INTO ads(user_id, title, description, price, imageUrl, phone, category, subCategory, province, city)',
+    `VALUES(${userId}, '${title}', '${description}', '${price}', '${imageUrl}', '${phone}', '${category}', '${subCategory}', '${province}', '${city}');`].join(' '))
           .then(() => getUserAds({exec, userId}))
 }
 

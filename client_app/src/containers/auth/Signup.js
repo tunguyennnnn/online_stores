@@ -80,10 +80,10 @@ class Signup extends React.Component {
           </div>
           <div class='field'>
             <select id='location' class='ui dropdown' style={{width: '111%'}} onChange={this.onChange}>
-            <option value='Montreal-Quebec'>Montreal - Quebec</option>
-            <option value='Vancouver-British Columbia'>Vancouver - British Columbia</option>
-            <option value='Ottawa-Ontario'>Ottawa - Ontario</option>
-            <option value='Winnipeg-Manitoba'>Winnipeg - Manitoba</option>
+              <option value='Montreal-Quebec'>Montreal - Quebec</option>
+              <option value='Vancouver-British Columbia'>Vancouver - British Columbia</option>
+              <option value='Ottawa-Ontario'>Ottawa - Ontario</option>
+              <option value='Winnipeg-Manitoba'>Winnipeg - Manitoba</option>
             </select>
           </div>
           <div class='field'>
