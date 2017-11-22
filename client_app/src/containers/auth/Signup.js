@@ -87,7 +87,7 @@ class Signup extends React.Component {
             </select>
           </div>
           <div class='field'>
-            <select id='userType' class='ui dropdown' style={{width: '111%'}} onChang={this.onChange}>
+            <select id='userType' class='ui dropdown' style={{width: '111%'}} onChange={this.onChange}>
               <option value='Particular'> Particular</option>
               <option value='Business'> Business</option>
             </select>
