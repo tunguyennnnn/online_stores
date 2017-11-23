@@ -15,7 +15,7 @@ import UserSettings from '../components/userSettings/UserSettings'
 )
 export default class PersonalPage extends React.Component {
   componentDidMount () {
-    this.props.fetchUser()
+    setTimeout(() => this.props.fetchUser(), 100)
   }
 
   render () {

@@ -1,11 +1,8 @@
 import * as AN from '../ActionName'
 
-export function fetchUser (userId) {
+export function fetchUser () {
   return {
-    type: AN.FETCH_USER_ITEMS,
-    payload: {
-      userId
-    }
+    type: AN.FETCH_USER_ITEMS
   }
 }
 

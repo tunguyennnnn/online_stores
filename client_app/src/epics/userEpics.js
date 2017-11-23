@@ -6,10 +6,11 @@ import { Observable } from 'rxjs/Observable'
 
 export function fetchUser (action$, store) {
   return action$.ofType(AN.FETCH_USER_ITEMS)
-    .map(action => action.payload.userEmail)
-    .switchMap(userEmail => {
+    .map(action => action.payload)
+    .switchMap(() => {
       const {auth} = store.getState()
       const userId = auth.userId || window.location.href.split('/').last()
+      console.log(userId)
       let request = {
         url: `/api/users/${userId}`,
         crossDomain: true,
