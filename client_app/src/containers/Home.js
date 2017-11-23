@@ -7,7 +7,7 @@ import { Grid, Divider } from 'semantic-ui-react'
 import * as NavigationActions from '../actions/navigation-actions'
 import * as FilterActions from '../actions/filter-actions'
 import * as AuthActions from '../actions/auth-actions'
-
+import * as PersonalActions from '../actions/personalPageAction'
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
 
@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     ...NavigationActions,
+    ...PersonalActions,
     ...FilterActions,
     ...AuthActions
   }, dispatch)
@@ -37,18 +38,24 @@ export default class Home extends React.Component {
     this.props.navigateToHomePage()
   }
 
+  componentDidMount () {
+    console.log(this.props)
+    this.props.fetchUser()
+  }
+
   render () {
     const {showSubcategory, category, province} = this.props.pageState
     console.log('this.props',this.props)
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout} = this.props
     const {items} = this.props.data
-    const {email} = userInfo.data
+    const {email, userId} = userInfo.data
     console.log(email)
     const navbar = () => (
       <Navbar
       userEmail={email}
+      userId={userId}
       navigateToHomePage={navigateToHomePage.bind(null)}
-      navigateToPersonalPage={navigateToPersonalPage.bind(null, email)}
+      navigateToPersonalPage={navigateToPersonalPage.bind(null)}
       showSubcategory={showSubcategory}
       navigateToHomePage={navigateToHomePage}
       province={province}

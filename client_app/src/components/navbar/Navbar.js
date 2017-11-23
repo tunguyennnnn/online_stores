@@ -107,12 +107,19 @@ export default class Navbar extends React.Component {
             return <Menu.Item key={i} name={subCategory} onClick={this.onClickHanlder.bind(this, {category: this.props.category, subCategory})} />
           })}
         {this.location()}
-        <UserSettings email={this.props.userEmail} navigateToPersonalPage={this.props.navigateToPersonalPage} logout={this.props.logout} />
+        <UserSettings
+          userId={this.props.userId}
+          email={this.props.userEmail}
+          navigateToPersonalPage={this.props.navigateToPersonalPage.bind(null, this.props.userId)}
+          logout={this.props.logout}
+        />
       </Menu>
     )
   }
   render () {
-    const {userEmail, navigateToHomePage, showSubcategory} = this.props
+    const {userEmail, navigateToHomePage, showSubcategory, userId} = this.props
+    console.log(userEmail)
+    console.log(userId)
     console.log(this.props)
     if (!showSubcategory) {
       return (
@@ -135,7 +142,12 @@ export default class Navbar extends React.Component {
             onClick={this.onClickHanlder.bind(this, {category: 'JOBS'})}
           />
           {this.location()}
-          <UserSettings email={userEmail} navigateToPersonalPage={this.props.navigateToPersonalPage} logout={this.props.logout} />
+          <UserSettings
+            userId={userId}
+            email={userEmail}
+            navigateToPersonalPage={this.props.navigateToPersonalPage.bind(null)}
+            logout={this.props.logout}
+          />
         </Menu>
       )
     } else {
