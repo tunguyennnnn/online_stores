@@ -3,17 +3,16 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
-import {navigateToHomePage} from '../actions/navigation-actions'
+import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
 import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, logout} from '../actions/personalPageAction'
 import { Menu, Grid } from 'semantic-ui-react'
+import UserSettings from '../components/userSettings/UserSettings'
 
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout}
+  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage}
 )
-
-@connect(mapStateToProps, mapDispatchToProps)
 export default class PersonalPage extends React.Component {
   componentDidMount () {
     this.props.fetchUser()

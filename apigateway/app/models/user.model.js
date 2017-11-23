@@ -26,4 +26,4 @@ function getUser ({exec, email}) {
     })
 }
 
-module.exports = {login, create}
+module.exports = {login, create, getUser}
