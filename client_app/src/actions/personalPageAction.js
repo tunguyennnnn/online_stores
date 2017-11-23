@@ -19,9 +19,12 @@ export function purchasePromotion (itemId, promotionId) {
   }
 }
 
-export function purchasePromotionSuccess (promotion) {
+export function purchasePromotionSuccess (response) {
   return {
-    type: AN.USER_PURCHASED_PROMOTION_SUCCESS
+    type: AN.USER_PURCHASED_PROMOTION_SUCCESS,
+    payload: {
+      response
+    }
   }
 }
 

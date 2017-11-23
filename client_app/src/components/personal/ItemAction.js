@@ -34,6 +34,7 @@ export default class UserItemAction extends React.Component {
 
   render () {
     const {promotion, available} = this.props
+    console.log(available, promotion)
     return (
       <div>
         {

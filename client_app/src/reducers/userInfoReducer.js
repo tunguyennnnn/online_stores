@@ -87,8 +87,10 @@ export default function (state = pageState, action) {
       }
     }
     case AN.USER_PURCHASED_PROMOTION_SUCCESS: {
+      console.log(action.payload)
       return {
-        ...state
+        ...state,
+        items: _.values(action.payload)
       }
     }
     case AN.USER_PURCHASED_PROMOTION_FAILED: {

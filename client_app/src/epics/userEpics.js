@@ -20,10 +20,7 @@ export function fetchUser (action$, store) {
       return ajax(request)
         .map(v => receivedUserInfo(v.response))
         .catch(error => Observable.of({
-          type: AN.FETCH_USER_INFO_REJECTED,
-          payload: {
-            userInfo: mock
-          }
+          type: AN.FETCH_USER_INFO_REJECTED
         }))
     })
 }

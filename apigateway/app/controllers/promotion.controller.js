@@ -1,5 +1,6 @@
 const Moment = require('moment')
 const Promotion = require('../models/promotion.model')
+const Ad = require('../models/ad.model')
 
 function get (req, res, next) {
   // return ({exec: res.pExec})
@@ -15,6 +16,8 @@ function get (req, res, next) {
 
 function create (req, res, next) {
   const {itemId, promotionId} = req.body
+  const {userId} = res.decoded
+  console.log(res.decoded)
   const now = Moment()
   Promotion.getPromotionSet({exec: res.pExec, setId: promotionId})
     .then(set => {
@@ -22,13 +25,11 @@ function create (req, res, next) {
       const startDate = now.format('YYYY-MM-DD HH:mm:ss')
       const endDate = now.add(duration, 'days').format('YYYY-MM-DD HH:mm:ss')
       Promotion.create({exec: res.pExec, itemId, setId: promotionId, startDate, endDate})
-        .then(r => {
-          const promotion = r.first()
-          if (promotion) {
-            res.json(promotion)
-          } else {
-            res.status(404).send()
-          }
+        .then(() => {
+          Ad.getUserAds({exec: res.pExec, userId})
+            .then(items => {
+              res.json(items)
+            })
         })
         .catch(err => {
           console.log(err)

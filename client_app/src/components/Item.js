@@ -7,9 +7,9 @@ import MainItemAction from './mainpage/ItemAction'
 export default class Item extends React.Component {
   render () {
     console.log(this.props.itemInfo)
-    const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city} = this.props.itemInfo
+    const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city, available, promotion} = this.props.itemInfo
     const forSaleBy = `${firstName} ${lastName}`
-    const {page, promotionSet, available, purchasePromotion, promotion} = this.props
+    const {page, promotionSet, purchasePromotion} = this.props
     console.log(page)
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
     const cardStyle = {padding: '0px'}
