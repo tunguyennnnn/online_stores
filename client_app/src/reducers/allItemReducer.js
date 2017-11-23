@@ -18,6 +18,20 @@ function filterItems (state, filterOptions) {
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category)
         }
       }
+    case 'PROVINCE':
+      console.log(filterOptions.province)
+      if (filterOptions.province !== 'All') {
+        console.log('in all')
+        return {
+          ...state,
+          items: fetchedItems.items.filter((item) => item.province === filterOptions.province)
+        }
+      } else {
+        return {
+          ...state,
+          items: fetchedItems.items.filter(item => !item.isSold)
+        }
+      }
     case 'HOME':
       return {
         ...state,

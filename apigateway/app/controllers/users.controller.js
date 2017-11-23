@@ -59,6 +59,7 @@ function createAd (req, res, next) {
   })
 }
 
+
 function show (req, res, next) {
   const {decoded} = res
   const exec = res.pExec
@@ -76,4 +77,4 @@ function show (req, res, next) {
     })
 }
 
-module.exports = {createUser, show, getAds, createAd}
+module.exports = {createUser, show}

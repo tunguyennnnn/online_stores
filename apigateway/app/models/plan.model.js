@@ -3,7 +3,7 @@ const uuid = require('uuid/v1')
 
 function createSet ({exec, name, price, duration}) {
   return exec(['INSERT INTO planSet(name, price, duration)',
-               `VALUES('${name}', ${price}, ${duration})`].join(' '))
+    `VALUES('${name}', ${price}, ${duration})`].join(' '))
         .then(() => getSet({exec}))
 }
 
@@ -13,7 +13,7 @@ function getSet ({exec, isAdmin}) {
 
 function create ({exec, userId, planId, startDate, endDate}) {
   return exec(['INSERT INTO plans(id, userId, planId, startDate, endDate)',
-               `VALUES('${uuid()}', '${userId}', '${planId}', '${startDate}', '${endDate}')`].join(' '))
+    `VALUES('${uuid()}', '${userId}', '${planId}', '${startDate}', '${endDate}')`].join(' '))
 }
 
 module.exports = {createSet, create, getSet}

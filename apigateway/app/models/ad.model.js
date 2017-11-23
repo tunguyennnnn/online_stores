@@ -1,4 +1,4 @@
-const Moment  = require('moment')
+const Moment = require('moment')
 const _ = require('lodash')
 
 function isUpToDate (endDate) {
@@ -9,17 +9,12 @@ function getAllAds (exec) {
   return exec('SELECT * FROM ads;')
 }
 
-function createAd ({exec, userId, title, description, price, imageUrl, address, phone, category, subCategory, type}) {
-  return exec(['INSERT INTO ads(user_id, title, description, price, imageUrl, address, phone, type, category, subCategory)',
-               `VALUES(${userId}, '${title}', '${description}', '${price}', '${imageUrl}', '${address}', '${phone}', '${type}', '${category}', '${subCategory}');`].join(' '))
+function createAd ({exec, userId, title, description, price, imageUrl, phone, category, subCategory, province, city}) {
+  return exec(['INSERT INTO ads(user_id, title, description, price, imageUrl, phone, category, subCategory, province, city)',
+    `VALUES(${userId}, '${title}', '${description}', '${price}', '${imageUrl}', '${phone}', '${category}', '${subCategory}', '${province}', '${city}');`].join(' '))
           .then(() => getUserAds({exec, userId}))
 }
 
-function getAds ({exec, userId, isAdmin}) {
-  console.log(userId, isAdmin)
-  const where = isAdmin ? ' WHERE a.user_id = u.id' : userId ? ` WHERE a.user_id = ${userId} AND a.user_id = u.id` : ' WHERE a.user_id = u.id'
-  return exec(`SELECT u.id as user_id, u.firstName, u.lastName, u.email, a.id, a.title, a.price, a.description, a.category, a.subCategory, a.type, a.phone, a.address FROM ads as a, users as u ${where}`)
-}
 
 function getUserAds ({exec, userId}) {
   return exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.category, a.subCategory, p.startDate, p.endDate',
@@ -33,4 +28,14 @@ function getUserAds ({exec, userId}) {
           })
         })
 }
+
+function getAds ({exec, userId, isAdmin}) {
+  const where = isAdmin
+              ? `JOIN users as u ON u.id = ${userId}`
+              : userId
+              ? `JOIN users as u ON u.id = '${userId}'` : 'JOIN users as u on u.id = a.user_id'
+
+  return exec(`SELECT a.*, u.firstName, u.lastName, u.email FROM ads as a ${where}`)
+}
+
 module.exports = {getAllAds, createAd, getAds, getUserAds}

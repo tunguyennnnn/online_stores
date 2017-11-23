@@ -5,6 +5,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAIL = 'SINGUP_FAIL'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
+export const LOGOUT = 'LOGOUT'
 
 // navigation
 export const NAVIGATE_TO_HOME_PAGE = 'NAVIGATE_TO_HOME_PAGE'

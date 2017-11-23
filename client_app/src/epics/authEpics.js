@@ -28,6 +28,7 @@ export function login (action$, store) {
 
 
 export function signup (action$, store) {
+  console.log('reachhhhhhhhhhh')
   return action$.ofType(AN.SIGNUP)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {

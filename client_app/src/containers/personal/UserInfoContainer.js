@@ -25,9 +25,10 @@ export default class UserInfoContainer extends React.Component {
     return (
       newPost
         ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
-      :newRent
+        : newRent
         ? <NewRentForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
       : <Grid stackable>
+<<<<<<< HEAD
           <PlanPurchase purchase={() => {}} />
           <Grid.Row columns={3}>
             {
@@ -35,6 +36,15 @@ export default class UserInfoContainer extends React.Component {
             }
           </Grid.Row>
         </Grid>
+=======
+        <PlanPurchase purchase={() => {}} />
+        <Grid.Row columns={3}>
+          {
+           items.map((d, i) => <Item key={i} belongToCurrentUser={'true'} editPost={this.props.editPost} itemInfo={d} />)
+          }
+        </Grid.Row>
+      </Grid>
+>>>>>>> 8f31a3492f2a248c6563c1be7e8d2c5199716db6
     )
   }
 }

@@ -6,23 +6,25 @@ import { Grid, Divider } from 'semantic-ui-react'
 
 import * as NavigationActions from '../actions/navigation-actions'
 import * as FilterActions from '../actions/filter-actions'
-
+import * as AuthActions from '../actions/auth-actions'
+import * as PersonalActions from '../actions/personalPageAction'
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
-import Categories from '../components/categories/Categories'
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    userInfo: state.userInfo,
     data: state.allItems,
-    pageState: state.mainPageState
+    pageState: state.mainPageState,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     ...NavigationActions,
-    ...FilterActions
+    ...PersonalActions,
+    ...FilterActions,
+    ...AuthActions
   }, dispatch)
 }
 
@@ -36,26 +38,31 @@ export default class Home extends React.Component {
     this.props.navigateToHomePage()
   }
 
-  render () {
-    const {showSubcategory, category=''} = this.props.pageState
-    console.log('category', category)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems} = this.props
-    const {items} = this.props.data
+  componentDidMount () {
     console.log(this.props)
+    this.props.fetchUser()
+  }
 
+  render () {
+    const {showSubcategory, category, province} = this.props.pageState
+    console.log('this.props',this.props)
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout} = this.props
+    const {items} = this.props.data
+    const {email, userId} = userInfo.data
+    console.log(email)
     const navbar = () => (
       <Navbar
-      userEmail={'tunguyen@gmail.com'}
+      userEmail={email}
+      userId={userId}
       navigateToHomePage={navigateToHomePage.bind(null)}
-      navigateToPersonalPage={navigateToPersonalPage.bind(null, 'tunguyen@gmail.com')}
+      navigateToPersonalPage={navigateToPersonalPage.bind(null)}
+      showSubcategory={showSubcategory}
+      navigateToHomePage={navigateToHomePage}
+      province={province}
+      category={category}
+      filterItems={filterItems}
+      logout={logout}
       />
-    )
-
-    const categories = (filterItems, navigateToHomePage) => (
-      <Grid.Row centered>
-        <Categories showSubcategory={showSubcategory}  navigateToHomePage={navigateToHomePage} category={category} filterItems={filterItems}/>
-        <Divider hidden />
-      </Grid.Row>
     )
 
     const listOfItems = (items) => (
@@ -66,9 +73,6 @@ export default class Home extends React.Component {
 
     const body = (items, filterItems) => (
       <div>
-        <Grid>
-          {categories(filterItems, navigateToHomePage)}
-        </Grid>
         <Grid stackable>
           {listOfItems(items)}
         </Grid>

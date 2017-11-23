@@ -59,9 +59,11 @@ CREATE TABLE IF NOT EXISTS ads(
     category varchar(32),
     subCategory varchar(32),
     type varchar(36) DEFAULT 'ONLINE_AD',
-    createdAt datetime,
-    updatedAt datetime DEFAULT CURRENT_TIMESTAMP,
+    createdAt datetime DEFAULT CURRENT_TIMESTAMP,
+    updatedAt datetime,
     forBuySale tinyint(1) DEFAULT 0,
+    province varchar(255),
+    city varchar(255),
     PRIMARY KEY(id)
 );
 

@@ -21,7 +21,8 @@ class Signup extends React.Component {
       email: '',
       password: '',
       city: 'Montreal',
-      province: 'Quebec'
+      province: 'Quebec',
+      userType:'Particular'
     }}
     this.onChange = this.onChange.bind(this)
     this.onSave = this.onSave.bind(this)
@@ -49,7 +50,6 @@ class Signup extends React.Component {
       //TODO show error messages
     }
   }
-
   render () {
     const style = {
       position: 'absolute',
@@ -67,10 +67,10 @@ class Signup extends React.Component {
         <div class='ui divider'></div>
         <form class='ui form'>
           <div class='field'>
-            <input id='firstName' placeholder='Firstname' type='text' onChange={this.onChange} />
+            <input id='firstName' placeholder='First name' type='text' onChange={this.onChange} />
           </div>
           <div class='field'>
-            <input id='lastName' placeholder='Lastname' type='text' onChange={this.onChange} />
+            <input id='lastName' placeholder='Last name' type='text' onChange={this.onChange} />
           </div>
           <div class='field'>
             <input id='email' placeholder='E-mail address' type='text' onChange={this.onChange} />
@@ -78,12 +78,20 @@ class Signup extends React.Component {
           <div class='field'>
             <input id='password' placeholder='***********' type='password' onChange={this.onChange} />
           </div>
-          <select id='location' class='ui dropdown' style={{width: '100%'}} onChange={this.onChange}>
-            <option value='Montreal-Quebec'>Montreal - Quebec</option>
-            <option value='Vancouver-British Columbia'>Vancouver - British Columbia</option>
-            <option value='Ottawa-Onterio'>Ottawa - Onterio</option>
-            <option value='Winnipeg-Manitoba'>Winnipeg - Manitoba</option>
-          </select>
+          <div class='field'>
+            <select id='location' class='ui dropdown' style={{width: '111%'}} onChange={this.onChange}>
+              <option value='Montreal-Quebec'>Montreal - Quebec</option>
+              <option value='Vancouver-British Columbia'>Vancouver - British Columbia</option>
+              <option value='Ottawa-Ontario'>Ottawa - Ontario</option>
+              <option value='Winnipeg-Manitoba'>Winnipeg - Manitoba</option>
+            </select>
+          </div>
+          <div class='field'>
+            <select id='userType' class='ui dropdown' style={{width: '111%'}} onChange={this.onChange}>
+              <option value='Particular'> Particular</option>
+              <option value='Business'> Business</option>
+            </select>
+          </div>
           <div class='group'>
             <button class='ui button' onClick={this.props.navigateToLoginPage}>Back</button>
             <button class='ui button' onClick={this.onSave}>Signup</button>
