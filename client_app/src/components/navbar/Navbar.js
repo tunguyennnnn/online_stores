@@ -51,14 +51,8 @@ export default class Navbar extends React.Component {
   }
   onChangeHandler (event, data) {
     event.preventDefault()
-    console.log(event)
-    console.log('province')
-    console.log(data.value)
     const province = data.value.split('-')[0]
     const city = data.value.split('-')[1]
-    console.log('province', province)
-    console.log('city', city)
-    console.log(this.props)
     this.props.filterItems({type: 'PROVINCE', province, city})
   }
 

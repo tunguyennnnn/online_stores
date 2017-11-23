@@ -18,6 +18,11 @@ function filterItems (state, filterOptions) {
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category)
         }
       }
+    case 'PROVINCE':
+      return {
+        ...state,
+        items: fetchedItems.items.filter((item) => item.province === filterOptions.province)
+      }
     case 'HOME':
       return {
         ...state,

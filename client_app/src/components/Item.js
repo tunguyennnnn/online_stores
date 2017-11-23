@@ -1,10 +1,9 @@
 
 import React from 'react'
-import { Grid, Card, Image, Divider } from 'semantic-ui-react'
+import { Grid, Card, Divider } from 'semantic-ui-react'
 
 export default class Item extends React.Component {
   render () {
-
     const {belongToCurrentUser, ownerName, editPost} = this.props
     const {imageUrl, title, description, price, postDate, completed, phone, type, forSaleBy, province, city} = this.props.itemInfo
     console.log(this.props.itemInfo)
