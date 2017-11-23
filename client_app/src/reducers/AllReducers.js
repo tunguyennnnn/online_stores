@@ -5,6 +5,7 @@ import allItemReducer from './allItemReducer'
 import navigationReducer from './navigationReducer'
 import adminReducer from './adminReducer'
 import mainPageReducer from './mainPageReducer'
+import modalReducer from './modalReducer'
 
 const allReducers = combineReducers({
   allItems: allItemReducer,
@@ -12,7 +13,8 @@ const allReducers = combineReducers({
   userInfo: userInfoReducer,
   navigation: navigationReducer,
   adminPage: adminReducer,
-  mainPageState: mainPageReducer
+  mainPageState: mainPageReducer,
+  modalStatus: modalReducer
 })
 
 export default allReducers
