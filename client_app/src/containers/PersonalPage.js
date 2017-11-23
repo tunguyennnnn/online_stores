@@ -3,14 +3,17 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
-import {navigateToHomePage} from '../actions/navigation-actions'
+import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
+import {logout} from '../actions/auth-actions'
+import UserSettings from '../components/userSettings/UserSettings'
+
 import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent} from '../actions/personalPageAction'
 import { Menu, Grid, Icon } from 'semantic-ui-react'
 
 @connect((state) => ({
   userInfo: state.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent}
+  {navigateToHomePage, navigateToPersonalPage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, logout}
 )
 
 export default class PersonalPage extends React.Component {
@@ -20,12 +23,13 @@ export default class PersonalPage extends React.Component {
   render () {
     const style = {marginTop: '2vw'}
     console.log(this.props)
-    const {userInfo, navigateToHomePage, addPost, cancelPost, submitPost, editPost, addRent} = this.props
+    const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent} = this.props
     console.log(userInfo.data)
     const {email} = userInfo.data
+    console.log('email', email)
     return (
       <div>
-        <Menu>
+        <Menu fluid>
           <Menu.Item header onClick={navigateToHomePage}>
           Home
           </Menu.Item>
@@ -38,10 +42,7 @@ export default class PersonalPage extends React.Component {
           <Menu.Item active={userInfo.newRent} onClick={addRent}>
             New Renting
           </Menu.Item>
-          <Menu.Item position='right'>
-            {email}
-            <Icon disabled name='setting' />
-          </Menu.Item>
+          <UserSettings email={email} navigateToPersonalPage={navigateToPersonalPage} logout={logout} />
         </Menu>
       <UserInfoContainer userInfo={userInfo} submitPost={submitPost} cancelPost={cancelPost} editPost={editPost} />
       </div>

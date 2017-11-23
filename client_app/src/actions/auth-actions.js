@@ -35,3 +35,9 @@ export function login (formInput) {
     }
   }
 }
+
+export function logout () {
+  return {
+    type: AN.LOGOUT
+  }
+}

@@ -1,12 +1,13 @@
 
 import React from 'react'
-import { Grid, Card, Divider } from 'semantic-ui-react'
+import { Grid, Divider, Button } from 'semantic-ui-react'
 
 export default class Item extends React.Component {
   render () {
-    const {belongToCurrentUser, ownerName, editPost} = this.props
-    const {imageUrl, title, description, price, postDate, completed, phone, type, forSaleBy, province, city} = this.props.itemInfo
-    console.log(this.props.itemInfo)
+    const {email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city} = this.props.itemInfo
+    const forSaleBy = `${firstName} ${lastName}`
+
+    // style
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
     const cardStyle = {padding: '0px'}
     const myStyle = {
@@ -17,6 +18,7 @@ export default class Item extends React.Component {
       'backgroundSize': 'cover',
       'backgroundImage': `url(${imageUrl})`
     }
+
     return (
       <Grid.Column stretched style={columnStyle}>
         <div class='ui card col s12 fluid' style={cardStyle}>
@@ -35,17 +37,12 @@ export default class Item extends React.Component {
             <br />
             <span>For sale by: {forSaleBy}</span>
             <br />
+            <span> E-mail address: {email} </span>
+            <br />
             <span>Ad type: {type}</span>
             <br />
-            <span>
-              {
-                belongToCurrentUser
-                  ? completed ? null : <a onClick={editPost.bind(null, this.props.itemInfo)}>Edit</a>
-                  : <a href='#'>{ownerName}</a>
-              }
-            </span>
           </div>
-          <div class='ui button'>More</div>
+          <Button color='green'>Buy</Button>
         </div>
       </Grid.Column>
     )

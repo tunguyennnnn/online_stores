@@ -46,6 +46,13 @@ export default function (state = initialState, action) {
         error: action.payload.error
       }
     }
+    case AN.LOGOUT: {
+      console.log(action.type)
+      window.localStorage.setItem('apiToken', null)
+      window.localStorage.setItem('expiresAt', null)
+      hashHistory.push('/login')
+      return initialState
+    }
     default:
       return state
   }

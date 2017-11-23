@@ -1,5 +1,6 @@
 import React from 'react'
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
+import UserSettings from '../userSettings/UserSettings'
 
 const myCategories = {
   categories: [
@@ -23,6 +24,11 @@ const myCategories = {
 }
 
 const provinceOptions = [
+  {
+    key: 'A',
+    value: 'All',
+    text: 'All'
+  },
   {
     key: 'MQ',
     value: 'Montreal-Quebec',
@@ -51,9 +57,14 @@ export default class Navbar extends React.Component {
   }
   onChangeHandler (event, data) {
     event.preventDefault()
-    const province = data.value.split('-')[0]
-    const city = data.value.split('-')[1]
-    this.props.filterItems({type: 'PROVINCE', province, city})
+    if (data.value === 'All') {
+      console.log(data.value)
+      this.props.filterItems({type: 'PROVINCE', province: data.value})
+    } else {
+      const province = data.value.split('-')[0]
+      const city = data.value.split('-')[1]
+      this.props.filterItems({type: 'PROVINCE', province, city})
+    }
   }
 
   getCategory (category) {
@@ -80,6 +91,7 @@ export default class Navbar extends React.Component {
       />
     )
   }
+
   mySubCategory () {
     const myCategory = myCategories.categories.filter((allCategories, i) => allCategories.category === this.props.category)
 
@@ -95,15 +107,12 @@ export default class Navbar extends React.Component {
             return <Menu.Item key={i} name={subCategory} onClick={this.onClickHanlder.bind(this, {category: this.props.category, subCategory})} />
           })}
         {this.location()}
-        <Menu.Item onClick={this.props.navigateToPersonalPage.bind(null)} position='right'>
-          {this.props.userEmail}
-          <Icon disabled name='setting' />
-        </Menu.Item>
+        <UserSettings email={this.props.userEmail} navigateToPersonalPage={this.props.navigateToPersonalPage} logout={this.props.logout} />
       </Menu>
     )
   }
   render () {
-    const {userEmail, navigateToHomePage, navigateToPersonalPage, showSubcategory, province} = this.props
+    const {userEmail, navigateToHomePage, showSubcategory} = this.props
     console.log(this.props)
     if (!showSubcategory) {
       return (
@@ -123,12 +132,10 @@ export default class Navbar extends React.Component {
           />
           <Menu.Item
             name='Jobs'
-            onClick={this.onClickHanlder.bind(this, {category: 'JOBS'})} />
+            onClick={this.onClickHanlder.bind(this, {category: 'JOBS'})}
+          />
           {this.location()}
-          <Menu.Item onClick={navigateToPersonalPage.bind(null)} position='right'>
-            {userEmail}
-            <Icon disabled name='setting' />
-          </Menu.Item>
+          <UserSettings email={userEmail} navigateToPersonalPage={this.props.navigateToPersonalPage} logout={this.props.logout} />
         </Menu>
       )
     } else {

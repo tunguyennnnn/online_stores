@@ -6,6 +6,7 @@ import { Grid, Divider } from 'semantic-ui-react'
 
 import * as NavigationActions from '../actions/navigation-actions'
 import * as FilterActions from '../actions/filter-actions'
+import * as AuthActions from '../actions/auth-actions'
 
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
@@ -14,14 +15,15 @@ const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
     data: state.allItems,
-    pageState: state.mainPageState
+    pageState: state.mainPageState,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     ...NavigationActions,
-    ...FilterActions
+    ...FilterActions,
+    ...AuthActions
   }, dispatch)
 }
 
@@ -38,11 +40,10 @@ export default class Home extends React.Component {
   render () {
     const {showSubcategory, category, province} = this.props.pageState
     console.log('this.props',this.props)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo} = this.props
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout} = this.props
     const {items} = this.props.data
     const {email} = userInfo.data
     console.log(email)
-
     const navbar = () => (
       <Navbar
       userEmail={email}
@@ -53,6 +54,7 @@ export default class Home extends React.Component {
       province={province}
       category={category}
       filterItems={filterItems}
+      logout={logout}
       />
     )
 
