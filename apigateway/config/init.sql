@@ -40,10 +40,11 @@ CREATE TABLE IF NOT EXISTS planSet (
 
 CREATE TABLE IF NOT EXISTS transactions (
     user_id int,
-    ad_id int,
+    transaction_id int,
+    type varchar(255),
     amount float,
     cardDetail varchar(32),
-    dateOfPayment date,
+    dateOfPayment datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(user_id, ad_id)
 );
 
