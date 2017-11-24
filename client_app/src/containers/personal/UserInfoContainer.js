@@ -7,7 +7,6 @@ import NewPostForm from '../../components/personal/NewPostForm'
 import NewRentForm from '../../components/personal/NewRentForm'
 import PlanPurchase from '../../components/personal/PlanPurchase'
 import TransactionModel from '../../components/TransactionModel'
-import {openModal, closeModal} from '../../actions/modalActions'
 import { Grid } from 'semantic-ui-react'
 
 
