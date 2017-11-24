@@ -2,7 +2,6 @@ import React from 'react'
 import { Grid, Card, Image, Divider } from 'semantic-ui-react'
 import UserItemAction from './personal/ItemAction'
 import AdminItemAction from './admin/ItemAction'
-import MainItemAction from './mainpage/ItemAction'
 
 export default class Item extends React.Component {
   render () {
@@ -48,7 +47,7 @@ export default class Item extends React.Component {
             ? <UserItemAction promotionSet={promotionSet} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
             : page === 'ADMIN_PAGE'
             ? <AdminItemAction />
-            : <MainItemAction />
+            : <div />
           }
         </div>
       </Grid.Column>
