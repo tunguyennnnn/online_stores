@@ -10,6 +10,7 @@ export function fetchUser (action$, store) {
     .map(action => action.payload)
     .switchMap(() => {
       const {auth} = store.getState()
+      console.log(auth)
       const userId = auth.userId || window.location.href.split('/').last()
       console.log(userId)
       let request = {
@@ -32,7 +33,6 @@ export function rateAd (action$, store) {
   return action$.ofType(AN.RATE_AD)
   .map(action => action.payload)
   .switchMap((payload) => {
-    const {auth} = store.getState()
     let request = {
       url: '/api/rate',
       crossDomain: true,

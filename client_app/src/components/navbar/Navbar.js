@@ -118,9 +118,6 @@ export default class Navbar extends React.Component {
   }
   render () {
     const {userEmail, navigateToHomePage, showSubcategory, userId} = this.props
-    console.log(userEmail)
-    console.log(userId)
-    console.log(this.props)
     if (!showSubcategory) {
       return (
         <Menu fluid>

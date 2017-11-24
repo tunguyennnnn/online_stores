@@ -5,13 +5,13 @@ export default class Rate extends React.Component {
   handleRating (e, {rating}) {
     console.log(rating)
     const {adId, rateAd} = this.props
-    this.props.rateAd({adId, score: rating})
+    rateAd({adId, score: rating})
   }
   render () {
     return (
       <Grid centered>
         <div style={{padding: '33px'}}>
-          <Rating maxRating={5} defaultRating={0} icon='star' size='massive' onRate={this.handleRating.bind(this)} />
+          <Rating maxRating={5} defaultRating={this.props.itemScore} icon='star' size='massive' onRate={this.handleRating.bind(this)} />
         </div>
       </Grid>
     )

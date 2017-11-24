@@ -6,7 +6,7 @@ import Rate from './rate/Rate'
 
 export default class Item extends React.Component {
   render () {
-    const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city, available, promotion} = this.props.itemInfo
+    const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city, available, promotion, score} = this.props.itemInfo
     const forSaleBy = `${firstName} ${lastName}`
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd} = this.props
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
@@ -48,7 +48,7 @@ export default class Item extends React.Component {
             ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
             : page === 'ADMIN_PAGE'
             ? <AdminItemAction />
-            : <Rate adId={id} rateAd={rateAd.bind(null)} />
+            : <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
           }
         </div>
       </Grid.Column>

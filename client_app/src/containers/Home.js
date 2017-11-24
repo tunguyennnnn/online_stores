@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
     ...PersonalActions,
     ...FilterActions,
     ...AuthActions,
-    rateAd
+    rateAd,
   }, dispatch)
 }
 
@@ -52,6 +52,7 @@ export default class Home extends React.Component {
     const {items} = this.props.data
     const {email, userId} = userInfo.data
     console.log(email)
+    console.log(this.props)
     const navbar = () => (
       <Navbar
       userEmail={email}
@@ -69,7 +70,7 @@ export default class Home extends React.Component {
 
     const listOfItems = (items) => (
         <Grid.Row columns={3}>
-          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} rateAd={rateAd.bind(this)}/>)}
+          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} rateAd={rateAd.bind(this)} />)}
         </Grid.Row>
     )
 
