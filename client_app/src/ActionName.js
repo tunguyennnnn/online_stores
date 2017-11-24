@@ -65,6 +65,8 @@ export const DELETE_ITEM = 'ADMIN_DELETE_ITEM'
 export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS'
 export const DELETE_ITEM_FAIL = 'DELETE_ITEM_FAIL'
 
-// Modal
-export const OPEN_MODAL = 'OPEN_MODAL'
-export const CLOSE_MODAL = 'CLOSE_MODAL'
+// Rate
+
+export const RATE_AD = 'RATE_AD'
+export const RATE_AD_SUCCESS = 'RATE_AD_SUCCESS'
+export const RATE_AD_FAILED = 'RATE_AD_FAILED'

@@ -7,6 +7,7 @@ import { Grid, Divider } from 'semantic-ui-react'
 import * as NavigationActions from '../actions/navigation-actions'
 import * as FilterActions from '../actions/filter-actions'
 import * as AuthActions from '../actions/auth-actions'
+import { rateAd } from '../actions/ratingAction'
 import * as PersonalActions from '../actions/personalPageAction'
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
@@ -24,7 +25,8 @@ const mapDispatchToProps = (dispatch) => {
     ...NavigationActions,
     ...PersonalActions,
     ...FilterActions,
-    ...AuthActions
+    ...AuthActions,
+    rateAd
   }, dispatch)
 }
 
@@ -46,7 +48,7 @@ export default class Home extends React.Component {
   render () {
     const {showSubcategory, category, province} = this.props.pageState
     console.log('this.props',this.props)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout} = this.props
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd} = this.props
     const {items} = this.props.data
     const {email, userId} = userInfo.data
     console.log(email)
@@ -67,7 +69,7 @@ export default class Home extends React.Component {
 
     const listOfItems = (items) => (
         <Grid.Row columns={3}>
-          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} />)}
+          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} rateAd={rateAd.bind(this)}/>)}
         </Grid.Row>
     )
 

@@ -99,6 +99,11 @@ export default function (state = pageState, action) {
         ...state
       }
     }
+    case AN.RATE_AD_SUCCESS: {
+      return {
+        ...state
+      }
+    }
   }
   return state
 }

@@ -1,6 +1,7 @@
 import * as AN from '../ActionName'
 import {receivedUserInfo} from '../actions/navigation-actions'
 import { postItemSuccess, purchasePlanSuccess, purchasePromotionSuccess } from '../actions/personalPageAction'
+import { rateSuccess } from '../actions/ratingAction'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
 
@@ -24,6 +25,29 @@ export function fetchUser (action$, store) {
           type: AN.FETCH_USER_INFO_REJECTED
         }))
     })
+}
+
+export function rateAd (action$, store) {
+  console.log('reached rateAd')
+  return action$.ofType(AN.RATE_AD)
+  .map(action => action.payload)
+  .switchMap((payload) => {
+    const {auth} = store.getState()
+    let request = {
+      url: '/api/rate',
+      crossDomain: true,
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+      },
+      body: payload
+    }
+    return ajax(request)
+    .map(v => rateSuccess(v.response))
+    .catch(err => Observable.Of({
+      type: AN.RATE_AD_FAILED
+    }))
+  })
 }
 
 export function submitPost (action$, store) {
