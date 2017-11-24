@@ -51,19 +51,14 @@ const provinceOptions = [
   }
 ]
 export default class Navbar extends React.Component {
-  onClickHanlder ({category, subCategory}) {
-    console.log(category)
-    this.props.filterItems({type: 'CATEGORY', category, subCategory})
-  }
-  onChangeHandler (event, data) {
-    event.preventDefault()
-    if (data.value === 'All') {
-      console.log(data.value)
-      this.props.filterItems({type: 'PROVINCE', province: data.value})
+  onClickHanlder (event, {name, value}, data) {
+    const {type, category, subCategory} = event
+
+    if (type === 'CATEGORY') {
+      this.props.filterItems({type, category, subCategory})
     } else {
       const province = data.value.split('-')[0]
-      const city = data.value.split('-')[1]
-      this.props.filterItems({type: 'PROVINCE', province, city})
+      this.props.filterItems({type, province})
     }
   }
 
@@ -84,7 +79,7 @@ export default class Navbar extends React.Component {
   location () {
     return (
       <Dropdown
-        onChange={this.onChangeHandler.bind(this)}
+        onChange={this.onClickHanlder.bind(this, {type: 'PROVINCE'})}
         placeholder='Select Province'
         fluid search selection
         options={provinceOptions}
@@ -100,11 +95,11 @@ export default class Navbar extends React.Component {
         <Menu.Item header onClick={this.props.navigateToHomePage.bind(null)}> Home</Menu.Item>
         <Menu.Item
           name={this.getCategory(this.props.category)}
-          onClick={this.onClickHanlder.bind(this, {category: this.props.category})}
+          onClick={this.onClickHanlder.bind(this, {type: 'CATEGORY', category: this.props.category})}
         />
         {
           myCategory.first().subCategories.map((subCategory, i) => {
-            return <Menu.Item key={i} name={subCategory} onClick={this.onClickHanlder.bind(this, {category: this.props.category, subCategory})} />
+            return <Menu.Item key={i} name={subCategory} onClick={this.onClickHanlder.bind(this, {type: 'CATEGORY', category: this.props.category, subCategory})} />
           })}
         {this.location()}
         <UserSettings
@@ -124,19 +119,19 @@ export default class Navbar extends React.Component {
           <Menu.Item header onClick={navigateToHomePage.bind(null)}> Home</Menu.Item>
           <Menu.Item
             name='Buy and Sell'
-            onClick={this.onClickHanlder.bind(this, {category: 'BUY_AND_SELL'})}
+            onClick={this.onClickHanlder.bind(this, {type: 'CATEGORY', category: 'BUY_AND_SELL'})}
           />
           <Menu.Item
             name='Rent'
-            onClick={this.onClickHanlder.bind(this, {category: 'RENT'})}
+            onClick={this.onClickHanlder.bind(this, {type: 'CATEGORY', category: 'RENT'})}
           />
           <Menu.Item
             name='Services'
-            onClick={this.onClickHanlder.bind(this, {category: 'SERVICES'})}
+            onClick={this.onClickHanlder.bind(this, {type: 'CATEGORY', category: 'SERVICES'})}
           />
           <Menu.Item
             name='Jobs'
-            onClick={this.onClickHanlder.bind(this, {category: 'JOBS'})}
+            onClick={this.onClickHanlder.bind(this, {type: 'CATEGORY', category: 'JOBS'})}
           />
           {this.location()}
           <UserSettings
