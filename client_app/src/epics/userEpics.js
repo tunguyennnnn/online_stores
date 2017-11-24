@@ -98,3 +98,23 @@ export function purchasePromotion (action$, store) {
         }))
     })
 }
+
+export function userDeleteItem (action$, store) {
+  return action$.ofType(AN.USER_DELETE_ITEM)
+    .map(action => action.payload.itemId)
+    .switchMap(itemId => {
+      console.log(itemId)
+      const request = {
+        url: `/api/ads/${itemId}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        }
+      }
+      return ajax(request)
+        .map(v => receivedUserInfo(v.response))
+        .catch(err => Observable.of({
+          type: AN.DELETE_ITEM_SUCCESS
+        }))
+    })
+}

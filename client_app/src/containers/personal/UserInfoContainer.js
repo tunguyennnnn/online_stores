@@ -39,7 +39,7 @@ export default class UserInfoContainer extends React.Component {
     const {data, newPost, showAll, newRent, postInfo} = this.props.userInfo
     console.log(data)
     const {promotions, plans, available, plan} = data
-    const {purchasePromotion, purchasePlan} = this.props
+    const {purchasePromotion, purchasePlan, deleteItem} = this.props
     const {items} = data
     return (
       <div>
@@ -52,7 +52,7 @@ export default class UserInfoContainer extends React.Component {
             <PlanPurchase plans={plans} currentPlan={plan} available={available} purchase={this.openTransaction.bind(this, purchasePlan)} />
             <Grid.Row columns={3}>
               {
-               items.map((d, i) => <Item key={i} page='USER_PAGE' belongToCurrentUser={'true'} purchasePromotion={this.openTransaction.bind(this, purchasePromotion)} promotionSet={promotions} editPost={this.props.editPost} itemInfo={d} />)
+               items.map((d, i) => <Item key={i} page='USER_PAGE' deleteItem={deleteItem} belongToCurrentUser={'true'} purchasePromotion={this.openTransaction.bind(this, purchasePromotion)} promotionSet={promotions} editPost={this.props.editPost} itemInfo={d} />)
               }
             </Grid.Row>
           </Grid>

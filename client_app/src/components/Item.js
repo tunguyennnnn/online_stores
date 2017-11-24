@@ -8,7 +8,7 @@ export default class Item extends React.Component {
   render () {
     const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city, available, promotion} = this.props.itemInfo
     const forSaleBy = `${firstName} ${lastName}`
-    const {page, promotionSet, purchasePromotion} = this.props
+    const {page, promotionSet, purchasePromotion, deleteItem} = this.props
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
     const cardStyle = {padding: '0px'}
     const myStyle = {
@@ -45,7 +45,7 @@ export default class Item extends React.Component {
           </div>
           {
             page === 'USER_PAGE'
-            ? <UserItemAction promotionSet={promotionSet} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
+            ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
             : page === 'ADMIN_PAGE'
             ? <AdminItemAction />
             : <MainItemAction />

@@ -68,3 +68,6 @@ export const DELETE_ITEM_FAIL = 'DELETE_ITEM_FAIL'
 // Modal
 export const OPEN_MODAL = 'OPEN_MODAL'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
+
+export const USER_DELETE_ITEM = 'USER_DELETE_ITEM'
+export const USER_DELETE_ITEM_FAIL = 'USER_DELETE_ITEM_FAIL'
