@@ -3,7 +3,11 @@ const _ = require('lodash')
 import * as AN from '../ActionName'
 
 let fetchedData = {
-  items: []
+  items: [],
+  plans: [],
+  available: false,
+  plan: {},
+  promotions: []
 }
 
 let pageState = {
@@ -40,7 +44,6 @@ export default function (state = pageState, action) {
       }
     }
     case AN.CANCEL_POST: {
-      console.log('reached cancel post')
       return {
         ...state,
         newPost: false,
@@ -49,7 +52,6 @@ export default function (state = pageState, action) {
       }
     }
     case AN.POST_ITEM_SUCCESS: {
-      console.log(action.payload)
       fetchedData.items = _.values(action.payload)
       return {
         ...state,
@@ -87,7 +89,6 @@ export default function (state = pageState, action) {
       }
     }
     case AN.USER_PURCHASED_PROMOTION_SUCCESS: {
-      console.log(action.payload)
       return {
         ...state,
         items: _.values(action.payload)

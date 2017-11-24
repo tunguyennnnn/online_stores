@@ -1,7 +1,6 @@
 import * as AN from '../ActionName'
 
 export function navigateToPersonalPage (userId) {
-  console.log(userId)
   return {
     type: AN.NAVIGATE_TO_PERSONAL_PAGE,
     payload: {

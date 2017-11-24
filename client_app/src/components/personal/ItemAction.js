@@ -14,6 +14,7 @@ export default class UserItemAction extends React.Component {
 
   purchasePromotionTemplate () {
     const {promotionSet = [], purchasePromotion} = this.props
+    const {itemId} = this.props
     return (
       <div>
         {
@@ -23,7 +24,7 @@ export default class UserItemAction extends React.Component {
               <div>
                 <span>Duration: {duration}</span>
                 <span>Price: {price}</span>
-                <button onClick={purchasePromotion.bind(null, id)}>Buy</button>
+                <button onClick={purchasePromotion.bind(null, {itemId, promotionId: id})}>Buy</button>
               </div>
             )
           })
@@ -34,7 +35,6 @@ export default class UserItemAction extends React.Component {
 
   render () {
     const {promotion, available} = this.props
-    console.log(available, promotion)
     return (
       <div>
         {

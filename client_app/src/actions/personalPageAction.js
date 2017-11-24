@@ -6,12 +6,13 @@ export function fetchUser () {
   }
 }
 
-export function purchasePromotion (itemId, promotionId) {
+export function purchasePromotion ({itemId, promotionId}, cardDetail) {
   return {
     type: AN.USER_PURCHASE_PROMOTION,
     payload: {
       itemId,
-      promotionId
+      promotionId,
+      cardDetail
     }
   }
 }
@@ -34,11 +35,12 @@ export function purchasePlanSuccess (plans) {
   }
 }
 
-export function purchasePlan (planId) {
+export function purchasePlan ({planId}, cardDetail) {
   return {
     type: AN.USER_PURCHASE_PLAN,
     payload: {
-      planId
+      planId,
+      cardDetail
     }
   }
 }

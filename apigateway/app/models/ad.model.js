@@ -29,7 +29,7 @@ function getUserAds ({exec, userId}) {
         })
 }
 
-function getAds ({exec, userId, isAdmin}) {
+function getAds ({exec, isAdmin}) {
   const where = isAdmin
               ? `JOIN users as u ON u.id = ${userId}`
               : userId

@@ -1,40 +1,63 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+
 import Item from '../../components/Item'
 import NewPostForm from '../../components/personal/NewPostForm'
 import NewRentForm from '../../components/personal/NewRentForm'
 import PlanPurchase from '../../components/personal/PlanPurchase'
-
+import TransactionModel from '../../components/TransactionModel'
+import {openModal, closeModal} from '../../actions/modalActions'
 import { Grid } from 'semantic-ui-react'
 
+
 export default class UserInfoContainer extends React.Component {
-  groupItem (items) {
-    const lst1 = [], lst2 = [], lst3 = []
-    items.forEach((item, i) => {
-      if (i % 3 === 0) lst1.push(item)
-      if (i % 3 === 1) lst2.push(item)
-      if (i % 3 === 2) lst3.push(item)
-    })
-    return {lst1, lst2, lst3}
+  constructor () {
+    super()
+    this.state = {
+      modelStatus: false,
+      purchaseFunc: () => {},
+      transactionInfo: {}
+    }
+  }
+
+  performPurchase (cardDetail) {
+    const {purchaseFunc, transactionInfo} = this.state
+    purchaseFunc(transactionInfo, cardDetail)
+    this.setState({modalStatus: false})
+  }
+
+  closeModal () {
+    this.setState({modalStatus: false})
+  }
+
+  openTransaction (purchaseFunc, transactionInfo) {
+    this.setState({modalStatus: true, purchaseFunc, transactionInfo})
   }
 
   render () {
     const {data, newPost, showAll, newRent, postInfo} = this.props.userInfo
-    const {promotions} = data
-    const {purchasePromotion} = this.props
+    console.log(data)
+    const {promotions, plans, available, plan} = data
+    const {purchasePromotion, purchasePlan} = this.props
     const {items} = data
     return (
-      newPost
-        ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
-        : newRent
-        ? <NewRentForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
-        : <Grid stackable>
-          <PlanPurchase purchase={() => {}} />
-          <Grid.Row columns={3}>
-            {
-             items.map((d, i) => <Item key={i} page='USER_PAGE' belongToCurrentUser={'true'} purchasePromotion={purchasePromotion} promotionSet={promotions} editPost={this.props.editPost} itemInfo={d} />)
-            }
-          </Grid.Row>
-        </Grid>
+      <div>
+        <TransactionModel status={this.state.modalStatus} transactionInfo={this.state.transactionInfo} closeModal={this.closeModal.bind(this)} purchase={this.performPurchase.bind(this)} />
+        {newPost
+          ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
+          : newRent
+          ? <NewRentForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
+          : <Grid stackable>
+            <PlanPurchase plans={plans} currentPlan={plan} available={available} purchase={this.openTransaction.bind(this, purchasePlan)} />
+            <Grid.Row columns={3}>
+              {
+               items.map((d, i) => <Item key={i} page='USER_PAGE' belongToCurrentUser={'true'} purchasePromotion={this.openTransaction.bind(this, purchasePromotion)} promotionSet={promotions} editPost={this.props.editPost} itemInfo={d} />)
+              }
+            </Grid.Row>
+          </Grid>
+        }
+      </div>
     )
   }
 }

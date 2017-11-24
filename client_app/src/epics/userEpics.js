@@ -52,8 +52,8 @@ export function submitPost (action$, store) {
 
 export function purchasePlan (action$, store) {
   return action$.ofType(AN.USER_PURCHASE_PLAN)
-    .map(action => action.payload.planId)
-    .switchMap(planId => {
+    .map(action => action.payload)
+    .switchMap(({planId, cardDetail}) => {
       const request = {
         url: `/api/plans/`,
         method: 'POST',
@@ -61,11 +61,13 @@ export function purchasePlan (action$, store) {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: {
-          planId
+          planId,
+          cardDetail
         }
       }
+      console.log(request)
       return ajax(request)
-        .map(v => purchasePlanSuccess(v.response))
+        .map(v => receivedUserInfo(v.response))
         .catch(err => Observable.of({
           type: AN.USER_PURCHASED_PLAN_FAILED
         }))
@@ -75,7 +77,8 @@ export function purchasePlan (action$, store) {
 export function purchasePromotion (action$, store) {
   return action$.ofType(AN.USER_PURCHASE_PROMOTION)
     .map(action => action.payload)
-    .switchMap(({promotionId, itemId}) => {
+    .switchMap(({promotionId, itemId, cardDetail}) => {
+      console.log(cardDetail)
       const request = {
         url: `/api/promotions/`,
         method: 'POST',
@@ -84,7 +87,8 @@ export function purchasePromotion (action$, store) {
         },
         body: {
           promotionId,
-          itemId
+          itemId,
+          cardDetail
         }
       }
       return ajax(request)

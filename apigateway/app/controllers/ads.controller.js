@@ -5,7 +5,6 @@ function index (req, res, next) {
   const {pExec, decoded} = res
   Ad.getAds({exec: pExec})
     .then(items => {
-      console.log(items)
       res.json(items)
     })
     .catch(err => {

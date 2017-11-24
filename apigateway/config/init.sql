@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     amount float,
     cardDetail varchar(32),
     dateOfPayment datetime DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(user_id, ad_id)
+    PRIMARY KEY(user_id, type, transaction_id)
 );
 
 CREATE TABLE IF NOT EXISTS ads(

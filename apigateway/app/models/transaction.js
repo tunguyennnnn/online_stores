@@ -1,6 +1,11 @@
-function buy ({exec, userId, type, transaction_id, amount, cardDetail, dataOfPayment}) {
-  return exec(['INSERT INTO transactions(user_id, ad_id, amount, cardDetail, dataOfPayment)',
-    `VALUES(${userId}, '${user_id}', '${ad_id}', '${amount}', '${cardDetail}';`].join(' '))
+function buy ({exec, userId, type, transaction_id, amount, cardDetail}) {
+  return exec(['INSERT INTO transactions(user_id, transaction_id, type, amount, cardDetail, dateOfPayment)',
+    `VALUES(${userId}, '${ad_id}', '${type}', '${amount}', '${cardDetail}';`].join(' '))
 }
 
-module.exports = {buy}
+function create ({exec, userId, type, transaction_id, amount, cardDetail}) {
+  return exec(['INSERT INTO transactions(user_id, transaction_id, type, amount, cardDetail)',
+               `VALUES(${userId}, ${transaction_id}, '${type}', ${amount}, '${cardDetail}')`].join(' '))
+}
+
+module.exports = {buy, create}
