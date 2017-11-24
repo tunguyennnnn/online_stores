@@ -70,3 +70,10 @@ export const DELETE_ITEM_FAIL = 'DELETE_ITEM_FAIL'
 export const RATE_AD = 'RATE_AD'
 export const RATE_AD_SUCCESS = 'RATE_AD_SUCCESS'
 export const RATE_AD_FAILED = 'RATE_AD_FAILED'
+
+// Modal
+export const OPEN_MODAL = 'OPEN_MODAL'
+export const CLOSE_MODAL = 'CLOSE_MODAL'
+
+export const USER_DELETE_ITEM = 'USER_DELETE_ITEM'
+export const USER_DELETE_ITEM_FAIL = 'USER_DELETE_ITEM_FAIL'

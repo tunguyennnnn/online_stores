@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS ads(
     type varchar(36) DEFAULT 'ONLINE_AD',
     createdAt datetime DEFAULT CURRENT_TIMESTAMP,
     updatedAt datetime,
+    deletedAt datetime DEFAULT NULL,
     forBuySale tinyint(1) DEFAULT 0,
     province varchar(255),
     city varchar(255),

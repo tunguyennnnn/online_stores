@@ -8,6 +8,10 @@ router.route('/')
   .get(adCtrl.index)
   .post(adCtrl.create)
 
+router.route('/:adId')
+  .all(authCheck)
+  .delete(adCtrl.destroy)
+
 router.route('/rates/')
   .all(authCheck)
 

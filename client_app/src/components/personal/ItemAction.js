@@ -12,16 +12,21 @@ export default class UserItemAction extends React.Component {
     )
   }
 
+  deleteItem () {
+    const c = window.confirm('Are you sure to delete this Item?')
+    if (c) this.props.deleteItem()
+  }
+
   purchasePromotionTemplate () {
     const {promotionSet = [], purchasePromotion} = this.props
     const {itemId} = this.props
     return (
       <div>
         {
-          promotionSet.map(p => {
+          promotionSet.map((p, i) => {
             const {id, duration, price} = p
             return (
-              <div>
+              <div key={i}>
                 <span>Duration: {duration}</span>
                 <span>Price: {price}</span>
                 <button onClick={purchasePromotion.bind(null, {itemId, promotionId: id})}>Buy</button>
@@ -42,6 +47,7 @@ export default class UserItemAction extends React.Component {
           ? this.promotionTemplate()
           : this.purchasePromotionTemplate()
         }
+        <button onClick={this.props.deleteItem}>Delete</button>
       </div>
     )
   }

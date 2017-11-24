@@ -89,3 +89,13 @@ export function postItemSuccess (response) {
     }
   }
 }
+
+export function deleteItem (itemId) {
+  console.log(itemId)
+  return {
+    type: AN.USER_DELETE_ITEM,
+    payload: {
+      itemId
+    }
+  }
+}

@@ -4,14 +4,14 @@ import {connect} from 'react-redux'
 import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
 import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
-import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, logout, purchasePlan} from '../actions/personalPageAction'
+import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, logout, purchasePlan, deleteItem} from '../actions/personalPageAction'
 import { Menu, Grid } from 'semantic-ui-react'
 import UserSettings from '../components/userSettings/UserSettings'
 
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan}
+  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem}
 )
 export default class PersonalPage extends React.Component {
   componentDidMount () {
@@ -20,7 +20,7 @@ export default class PersonalPage extends React.Component {
 
   render () {
     const style = {marginTop: '2vw'}
-    const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan} = this.props
+    const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem} = this.props
     console.log(userInfo)
     const {email, userId} = userInfo.data
     return (
@@ -40,7 +40,14 @@ export default class PersonalPage extends React.Component {
           </Menu.Item>
           <UserSettings userId={userId} email={email} navigateToPersonalPage={navigateToPersonalPage} logout={logout} />
         </Menu>
-        <UserInfoContainer purchasePlan={purchasePlan} userInfo={userInfo} submitPost={submitPost} purchasePromotion={purchasePromotion} cancelPost={cancelPost} editPost={editPost} />
+        <UserInfoContainer
+              purchasePlan={purchasePlan}
+              userInfo={userInfo}
+              submitPost={submitPost}
+              purchasePromotion={purchasePromotion}
+              cancelPost={cancelPost}
+              editPost={editPost}
+              deleteItem={deleteItem} />
       </div>
     )
   }

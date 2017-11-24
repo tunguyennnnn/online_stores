@@ -18,7 +18,7 @@ import { Menu, Grid } from 'semantic-ui-react'
 
 export default class AdminPage extends React.Component {
   componentWillMount () {
-    this.props.fetchAdmin()
+    setTimeout(() => this.props.fetchAdmin(), 100)
   }
 
   render () {
