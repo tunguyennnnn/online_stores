@@ -90,5 +90,19 @@ CREATE TABLE IF NOT EXISTS rates (
     score int,
     ad_id int,
     user_id int,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    CONSTRAINT UC_Rates UNIQUE (ad_id, user_id)
 );
+
+CREATE TABLE IF NOT EXISTS stores (
+  id INT,
+  strategicLocation VARCHAR (8),
+  address VARCHAR (128),
+  PRIMARY KEY (id)
+);
+
+INSERT IGNORE INTO stores (id, strategicLocation, address)
+VALUES (001, "SL-1", "123 Marketplace, Montreal, QC"),
+				(002, "SL-2", "456 Marketplace, Montreal, QC"),
+				(003, "SL-3", "789 Marketplace, Montreal, QC"),
+				(004, "SL-4", "001 Marketplace, Montreal, QC");

@@ -14,7 +14,9 @@ let pageState = {
   data: fetchedData,
   newPost: false,
   newRent: false,
-  showAll: true
+  showAll: true,
+  error: '',
+  message: ''
 }
 
 export default function (state = pageState, action) {
@@ -101,7 +103,17 @@ export default function (state = pageState, action) {
     }
     case AN.RATE_AD_SUCCESS: {
       return {
-        ...state
+        ...state,
+        message: action.message,
+        error: ''
+      }
+    }
+    case AN.RATE_AD_FAILED: {
+      console.log('in failed ad')
+      return {
+        ...state,
+        message: '',
+        error: 'Failed to rate'
       }
     }
   }

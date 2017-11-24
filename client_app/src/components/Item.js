@@ -1,14 +1,33 @@
 import React from 'react'
-import { Grid, Card, Image, Divider } from 'semantic-ui-react'
+import { Grid, Card, Image, Divider, Message } from 'semantic-ui-react'
 import UserItemAction from './personal/ItemAction'
 import AdminItemAction from './admin/ItemAction'
 import Rate from './rate/Rate'
 
 export default class Item extends React.Component {
   render () {
+    const handleErrorMessage = (error, message) => {
+      console.log('error', error)
+      if (error) {
+        return (
+          <Message
+            negative
+            content={error}
+          />
+        )
+      } else if (message) {
+        return (
+          <Message
+            positive
+            content={error}
+        />
+        )
+      }
+    }
     const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city, available, promotion, score} = this.props.itemInfo
     const forSaleBy = `${firstName} ${lastName}`
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd} = this.props
+    console.log(this.props)
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
     const cardStyle = {padding: '0px'}
     const myStyle = {
@@ -42,14 +61,17 @@ export default class Item extends React.Component {
             <br />
             <span>Ad type: {type}</span>
             <br />
+            {
+              page === 'USER_PAGE'
+              ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
+              : page === 'ADMIN_PAGE'
+              ? <AdminItemAction />
+              : type === 'PHYSICAL_AD'
+              ? <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
+              : <div />
+            }
+            {handleErrorMessage(this.props.error, this.props.message)}
           </div>
-          {
-            page === 'USER_PAGE'
-            ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
-            : page === 'ADMIN_PAGE'
-            ? <AdminItemAction />
-            : <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
-          }
         </div>
       </Grid.Column>
     )

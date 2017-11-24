@@ -44,7 +44,7 @@ export function rateAd (action$, store) {
     }
     return ajax(request)
     .map(v => rateSuccess(v.response))
-    .catch(err => Observable.Of({
+    .catch(err => Observable.of({
       type: AN.RATE_AD_FAILED
     }))
   })
@@ -131,6 +131,7 @@ export function userDeleteItem (action$, store) {
       const request = {
         url: `/api/ads/${itemId}`,
         method: 'DELETE',
+        crossDomain: true,
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         }

@@ -31,11 +31,11 @@ function getUserAds ({exec, userId}) {
 
 function getAds ({exec, userId, isAdmin}) {
   const where = isAdmin
-              ? `JOIN users as u ON u.id = ${userId} JOIN rates as r  ON r.ad_id = a.id`
+              ? `JOIN users as u ON u.id = ${userId} LEFT JOIN rates as r  ON r.ad_id = a.id  GROUP BY a.id`
               : userId
-              ? `JOIN users as u ON u.id = '${userId}'  JOIN rates as r  ON r.ad_id = a.id` : 'JOIN users as u ON a.user_id = u.id JOIN rates as r ON r.ad_id = a.id'
+              ? `LEFT JOIN users as u ON u.id = '${userId}' LEFT JOIN rates as r on r.ad_id = a.id where a.deletedAt is null GROUP BY a.id` : 'LEFT JOIN users as u ON a.user_id = u.id LEFT JOIN rates as r on r.ad_id = a.id where a.deletedAt is null GROUP BY a.id'
   console.log(where)
-  return exec(`SELECT DISTINCT a.*, u.firstName, u.lastName, u.email, ROUND(AVG(r.score)) as score FROM ads as a ${where}`)
+  return exec(`SELECT DISTINCT a.*, u.firstName, u.lastName, u.email, ROUND(AVG(CASE WHEN r.score IS NULL THEN 0 ELSE r.score END)) as score FROM ads as a ${where}`)
 }
 
 function destroy ({exec, adId, userId, isAdmin}) {

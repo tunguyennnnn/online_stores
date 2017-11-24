@@ -70,7 +70,7 @@ export default class Home extends React.Component {
 
     const listOfItems = (items) => (
         <Grid.Row columns={3}>
-          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} rateAd={rateAd.bind(this)} />)}
+          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} rateAd={rateAd.bind(this)} error={this.props.userInfo.error}/>)}
         </Grid.Row>
     )
 
