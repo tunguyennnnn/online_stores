@@ -19,7 +19,7 @@ function createAd ({exec, userId, title, description, price, imageUrl, phone, ca
 function getUserAds ({exec, userId, isAdmin}) {
   if (!isAdmin) {
     return exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.category, a.subCategory, p.startDate, p.endDate, a.deletedAt',
-                 `FROM (SELECT * FROM ads WHERE ads.user_id = ${userId} AND ads.deletedAt is NULL) as a`,
+                 `FROM (SELECT * FROM ads WHERE ads.user_id = ${userId}) as a`,
                  `LEFT OUTER JOIN promotions as p ON p.ad_id = a.id`].join(' '))
           .then(ads => {
             return ads.map(ad => {
