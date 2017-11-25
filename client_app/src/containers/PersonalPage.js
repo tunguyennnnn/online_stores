@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
 import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
-import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, logout, purchasePlan, deleteItem} from '../actions/personalPageAction'
+import {logout} from '../actions/auth-actions'
+import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, purchasePlan, deleteItem} from '../actions/personalPageAction'
 import {fetchStores} from '../actions/storeAction'
 
 import { Menu, Grid } from 'semantic-ui-react'
@@ -24,7 +25,6 @@ export default class PersonalPage extends React.Component {
   render () {
     const style = {marginTop: '2vw'}
     const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem} = this.props
-    console.log(userInfo)
     const {email, userId} = userInfo.data
     return (
       <div>
