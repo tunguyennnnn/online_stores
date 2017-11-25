@@ -36,10 +36,10 @@ export default class PersonalPage extends React.Component {
             Items
           </Menu.Item>
           <Menu.Item active={userInfo.newPost} onClick={addPost}>
-            New Ad
+            Ad
           </Menu.Item>
           <Menu.Item active={userInfo.newRent} onClick={addRent}>
-            New Renting
+            Physical Ad
           </Menu.Item>
           <UserSettings userId={userId} email={email} navigateToPersonalPage={navigateToPersonalPage} logout={logout} />
         </Menu>
