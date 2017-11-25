@@ -59,13 +59,15 @@ CREATE TABLE IF NOT EXISTS ads(
     address varchar (255),
     category varchar(32),
     subCategory varchar(32),
-    type varchar(36) DEFAULT 'ONLINE_AD',
+    type varchar(36) DEFAULT NULL,
     createdAt datetime DEFAULT CURRENT_TIMESTAMP,
     updatedAt datetime,
     deletedAt datetime DEFAULT NULL,
     forBuySale tinyint(1) DEFAULT 0,
     province varchar(255),
     city varchar(255),
+    store varchar(255),
+    timeslot varchar(255),
     PRIMARY KEY(id)
 );
 

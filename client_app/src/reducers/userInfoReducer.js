@@ -16,7 +16,8 @@ let pageState = {
   newRent: false,
   showAll: true,
   error: '',
-  message: ''
+  message: '',
+  stores: []
 }
 
 export default function (state = pageState, action) {
@@ -114,6 +115,13 @@ export default function (state = pageState, action) {
         ...state,
         message: '',
         error: 'Failed to rate'
+      }
+    }
+    case AN.FETCH_STORES_SUCCESS: {
+      console.log('reached fetched success stores')
+      return {
+        ...state,
+        stores: _.values(action.payload)
       }
     }
   }

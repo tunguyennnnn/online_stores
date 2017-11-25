@@ -1,6 +1,8 @@
 import * as AN from '../ActionName'
 import {receivedUserInfo} from '../actions/navigation-actions'
 import { postItemSuccess, purchasePlanSuccess, purchasePromotionSuccess } from '../actions/personalPageAction'
+import { receivedStores } from '../actions/storeAction'
+
 import { rateSuccess } from '../actions/ratingAction'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
@@ -141,5 +143,24 @@ export function userDeleteItem (action$, store) {
         .catch(err => Observable.of({
           type: AN.DELETE_ITEM_SUCCESS
         }))
+    })
+}
+
+export function fetchStores (action$, store) {
+    return action$.ofType(AN.FETCH_STORES)
+    .map(action => action.payload)
+    .switchMap(() => {
+      let request = {
+        url: '/api/store',
+        crossDomain: true,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        }
+      }
+      return ajax(request)
+      .map(v => receivedStores(v.response))
+      .catch(err => Observable.of({
+        type: AN.FETCH_STORES_FAILED
+      }))
     })
 }

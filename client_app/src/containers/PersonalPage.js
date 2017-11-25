@@ -5,17 +5,20 @@ import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
 import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
 import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, logout, purchasePlan, deleteItem} from '../actions/personalPageAction'
+import {fetchStores} from '../actions/storeAction'
+
 import { Menu, Grid } from 'semantic-ui-react'
 import UserSettings from '../components/userSettings/UserSettings'
 
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem}
+  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem, fetchStores}
 )
 export default class PersonalPage extends React.Component {
   componentDidMount () {
     setTimeout(() => this.props.fetchUser(), 100)
+    setTimeout(() => this.props.fetchStores(), 100)
   }
 
   render () {
@@ -23,6 +26,7 @@ export default class PersonalPage extends React.Component {
     const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem} = this.props
     console.log(userInfo)
     const {email, userId} = userInfo.data
+    console.log(this.props)
     return (
       <div>
         <Menu fluid>

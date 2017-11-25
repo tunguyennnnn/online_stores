@@ -15,7 +15,8 @@ export default class NewPostForm extends React.Component {
         category: CATEGORY.first().value.split('-')[0],
         subCategory: CATEGORY.first().value.split('-')[1],
         province: PROVINCE.first().value.split('-')[0],
-        city: PROVINCE.first().value.split('-')[1]
+        city: PROVINCE.first().value.split('-')[1],
+        type: 'Online ad'
       }
     }
   }
@@ -37,7 +38,7 @@ export default class NewPostForm extends React.Component {
   }
 
   render () {
-    const {itemId, title, imageUrl, description, price, category} = this.props.postInfo || {}
+    const {title, imageUrl, description, price} = this.props.postInfo || {}
     const gStyle = {width: '100%'}
     return (
       <div class='col s12'>
@@ -76,9 +77,9 @@ export default class NewPostForm extends React.Component {
               }
             </select>
             <select id='province' class='ui dropdown' onChange={this.onChange.bind(this)}>
-            {
-              PROVINCE.map((province, i) => <option key={i} value={province.value}>{province.text}</option>)
-            }
+              {
+                PROVINCE.map((province, i) => <option key={i} value={province.value}>{province.text}</option>)
+              }
             </select>
           </div>
           <br />

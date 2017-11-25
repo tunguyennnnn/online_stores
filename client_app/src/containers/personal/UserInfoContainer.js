@@ -35,7 +35,7 @@ export default class UserInfoContainer extends React.Component {
   }
 
   render () {
-    const {data, newPost, showAll, newRent, postInfo} = this.props.userInfo
+    const {data, newPost, showAll, newRent, postInfo, stores} = this.props.userInfo
     console.log(data)
     const {promotions, plans, available, plan} = data
     const {purchasePromotion, purchasePlan, deleteItem} = this.props
@@ -46,7 +46,7 @@ export default class UserInfoContainer extends React.Component {
         {newPost
           ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
           : newRent
-          ? <NewRentForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />
+          ? <NewRentForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} stores={stores} />
           : <Grid stackable>
             <PlanPurchase plans={plans} currentPlan={plan} available={available} purchase={this.openTransaction.bind(this, purchasePlan)} />
             <Grid.Row columns={3}>

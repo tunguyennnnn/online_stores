@@ -25,9 +25,9 @@ export default class TransactionModel extends React.Component {
       >
         <Modal.Content>
           <Modal.Description>
-          <Grid centered>
-            <Input onChange={this.onChange.bind(this)} placeholder='Add credit card number' />
-          </Grid>
+            <Grid centered>
+              <Input onChange={this.onChange.bind(this)} placeholder='Add credit card number' />
+            </Grid>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
