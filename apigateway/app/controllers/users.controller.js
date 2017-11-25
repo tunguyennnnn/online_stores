@@ -9,10 +9,11 @@ const Promise = require('bluebird')
 const Transaction = require('../models/transaction')
 
 function createUser (req, res, next) {
+  console.log(superSecret)
   const {email, password, firstName, lastName, isAdmin, province, city} = req.body
   User.create({exec: res.pExec, email, password, firstName, lastName, province, city, isAdmin})
     .then(user => {
-      const userId = user.id
+      const userId = user.insertId
       const apiToken = jwt.sign({userId, email, password, isAdmin}, superSecret, {expiresIn: 60 * 60 * 24})
       res.json({userId, firstName, lastName, email, apiToken})
     })

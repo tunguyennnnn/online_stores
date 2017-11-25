@@ -3,6 +3,13 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {login} from '../../actions/auth-actions'
 import * as NavigationActions from '../../actions/navigation-actions'
+import {Message, Grid} from 'semantic-ui-react'
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
@@ -11,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 }
 
-@connect(null, mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 class Login extends React.Component {
   constructor (props) {
     super(props)
@@ -30,7 +37,19 @@ class Login extends React.Component {
     event.preventDefault()
     this.props.login(this.state.credentials)
   }
-
+  handleErrorMessage = () => {
+    let errorMessage = this.props.auth.error;
+    console.log('in handleErrorMesage', errorMessage)
+    if(errorMessage){
+      return (
+        <Message
+          negative
+          header='Error!'
+          content={errorMessage}
+        />
+      )
+    }
+  }
   render () {
     const style = {
       position: 'absolute',
@@ -42,6 +61,7 @@ class Login extends React.Component {
       margin: '-100px 0 0 -150px',
       textAlign: 'center'
     }
+    console.log(this.props)
     const styleButton = {left:'22%', position: 'absolute'}
     return (
       <div style={style}>
@@ -54,10 +74,15 @@ class Login extends React.Component {
           <div class='field'>
             <input type='password' placeholder='************' onChange={this.onChange} />
           </div>
-            <div class='group'>
-              <button class='ui button' onClick={this.onSave}>Login</button>
-              <button class='ui button' onClick={this.props.navigateToSignupPage}>Register</button>
-            </div>
+          <Grid centered style={{marginLeft: '15px'}}>
+            <Grid.Row>
+              {this.handleErrorMessage()}
+            </Grid.Row>
+          </Grid>
+          <div class='group'>
+            <button class='ui button' onClick={this.onSave}>Login</button>
+            <button class='ui button' onClick={this.props.navigateToSignupPage}>Register</button>
+          </div>
         </form>
       </div>
     )

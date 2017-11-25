@@ -20,7 +20,8 @@ export function login (action$, store) {
         .catch(err => Observable.of({
           type: AN.LOGIN_FAIL,
           payload: {
-            formInput
+            formInput,
+            error: 'Uh oh something went wrong. Please verify your email address or password and try again!'
           }
         }))
     })

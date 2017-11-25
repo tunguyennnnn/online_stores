@@ -21,11 +21,12 @@ export default function (state = initialState, action) {
       hashHistory.push(`/${isAdmin ? 'admins' : 'users'}/${userId}`)
       return {
         ...state,
-        user: userId
+        user: userId,
+        error: ''
       }
     }
     case AN.LOGIN_FAIL: {
-      hashHistory.push('/login')
+      console.log(action.payload.error)
       return {
         ...state,
         error: action.payload.error
@@ -33,6 +34,7 @@ export default function (state = initialState, action) {
     }
     case AN.SIGNUP_SUCCESS: {
       const {userId} = action.payload.user
+      console.log(userId)
       hashHistory.push(`/users/${userId}`)
       return {
         ...state,
