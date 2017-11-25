@@ -5,6 +5,7 @@ import PromotionList from '../components/admin/PromotionList'
 import PlanList from '../components/admin/PlanList'
 import PromotionForm from '../components/admin/PromotionForm'
 import AccountForm from '../components/admin/AccountForm'
+import TransactionList from '../components/admin/TransactionList'
 import * as AdminActions from '../actions/admin-actions'
 import {connect} from 'react-redux'
 import { Menu, Grid } from 'semantic-ui-react'
@@ -23,9 +24,9 @@ export default class AdminPage extends React.Component {
 
   render () {
     console.log(this.props.pageState)
-    const {showItems, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion} = this.props
+    const {showItems, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion, showTransaction} = this.props
     const {pageState} = this.props
-    const {items, promotions, plans} = this.props.pageState
+    const {items, promotions, plans, transactions} = this.props.pageState
     return (
       <div class='row'>
         <Menu>
@@ -41,6 +42,9 @@ export default class AdminPage extends React.Component {
           <Menu.Item active={pageState.account} onClick={createAdminAccount}>
             Accounts
           </Menu.Item>
+          <Menu.Item active={pageState.transaction} onClick={showTransaction}>
+            Transaction
+          </Menu.Item>
         </Menu>
         {
           pageState.plan
@@ -55,6 +59,8 @@ export default class AdminPage extends React.Component {
               </div>
             : pageState.account
             ? <AccountForm submitAccount={submitAccount} />
+            : pageState.transaction
+            ? <TransactionList transactions={transactions} />
             : (
               <Grid stackable>
                 <Grid.Row columns={3}>

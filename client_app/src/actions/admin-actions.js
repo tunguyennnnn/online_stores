@@ -69,6 +69,12 @@ export function submitPlan (formInput) {
   }
 }
 
+export function showTransaction () {
+  return {
+    type: AN.SHOW_TRANSACTION
+  }
+}
+
 export function createPromotion () {
   return {
     type: AN.CREATE_PROMOTIONAL_PLAN
