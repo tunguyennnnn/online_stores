@@ -15,12 +15,13 @@ import {logout} from '../actions/auth-actions'
   pageState: store.adminPage,
   itemList: store.allItems
 }),
-  {AdminActions,
-  logout}
+  {...AdminActions,logout}
+
 )
 
 export default class AdminPage extends React.Component {
   componentWillMount () {
+    console.log(this.props)
     setTimeout(() => this.props.fetchAdmin(), 100)
   }
 
