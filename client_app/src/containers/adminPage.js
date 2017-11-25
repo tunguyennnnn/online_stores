@@ -9,12 +9,14 @@ import TransactionList from '../components/admin/TransactionList'
 import * as AdminActions from '../actions/admin-actions'
 import {connect} from 'react-redux'
 import { Menu, Grid } from 'semantic-ui-react'
+import {logout} from '../actions/auth-actions'
 
 @connect((store) => ({
   pageState: store.adminPage,
   itemList: store.allItems
 }),
-  AdminActions
+  {AdminActions,
+  logout}
 )
 
 export default class AdminPage extends React.Component {
@@ -24,7 +26,7 @@ export default class AdminPage extends React.Component {
 
   render () {
     console.log(this.props.pageState)
-    const {showItems, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion, showTransaction} = this.props
+    const {showItems, logout, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion, showTransaction} = this.props
     const {pageState} = this.props
     const {items, promotions, plans, transactions} = this.props.pageState
     return (
@@ -44,6 +46,9 @@ export default class AdminPage extends React.Component {
           </Menu.Item>
           <Menu.Item active={pageState.transaction} onClick={showTransaction}>
             Transaction
+          </Menu.Item>
+          <Menu.Item onClick={logout} position='right'>
+            Logout
           </Menu.Item>
         </Menu>
         {
