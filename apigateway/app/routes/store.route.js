@@ -1,11 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const planCtrl = require('../controllers/plan.controller')
+const storeCtrl = require('../controllers/store.controller')
 const authCheck = require('../../config/auth')
 
 router.route('/')
   .all(authCheck)
-  .get(planCtrl.get)
-  .post(planCtrl.create)
+  .get(storeCtrl.getStores)
 
 module.exports = router

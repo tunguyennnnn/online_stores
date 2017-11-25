@@ -1,15 +1,20 @@
 import * as AN from '../ActionName'
 import {receivedUserInfo} from '../actions/navigation-actions'
 import { postItemSuccess, purchasePlanSuccess, purchasePromotionSuccess } from '../actions/personalPageAction'
+import { receivedStores } from '../actions/storeAction'
+
+import { rateSuccess } from '../actions/ratingAction'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
 
 export function fetchUser (action$, store) {
   return action$.ofType(AN.FETCH_USER_ITEMS)
-    .map(action => action.payload.userEmail)
-    .switchMap(userEmail => {
+    .map(action => action.payload)
+    .switchMap(() => {
       const {auth} = store.getState()
+      console.log(auth)
       const userId = auth.userId || window.location.href.split('/').last()
+      console.log(userId)
       let request = {
         url: `/api/users/${userId}`,
         crossDomain: true,
@@ -20,12 +25,31 @@ export function fetchUser (action$, store) {
       return ajax(request)
         .map(v => receivedUserInfo(v.response))
         .catch(error => Observable.of({
-          type: AN.FETCH_USER_INFO_REJECTED,
-          payload: {
-            userInfo: mock
-          }
+          type: AN.FETCH_USER_INFO_REJECTED
         }))
     })
+}
+
+export function rateAd (action$, store) {
+  console.log('reached rateAd')
+  return action$.ofType(AN.RATE_AD)
+  .map(action => action.payload)
+  .switchMap((payload) => {
+    let request = {
+      url: '/api/rate',
+      crossDomain: true,
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+      },
+      body: payload
+    }
+    return ajax(request)
+    .map(v => rateSuccess(v.response))
+    .catch(err => Observable.of({
+      type: AN.RATE_AD_FAILED
+    }))
+  })
 }
 
 export function submitPost (action$, store) {
@@ -54,8 +78,8 @@ export function submitPost (action$, store) {
 
 export function purchasePlan (action$, store) {
   return action$.ofType(AN.USER_PURCHASE_PLAN)
-    .map(action => action.payload.planId)
-    .switchMap(planId => {
+    .map(action => action.payload)
+    .switchMap(({planId, cardDetail}) => {
       const request = {
         url: `/api/plans/`,
         method: 'POST',
@@ -63,11 +87,13 @@ export function purchasePlan (action$, store) {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: {
-          planId
+          planId,
+          cardDetail
         }
       }
+      console.log(request)
       return ajax(request)
-        .map(v => purchasePlanSuccess(v.response))
+        .map(v => receivedUserInfo(v.response))
         .catch(err => Observable.of({
           type: AN.USER_PURCHASED_PLAN_FAILED
         }))
@@ -75,9 +101,10 @@ export function purchasePlan (action$, store) {
 }
 
 export function purchasePromotion (action$, store) {
-  return action$.ofType(AN.USER_PURCHASE_PLAN)
+  return action$.ofType(AN.USER_PURCHASE_PROMOTION)
     .map(action => action.payload)
-    .switchMap(({promotionId, itemId}) => {
+    .switchMap(({promotionId, itemId, cardDetail}) => {
+      console.log(cardDetail)
       const request = {
         url: `/api/promotions/`,
         method: 'POST',
@@ -86,7 +113,8 @@ export function purchasePromotion (action$, store) {
         },
         body: {
           promotionId,
-          itemId
+          itemId,
+          cardDetail
         }
       }
       return ajax(request)
@@ -94,5 +122,45 @@ export function purchasePromotion (action$, store) {
         .catch(err => Observable.of({
           type: AN.USER_PURCHASED_PROMOTION_FAILED
         }))
+    })
+}
+
+export function userDeleteItem (action$, store) {
+  return action$.ofType(AN.USER_DELETE_ITEM)
+    .map(action => action.payload.itemId)
+    .switchMap(itemId => {
+      console.log(itemId)
+      const request = {
+        url: `/api/ads/${itemId}`,
+        method: 'DELETE',
+        crossDomain: true,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        }
+      }
+      return ajax(request)
+        .map(v => receivedUserInfo(v.response))
+        .catch(err => Observable.of({
+          type: AN.DELETE_ITEM_SUCCESS
+        }))
+    })
+}
+
+export function fetchStores (action$, store) {
+    return action$.ofType(AN.FETCH_STORES)
+    .map(action => action.payload)
+    .switchMap(() => {
+      let request = {
+        url: '/api/store',
+        crossDomain: true,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
+        }
+      }
+      return ajax(request)
+      .map(v => receivedStores(v.response))
+      .catch(err => Observable.of({
+        type: AN.FETCH_STORES_FAILED
+      }))
     })
 }

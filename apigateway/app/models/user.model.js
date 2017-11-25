@@ -1,3 +1,10 @@
+const Moment = require('moment')
+const _ = require('lodash')
+
+function isUpToDate (endDate) {
+  return Moment(endDate) >= Moment()
+}
+
 function login ({exec, email, password}) {
   return exec(`SELECT * FROM users AS u WHERE u.email = '${email}' AND u.password = '${password}';`)
 }
@@ -10,7 +17,13 @@ function create ({exec, email, password, firstName, lastName, province, city, is
 }
 
 function getUser ({exec, email}) {
-  return exec(`SELECT * FROM users AS u WHERE u.email = '${email}'`)
+  return exec(`SELECT * FROM (SELECT * FROM users where users.email = '${email}') AS u LEFT OUTER JOIN plans as p ON u.id = p.user_id`)
+    .then(users => {
+      const user = users.first()
+      const {startDate, lastDate} = user
+      const available = lastDate ? isUpToDate(lastDate) : false
+      return _.assign({}, user, {available, plan: {startDate, lastDate}})
+    })
 }
 
-module.exports = {login, create}
+module.exports = {login, create, getUser}

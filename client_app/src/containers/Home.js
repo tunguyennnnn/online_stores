@@ -6,7 +6,9 @@ import { Grid, Divider } from 'semantic-ui-react'
 
 import * as NavigationActions from '../actions/navigation-actions'
 import * as FilterActions from '../actions/filter-actions'
-
+import * as AuthActions from '../actions/auth-actions'
+import { rateAd } from '../actions/ratingAction'
+import * as PersonalActions from '../actions/personalPageAction'
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
 
@@ -14,14 +16,17 @@ const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
     data: state.allItems,
-    pageState: state.mainPageState
+    pageState: state.mainPageState,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     ...NavigationActions,
-    ...FilterActions
+    ...PersonalActions,
+    ...FilterActions,
+    ...AuthActions,
+    rateAd,
   }, dispatch)
 }
 
@@ -35,29 +40,37 @@ export default class Home extends React.Component {
     this.props.navigateToHomePage()
   }
 
-  render () {
-    const {showSubcategory, category=''} = this.props.pageState
-    console.log('this.props',this.props)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo} = this.props
-    const {items} = this.props.data
-    const {email} = userInfo.data
-    console.log(email)
+  componentDidMount () {
+    console.log(this.props)
+    this.props.fetchUser()
+  }
 
+  render () {
+    const {showSubcategory, category, province} = this.props.pageState
+    console.log('this.props',this.props)
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd} = this.props
+    const {items} = this.props.data
+    const {email, userId} = userInfo.data
+    console.log(email)
+    console.log(this.props)
     const navbar = () => (
       <Navbar
       userEmail={email}
+      userId={userId}
       navigateToHomePage={navigateToHomePage.bind(null)}
-      navigateToPersonalPage={navigateToPersonalPage.bind(null, email)}
+      navigateToPersonalPage={navigateToPersonalPage.bind(null)}
       showSubcategory={showSubcategory}
       navigateToHomePage={navigateToHomePage}
+      province={province}
       category={category}
       filterItems={filterItems}
+      logout={logout}
       />
     )
 
     const listOfItems = (items) => (
         <Grid.Row columns={3}>
-          {items.map((d, i) => <Item key={i} itemInfo={d} />)}
+          {items.map((d, i) => <Item key={i} page='HOME_PAGE' itemInfo={d} rateAd={rateAd.bind(this)} error={this.props.userInfo.error}/>)}
         </Grid.Row>
     )
 

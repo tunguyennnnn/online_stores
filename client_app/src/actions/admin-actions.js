@@ -13,7 +13,6 @@ export function fetchAdmin () {
 }
 
 export function receivedAdminInfo (response) {
-  console.log(response)
   return {
     type: AN.RECEIVED_ADMIN_INFO,
     payload: {
@@ -53,7 +52,6 @@ export function createPlan () {
 }
 
 export function createPlanSuccess (response) {
-  console.log(response)
   return {
     type: AN.CREATE_PLAN_SUCCESS,
     payload: {
@@ -68,6 +66,12 @@ export function submitPlan (formInput) {
     payload: {
       formInput
     }
+  }
+}
+
+export function showTransaction () {
+  return {
+    type: AN.SHOW_TRANSACTION
   }
 }
 

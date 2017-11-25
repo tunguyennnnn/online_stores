@@ -12,7 +12,7 @@ const allReducers = combineReducers({
   userInfo: userInfoReducer,
   navigation: navigationReducer,
   adminPage: adminReducer,
-  mainPageState: mainPageReducer
+  mainPageState: mainPageReducer,
 })
 
 export default allReducers

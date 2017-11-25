@@ -3,18 +3,24 @@ const _ = require('lodash')
 import * as AN from '../ActionName'
 
 let fetchedData = {
-  items: []
+  items: [],
+  plans: [],
+  available: false,
+  plan: {},
+  promotions: []
 }
 
 let pageState = {
   data: fetchedData,
   newPost: false,
   newRent: false,
-  showAll: true
+  showAll: true,
+  error: '',
+  message: '',
+  stores: []
 }
 
 export default function (state = pageState, action) {
-  console.log(action.type)
   switch (action.type) {
     case AN.ADD_NEW_POST: {
       return {
@@ -41,7 +47,6 @@ export default function (state = pageState, action) {
       }
     }
     case AN.CANCEL_POST: {
-      console.log('reached cancel post')
       return {
         ...state,
         newPost: false,
@@ -50,7 +55,6 @@ export default function (state = pageState, action) {
       }
     }
     case AN.POST_ITEM_SUCCESS: {
-      console.log(action.payload)
       fetchedData.items = _.values(action.payload)
       return {
         ...state,
@@ -89,12 +93,35 @@ export default function (state = pageState, action) {
     }
     case AN.USER_PURCHASED_PROMOTION_SUCCESS: {
       return {
-        ...state
+        ...state,
+        items: _.values(action.payload)
       }
     }
     case AN.USER_PURCHASED_PROMOTION_FAILED: {
       return {
         ...state
+      }
+    }
+    case AN.RATE_AD_SUCCESS: {
+      return {
+        ...state,
+        message: action.message,
+        error: ''
+      }
+    }
+    case AN.RATE_AD_FAILED: {
+      console.log('in failed ad')
+      return {
+        ...state,
+        message: '',
+        error: 'Failed to rate'
+      }
+    }
+    case AN.FETCH_STORES_SUCCESS: {
+      console.log('reached fetched success stores')
+      return {
+        ...state,
+        stores: _.values(action.payload)
       }
     }
   }

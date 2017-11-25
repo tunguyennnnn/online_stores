@@ -3,28 +3,33 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
-import {navigateToHomePage} from '../actions/navigation-actions'
-import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent} from '../actions/personalPageAction'
-import { Menu, Grid, Icon } from 'semantic-ui-react'
+import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
+import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, logout, purchasePlan, deleteItem} from '../actions/personalPageAction'
+import {fetchStores} from '../actions/storeAction'
+
+import { Menu, Grid } from 'semantic-ui-react'
+import UserSettings from '../components/userSettings/UserSettings'
 
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent}
+  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem, fetchStores}
 )
-
 export default class PersonalPage extends React.Component {
   componentDidMount () {
-    this.props.fetchUser()
+    setTimeout(() => this.props.fetchUser(), 100)
+    setTimeout(() => this.props.fetchStores(), 100)
   }
+
   render () {
     const style = {marginTop: '2vw'}
-    const {userInfo, navigateToHomePage, addPost, cancelPost, submitPost, editPost, addRent} = this.props
-    const {email} = userInfo.data
+    const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem} = this.props
+    console.log(userInfo)
+    const {email, userId} = userInfo.data
     return (
       <div>
-        <Menu>
-          <Menu.Item onClick={navigateToHomePage}>
+        <Menu fluid>
+          <Menu.Item header onClick={navigateToHomePage}>
           Home
           </Menu.Item>
           <Menu.Item active={userInfo.showAll && !(userInfo.newPost || userInfo.newRent)}>
@@ -36,12 +41,16 @@ export default class PersonalPage extends React.Component {
           <Menu.Item active={userInfo.newRent} onClick={addRent}>
             New Renting
           </Menu.Item>
-          <Menu.Item position='right'>
-            {email}
-            <Icon disabled name='setting' />
-          </Menu.Item>
+          <UserSettings userId={userId} email={email} navigateToPersonalPage={navigateToPersonalPage} logout={logout} />
         </Menu>
-      <UserInfoContainer userInfo={userInfo} submitPost={submitPost} cancelPost={cancelPost} editPost={editPost} />
+        <UserInfoContainer
+              purchasePlan={purchasePlan}
+              userInfo={userInfo}
+              submitPost={submitPost}
+              purchasePromotion={purchasePromotion}
+              cancelPost={cancelPost}
+              editPost={editPost}
+              deleteItem={deleteItem} />
       </div>
     )
   }

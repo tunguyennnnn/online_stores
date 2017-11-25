@@ -12,8 +12,13 @@ function getSet ({exec, isAdmin}) {
 }
 
 function create ({exec, userId, planId, startDate, endDate}) {
-  return exec(['INSERT INTO plans(id, userId, planId, startDate, endDate)',
-    `VALUES('${uuid()}', '${userId}', '${planId}', '${startDate}', '${endDate}')`].join(' '))
+  return exec(['INSERT INTO plans(user_id, planSet_id, startDate, lastDate)',
+    `VALUES('${userId}', '${planId}', '${startDate}', '${endDate}')`].join(' '))
 }
 
-module.exports = {createSet, create, getSet}
+function getPlanSet ({exec, setId}) {
+  return exec(`SELECT * from planSet where planSet.id = ${setId}`)
+    .then(plans => plans.first())
+}
+
+module.exports = {createSet, create, getSet, getPlanSet}

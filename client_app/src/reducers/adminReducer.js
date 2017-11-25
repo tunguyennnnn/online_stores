@@ -8,18 +8,21 @@ const initialState = {
   plans: [],
   plan: false,
   promotion: false,
-  account: false
+  account: false,
+  transaction: false,
+  transactions: []
 }
 
 export default function adminReducer (state = initialState, action) {
   switch (action.type) {
     case AN.RECEIVED_ADMIN_INFO: {
-      const {userId, email, items = [], plans = [], promotions = []} = action.payload
+      const {userId, email, items = [], plans = [], promotions = [], transactions = []} = action.payload
       return {
         ...state,
         items,
         plans,
-        promotions
+        promotions,
+        transactions
       }
     }
     case AN.SHOW_ALL_ITEMS_ADMIN_PAGE:
@@ -28,7 +31,8 @@ export default function adminReducer (state = initialState, action) {
         ...state,
         plan: false,
         promotion: false,
-        account: false
+        account: false,
+        transaction: false
       }
     }
     case AN.CREATE_PROMOTION_SUCCESS: {
@@ -37,6 +41,8 @@ export default function adminReducer (state = initialState, action) {
         ...state,
         plan: false,
         promotion: true,
+        transaction: false,
+        account: false,
         promotions
       }
     }
@@ -44,8 +50,10 @@ export default function adminReducer (state = initialState, action) {
       return {
         ...state,
         plans: _.values(action.payload),
+        plan: true,
         promotion: false,
-        plan: true
+        account: false,
+        transaction: false
       }
     }
     case AN.FETCH_TRACTION_DETAIL: {
@@ -56,7 +64,8 @@ export default function adminReducer (state = initialState, action) {
         ...state,
         plan: false,
         promotion: false,
-        account: true
+        account: true,
+        transaction: false
       }
     }
     case AN.SUBMIT_ADMIN_ACCOUNT: {
@@ -66,8 +75,18 @@ export default function adminReducer (state = initialState, action) {
       return {
         ...state,
         plan: false,
+        promotion: true,
         account: false,
-        promotion: true
+        transaction: false
+      }
+    }
+    case AN.SHOW_TRANSACTION: {
+      return {
+        ...state,
+        plan: false,
+        promotion: false,
+        account: false,
+        transaction: true
       }
     }
     case AN.SUBMIT_PROMOTIONAL_PLAN: {

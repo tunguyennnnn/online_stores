@@ -21,12 +21,14 @@ CREATE TABLE IF NOT EXISTS locations (
     PRIMARY KEY(city, province)
 );
 
-CREATE TABLE IF NOT EXISTS mPlans (
+CREATE TABLE IF NOT EXISTS plans (
+    id int NOT NULL AUTO_INCREMENT,
     startDate date,
     lastDate date,
     price float(32),
     user_id int,
-    planSet_id int
+    planSet_id int,
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS planSet (
@@ -40,11 +42,12 @@ CREATE TABLE IF NOT EXISTS planSet (
 
 CREATE TABLE IF NOT EXISTS transactions (
     user_id int,
-    ad_id int,
+    transaction_id int,
+    type varchar(255),
     amount float,
     cardDetail varchar(32),
-    dateOfPayment date,
-    PRIMARY KEY(user_id, ad_id)
+    dateOfPayment datetime DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(user_id, type, transaction_id)
 );
 
 CREATE TABLE IF NOT EXISTS ads(
@@ -58,10 +61,15 @@ CREATE TABLE IF NOT EXISTS ads(
     address varchar (255),
     category varchar(32),
     subCategory varchar(32),
-    type varchar(36) DEFAULT 'ONLINE_AD',
+    type varchar(36) DEFAULT NULL,
     createdAt datetime DEFAULT CURRENT_TIMESTAMP,
     updatedAt datetime,
+    deletedAt datetime DEFAULT NULL,
     forBuySale tinyint(1) DEFAULT 0,
+    province varchar(255),
+    city varchar(255),
+    store varchar(255),
+    timeslot varchar(255),
     PRIMARY KEY(id)
 );
 
@@ -86,5 +94,19 @@ CREATE TABLE IF NOT EXISTS rates (
     score int,
     ad_id int,
     user_id int,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    CONSTRAINT UC_Rates UNIQUE (ad_id, user_id)
 );
+
+CREATE TABLE IF NOT EXISTS stores (
+  id INT,
+  strategicLocation VARCHAR (8),
+  address VARCHAR (128),
+  PRIMARY KEY (id)
+);
+
+INSERT IGNORE INTO stores (id, strategicLocation, address)
+VALUES (001, "SL-1", "123 Marketplace, Montreal, QC"),
+				(002, "SL-2", "456 Marketplace, Montreal, QC"),
+				(003, "SL-3", "789 Marketplace, Montreal, QC"),
+				(004, "SL-4", "001 Marketplace, Montreal, QC");

@@ -6,8 +6,9 @@ const fetchedItems = {items: []}
 
 function filterItems (state, filterOptions) {
   switch (filterOptions.type) {
-    case 'CATEGORY':
+    case 'CATEGORY': {
       if (filterOptions.subCategory) {
+        console.log('filterItems subCategories', filterOptions.subCategory)
         return {
           ...state,
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
@@ -18,11 +19,41 @@ function filterItems (state, filterOptions) {
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category)
         }
       }
-    case 'HOME':
+    }
+    case 'PROVINCE': {
+      if (filterOptions.province !== 'All') {
+        if (filterOptions.category && filterOptions.subCategory) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter((item) => item.province === filterOptions.province && item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+          }
+        } else if (filterOptions.category) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter((item) => item.province === filterOptions.province && item.category === filterOptions.category)
+          }
+        }
+      } else {
+        if (filterOptions.category && filterOptions.subCategory) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter(item => !item.isSold && item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+          }
+        } else if (filterOptions.category) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter(item => !item.isSold && item.category === filterOptions.category)
+          }
+        }
+      }
+    }
+      break
+    case 'HOME': {
       return {
         ...state,
         items: fetchedItems.items.filter(item => !item.isSold)
       }
+    }
     default:
       return state
   }
@@ -31,7 +62,6 @@ function filterItems (state, filterOptions) {
 export default function (state = fetchedItems, action) {
   switch (action.type) {
     case AN.RECEIVED_ALL_ITEM: {
-      console.log(action.payload)
       fetchedItems.items = _.values(action.payload)
       return {
         ...state,

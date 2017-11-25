@@ -11,7 +11,7 @@ export function submitAccount (action$, store) {
       const request = {
         url: '/api/users/',
         header: {
-          Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
+          Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },
         body: formInput
       }

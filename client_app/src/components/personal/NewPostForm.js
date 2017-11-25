@@ -1,11 +1,6 @@
 import React from 'react'
 import {Form, Input, TextArea, Select, Button} from 'semantic-ui-react'
-const CATEGORY = [
-  {key: 'buyandsell.clothing', value: 'BUY_AND_SELL-Clothing', text: 'Buy and Sell - Clothing'},
-  {key: 'buyandsell.books', value: 'BUY_AND_SELL-Books', text: 'Buy and Sell - Books'},
-  {key: 'buyandsell.electronics', value: 'BUY_AND_SELL-Electronics', text: 'Buy and Sell - Electronics'},
-  {key: 'buyandsell.electronics', value: 'BUY_AND_SELL-Musical Instruments', text: 'Buy and Sell - Musical Instruments'}
-]
+import { CATEGORY, PROVINCE } from '../../../constants'
 
 export default class NewPostForm extends React.Component {
   constructor () {
@@ -18,7 +13,10 @@ export default class NewPostForm extends React.Component {
         phone: '',
         price: '',
         category: CATEGORY.first().value.split('-')[0],
-        subCategory: CATEGORY.first().value.split('-')[1]
+        subCategory: CATEGORY.first().value.split('-')[1],
+        province: PROVINCE.first().value.split('-')[0],
+        city: PROVINCE.first().value.split('-')[1],
+        type: 'Online ad'
       }
     }
   }
@@ -29,6 +27,9 @@ export default class NewPostForm extends React.Component {
     if (id === 'category') {
       formInput.category = value.split('-')[0]
       formInput.subCategory = value.split('-')[1]
+    } else if (id === 'province') {
+      formInput.province = value.split('-')[0]
+      formInput.city = value.split('-')[1]
     } else {
       formInput[id] = value
     }
@@ -37,7 +38,7 @@ export default class NewPostForm extends React.Component {
   }
 
   render () {
-    const {itemId, title, imageUrl, description, price, category} = this.props.postInfo || {}
+    const {title, imageUrl, description, price} = this.props.postInfo || {}
     const gStyle = {width: '100%'}
     return (
       <div class='col s12'>
@@ -73,6 +74,11 @@ export default class NewPostForm extends React.Component {
             <select id='category' class='ui dropdown' onChange={this.onChange.bind(this)}>
               {
                 CATEGORY.map((category, i) => <option key={i} value={category.value}>{category.text}</option>)
+              }
+            </select>
+            <select id='province' class='ui dropdown' onChange={this.onChange.bind(this)}>
+              {
+                PROVINCE.map((province, i) => <option key={i} value={province.value}>{province.text}</option>)
               }
             </select>
           </div>

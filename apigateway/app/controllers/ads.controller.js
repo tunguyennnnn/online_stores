@@ -1,11 +1,11 @@
 const Ad = require('../models/ad.model')
 const _ = require('lodash')
+const UserCtrl = require('./users.controller')
 
 function index (req, res, next) {
   const {pExec, decoded} = res
   Ad.getAds({exec: pExec})
     .then(items => {
-      console.log(items)
       res.json(items)
     })
     .catch(err => {
@@ -31,4 +31,19 @@ function update (req, res, next) {
   res.status(200)
 }
 
-module.exports = {index, create, update}
+function destroy (req, res, next) {
+  const {adId} = req.params
+  const {decoded, pExec} = res
+  const {userId, isAdmin} = decoded
+  console.log(adId, decoded)
+  Ad.destroy({exec: pExec, userId, adId, isAdmin})
+    .then(() => {
+      UserCtrl.show(req, res, next)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send()
+    })
+}
+
+module.exports = {index, create, update, destroy}

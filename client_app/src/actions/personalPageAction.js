@@ -1,17 +1,28 @@
 import * as AN from '../ActionName'
 
-export function fetchUser (userId) {
+export function fetchUser () {
   return {
-    type: AN.FETCH_USER_ITEMS,
+    type: AN.FETCH_USER_ITEMS
+  }
+}
+
+export function purchasePromotion ({itemId, promotionId}, cardDetail) {
+  return {
+    type: AN.USER_PURCHASE_PROMOTION,
     payload: {
-      userId
+      itemId,
+      promotionId,
+      cardDetail
     }
   }
 }
 
-export function purchasePromotionSuccess (promotion) {
+export function purchasePromotionSuccess (response) {
   return {
-    type: AN.USER_PURCHASED_PROMOTION_SUCCESS
+    type: AN.USER_PURCHASED_PROMOTION_SUCCESS,
+    payload: {
+      response
+    }
   }
 }
 
@@ -24,20 +35,12 @@ export function purchasePlanSuccess (plans) {
   }
 }
 
-export function purchasePlan (planId) {
+export function purchasePlan ({planId}, cardDetail) {
   return {
     type: AN.USER_PURCHASE_PLAN,
     payload: {
-      planId
-    }
-  }
-}
-
-export function purchasePromotion (promotionId, itemId) {
-  return {
-    type: AN.USER_PURCHASE_PROMOTION,
-    payload: {
-      itemId, promotionId
+      planId,
+      cardDetail
     }
   }
 }
@@ -83,6 +86,16 @@ export function postItemSuccess (response) {
     type: AN.POST_ITEM_SUCCESS,
     payload: {
       ...response
+    }
+  }
+}
+
+export function deleteItem (itemId) {
+  console.log(itemId)
+  return {
+    type: AN.USER_DELETE_ITEM,
+    payload: {
+      itemId
     }
   }
 }
