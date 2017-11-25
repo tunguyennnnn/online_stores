@@ -59,7 +59,19 @@ export default function (state = pageState, action) {
       return {
         ...state,
         showAll: true,
-        newPost: false
+        newPost: false,
+        newRent: false,
+        message: 'Ad successfully added'
+      }
+    }
+    case AN.POST_ITEM_FAILED: {
+      return {
+        ...state,
+        showAll: true,
+        newPost: false,
+        newRent: false,
+        message: '',
+        error: 'Failed to post Ad, please try again!'
       }
     }
     case AN.RECEIVED_USER_INFO: {
@@ -83,7 +95,8 @@ export default function (state = pageState, action) {
       const {plans} = action.payload
       return {
         ...state,
-        plans
+        plans,
+        message: 'Successfully purchased plan'
       }
     }
     case AN.USER_PURCHASED_PLAN_FAILED: {
@@ -94,7 +107,8 @@ export default function (state = pageState, action) {
     case AN.USER_PURCHASED_PROMOTION_SUCCESS: {
       return {
         ...state,
-        items: _.values(action.payload)
+        items: _.values(action.payload),
+        message: 'Successfully purchased promotion'
       }
     }
     case AN.USER_PURCHASED_PROMOTION_FAILED: {
@@ -122,6 +136,13 @@ export default function (state = pageState, action) {
       return {
         ...state,
         stores: _.values(action.payload)
+      }
+    }
+    case AN.UPDATE_MESSAGE: {
+      return {
+        ...state,
+        message: '',
+        error: ''
       }
     }
   }

@@ -7,7 +7,7 @@ import NewPostForm from '../../components/personal/NewPostForm'
 import NewRentForm from '../../components/personal/NewRentForm'
 import PlanPurchase from '../../components/personal/PlanPurchase'
 import TransactionModel from '../../components/TransactionModel'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Message } from 'semantic-ui-react'
 
 
 export default class UserInfoContainer extends React.Component {
@@ -33,15 +33,42 @@ export default class UserInfoContainer extends React.Component {
   openTransaction (purchaseFunc, transactionInfo) {
     this.setState({modalStatus: true, purchaseFunc, transactionInfo})
   }
-
+  handleMessage = () => {
+    if(this.props.userInfo.message || this.props.userInfo.error){
+      setTimeout(() => this.props.updateMessage(), 5000)
+    }
+  }
+  handleSuccessMessage = () => {
+    let {message, error} = this.props.userInfo;
+    console.log('in handleErrorMesage', message)
+    if(message){
+      return (
+        <Message
+          positive
+          header='Success!'
+          content={message}
+        />
+      )
+    } else if (error) {
+        return (
+          <Message
+            negative
+            header='Error!'
+            content={error}
+          />
+        )
+      }
+    }
   render () {
-    const {data, newPost, showAll, newRent, postInfo, stores} = this.props.userInfo
+    const {data, newPost, showAll, newRent, postInfo, stores, message} = this.props.userInfo
     console.log(data)
     const {promotions, plans, available, plan} = data
     const {purchasePromotion, purchasePlan, deleteItem} = this.props
     const {items} = data
     return (
       <div>
+        {this.handleSuccessMessage()}
+        {this.handleMessage()}
         <TransactionModel status={this.state.modalStatus} transactionInfo={this.state.transactionInfo} closeModal={this.closeModal.bind(this)} purchase={this.performPurchase.bind(this)} />
         {newPost
           ? <NewPostForm submitPost={this.props.submitPost} postInfo={postInfo} cancelPost={this.props.cancelPost} />

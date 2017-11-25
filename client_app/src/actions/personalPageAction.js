@@ -99,3 +99,10 @@ export function deleteItem (itemId) {
     }
   }
 }
+
+export function updateMessage () {
+  console.log('updating message')
+  return {
+    type: AN.UPDATE_MESSAGE
+  }
+}

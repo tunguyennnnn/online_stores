@@ -68,7 +68,7 @@ export function submitPost (action$, store) {
       return ajax(request)
         .map(v => postItemSuccess(v.response))
         .catch(err => Observable.of({
-          type: AN.POST_ITEM_SUCCESS,
+          type: AN.POST_ITEM_FAILED,
           payload: {
             formInput
           }
