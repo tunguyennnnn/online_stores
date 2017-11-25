@@ -50,15 +50,21 @@ const provinceOptions = [
     text: 'Winnipeg - Manitoba'
   }
 ]
+
 export default class Navbar extends React.Component {
+  constructor () {
+    super()
+    this.state = {subCategory: ''}
+  }
   onClickHanlder (event, {name, value}, data) {
     const {type, category, subCategory} = event
 
     if (type === 'CATEGORY') {
+      this.setState({subCategory: subCategory})
       this.props.filterItems({type, category, subCategory})
     } else {
       const province = data.value.split('-')[0]
-      this.props.filterItems({type, province})
+      this.props.filterItems({type, province, category: this.props.category, subCategory: this.state.subCategory})
     }
   }
 

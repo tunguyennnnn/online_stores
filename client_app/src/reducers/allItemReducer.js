@@ -6,8 +6,9 @@ const fetchedItems = {items: []}
 
 function filterItems (state, filterOptions) {
   switch (filterOptions.type) {
-    case 'CATEGORY':
+    case 'CATEGORY': {
       if (filterOptions.subCategory) {
+        console.log('filterItems subCategories', filterOptions.subCategory)
         return {
           ...state,
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
@@ -18,25 +19,41 @@ function filterItems (state, filterOptions) {
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category)
         }
       }
-    case 'PROVINCE':
-      console.log(filterOptions.province)
+    }
+    case 'PROVINCE': {
       if (filterOptions.province !== 'All') {
-        console.log('in all')
-        return {
-          ...state,
-          items: fetchedItems.items.filter((item) => item.province === filterOptions.province)
+        if (filterOptions.category && filterOptions.subCategory) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter((item) => item.province === filterOptions.province && item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+          }
+        } else if (filterOptions.category) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter((item) => item.province === filterOptions.province && item.category === filterOptions.category)
+          }
         }
       } else {
-        return {
-          ...state,
-          items: fetchedItems.items.filter(item => !item.isSold)
+        if (filterOptions.category && filterOptions.subCategory) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter(item => !item.isSold && item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
+          }
+        } else if (filterOptions.category) {
+          return {
+            ...state,
+            items: fetchedItems.items.filter(item => !item.isSold && item.category === filterOptions.category)
+          }
         }
       }
-    case 'HOME':
+    }
+      break
+    case 'HOME': {
       return {
         ...state,
         items: fetchedItems.items.filter(item => !item.isSold)
       }
+    }
     default:
       return state
   }
