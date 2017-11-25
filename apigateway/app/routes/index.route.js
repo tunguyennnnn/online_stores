@@ -8,6 +8,7 @@ const planRouter = require('./plan.route')
 const promotionSet = require('./promotionSet.route')
 const planSet = require('./planSet.route')
 const rateRouter = require('./rate.route')
+const storeRouter = require('./store.route')
 
 router.post('/health-check', (req, res) => {
   console.log(req.body)
@@ -22,5 +23,6 @@ router.use('/plans', planRouter)
 router.use('/promotionSet', promotionSet)
 router.use('/planSet', planSet)
 router.use('/rate', rateRouter)
+router.use('/store', storeRouter)
 
 module.exports = router
