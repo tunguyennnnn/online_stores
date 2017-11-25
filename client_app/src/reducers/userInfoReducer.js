@@ -119,7 +119,7 @@ export default function (state = pageState, action) {
     case AN.RATE_AD_SUCCESS: {
       return {
         ...state,
-        message: action.message,
+        message: 'Thank you for rating',
         error: ''
       }
     }
@@ -128,7 +128,7 @@ export default function (state = pageState, action) {
       return {
         ...state,
         message: '',
-        error: 'Failed to rate'
+        error: 'You cannot rate twice, sorry!'
       }
     }
     case AN.FETCH_STORES_SUCCESS: {
