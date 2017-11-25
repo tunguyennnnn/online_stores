@@ -22,11 +22,13 @@ CREATE TABLE IF NOT EXISTS locations (
 );
 
 CREATE TABLE IF NOT EXISTS plans (
+    id int NOT NULL AUTO_INCREMENT,
     startDate date,
     lastDate date,
     price float(32),
     user_id int,
-    planSet_id int
+    planSet_id int,
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS planSet (

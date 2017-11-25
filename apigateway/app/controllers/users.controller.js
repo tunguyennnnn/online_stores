@@ -6,6 +6,7 @@ const Ad = require('../models/ad.model')
 const Promotion = require('../models/promotion.model')
 const Plan = require('../models/plan.model')
 const Promise = require('bluebird')
+const Transaction = require('../models/transaction')
 
 function createUser (req, res, next) {
   const {email, password, firstName, lastName, isAdmin, province, city} = req.body
@@ -25,12 +26,12 @@ function show (req, res, next) {
   const {decoded} = res
   const exec = res.pExec
   const {userId, isAdmin, email} = decoded
-  const promises = [User.getUser({exec, email}), Ad.getUserAds({exec, isAdmin, userId}), Promotion.getSet({exec, isAdmin}), Plan.getSet({exec, isAdmin})]
+  const promises = [User.getUser({exec, email}), Ad.getUserAds({exec, isAdmin, userId}), Promotion.getSet({exec, isAdmin}), Plan.getSet({exec, isAdmin}), Transaction.getAll({exec})]
   Promise.all(promises)
     .then(data => {
       console.log(data)
-      const [user, items, promotions, plans] = data
-      res.json({userId, email, available: user.available, plan: user.plan, isAdmin, items, promotions, plans})
+      const [user, items, promotions, plans, transactions] = data
+      res.json({userId, email, available: user.available, plan: user.plan, isAdmin, items, promotions, plans, transactions})
     })
     .catch(err => {
       console.log(err)
