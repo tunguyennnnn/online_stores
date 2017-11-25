@@ -24,7 +24,8 @@ export default class Item extends React.Component {
         )
       }
     }
-    const {id, email, firstName, lastName, imageUrl, title, description, price, postDate, completed, phone, type, province, city, available, promotion, score} = this.props.itemInfo
+    const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, promotion, score, deletedAt} = this.props.itemInfo
+    console.log(deletedAt)
     const forSaleBy = `${firstName} ${lastName}`
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd} = this.props
     console.log(this.props)
@@ -53,8 +54,6 @@ export default class Item extends React.Component {
             <div class='meta' style={{color: '#78909c'}}>Phone number: {phone} </div>
           </div>
           <div class='content extra'>
-            <span>Status: </span><span>{completed ? 'Sold' : 'Available'}</span>
-            <br />
             <span>For sale by: {forSaleBy}</span>
             <br />
             <span> E-mail address: {email} </span>
@@ -62,13 +61,13 @@ export default class Item extends React.Component {
             <span>Ad type: {type}</span>
             <br />
             {
-              page === 'USER_PAGE'
+              page === 'USER_PAGE' && deletedAt
               ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
               : page === 'ADMIN_PAGE'
               ? <AdminItemAction />
-              : type === 'PHYSICAL_AD'
+              : type === 'PHYSICAL_AD' && page !== 'USER_PAGE'
               ? <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
-              : <div />
+              : null
             }
             {handleErrorMessage(this.props.error, this.props.message)}
           </div>

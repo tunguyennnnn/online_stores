@@ -26,7 +26,6 @@ export default class PersonalPage extends React.Component {
     const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem} = this.props
     console.log(userInfo)
     const {email, userId} = userInfo.data
-    console.log(this.props)
     return (
       <div>
         <Menu fluid>
