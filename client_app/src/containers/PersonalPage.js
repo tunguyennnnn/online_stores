@@ -24,7 +24,8 @@ export default class PersonalPage extends React.Component {
   render () {
     const style = {marginTop: '2vw'}
     const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem, updateMessage} = this.props
-    const {email, userId} = userInfo.data
+    const {email, userId, firstName, lastName, userType} = userInfo.data
+    console.log(this.props)
     return (
       <div>
         <Menu fluid>
@@ -43,6 +44,10 @@ export default class PersonalPage extends React.Component {
           <UserSettings userId={userId} email={email} navigateToPersonalPage={navigateToPersonalPage} logout={logout} />
         </Menu>
         <UserInfoContainer
+          firstName={firstName}
+          lastName={lastName}
+          userEmail={email}
+          userType={userType}
           updateMessage={updateMessage}
           purchasePlan={purchasePlan}
           userInfo={userInfo}

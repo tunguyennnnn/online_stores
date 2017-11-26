@@ -16,9 +16,10 @@ export default class NewRentForm extends React.Component {
         subCategory: CATEGORY.first().value.split('-')[1],
         province: PROVINCE.first().value.split('-')[0],
         city: PROVINCE.first().value.split('-')[1],
-        type: 'PHYSICAL_AD',
-        store: '',
-        timeSlot: ''
+        type: 'Physical ad',
+        adType: 'Sell',
+        store: 'SL-1-123 Marketplace, Montreal, QC',
+        timeSlot: '10:00-12:00'
       }
     }
   }

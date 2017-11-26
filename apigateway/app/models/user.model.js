@@ -18,8 +18,8 @@ function getUser ({exec, email}) {
   console.log('USEREMAIL', email)
   return exec(`SELECT * FROM (SELECT * FROM users where users.email = '${email}') AS u LEFT OUTER JOIN plans as p ON u.id = p.user_id;`)
     .then(users => {
-      console.log(users)
       const user = users.first()
+      console.log(user)
       const {startDate, lastDate} = user
       const available = lastDate ? isUpToDate(lastDate) : false
       return _.assign({}, user, {available, plan: {startDate, lastDate}})

@@ -24,9 +24,12 @@ export default class Item extends React.Component {
         )
       }
     }
-    const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, promotion, score, deletedAt} = this.props.itemInfo
+    const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, promotion, score, deletedAt, userType, adType} = this.props.itemInfo
     console.log(deletedAt)
     const forSaleBy = `${firstName} ${lastName}`
+    const forSaleByPersonal = `${this.props.firstName} ${this.props.lastName}`
+    console.log(forSaleBy)
+    console.log(forSaleByPersonal)
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd} = this.props
     console.log(this.props)
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
@@ -49,23 +52,23 @@ export default class Item extends React.Component {
             <div class='description'>{description}</div>
             <Divider horizontal hidden />
             <div class='meta' style={{color: '#78909c'}}>Price: {`${price} CAD`}</div>
-            <div class='meta' style={{color: '#78909c'}}>Province: {province} </div>
-            <div class='meta' style={{color: '#78909c'}}>City: {city} </div>
+            <div class='meta' style={{color: '#78909c'}}>Province: {province === undefined ? this.props.province : province} </div>
+            <div class='meta' style={{color: '#78909c'}}>City: {city === undefined ? this.props.city : city} </div>
             <div class='meta' style={{color: '#78909c'}}>Phone number: {phone} </div>
           </div>
           <div class='content extra'>
-            <span>For sale by: {forSaleBy}</span>
+            <span>For sale by: {`${firstName === undefined ? forSaleByPersonal : forSaleBy} - ${this.props.userType !== undefined ? userType : this.props.userType}`}</span>
             <br />
-            <span> E-mail address: {email} </span>
+            <span> E-mail address: {email === undefined ? this.props.userEmail : email} </span>
             <br />
-            <span>Ad type: {type}</span>
+            <span>Ad type: {`${type} - ${adType}`}</span>
             <br />
             {
               page === 'USER_PAGE' && deletedAt
               ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
               : page === 'ADMIN_PAGE'
               ? <AdminItemAction />
-              : type === 'PHYSICAL_AD' && page !== 'USER_PAGE'
+              : type === 'Physical ad' && page !== 'USER_PAGE'
               ? <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
               : null
             }

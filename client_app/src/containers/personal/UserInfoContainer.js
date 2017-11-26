@@ -62,8 +62,9 @@ export default class UserInfoContainer extends React.Component {
   render () {
     const {data, newPost, showAll, newRent, postInfo, stores, message} = this.props.userInfo
     console.log(data)
-    const {promotions, plans, available, plan} = data
-    const {purchasePromotion, purchasePlan, deleteItem} = this.props
+    const {promotions, plans, available, plan, province, city} = data
+    const {purchasePromotion, purchasePlan, deleteItem, firstName, lastName, userType, userEmail} = this.props
+    console.log('userinfocontainer', this.props)
     const {items} = data
     return (
       <div>
@@ -78,7 +79,20 @@ export default class UserInfoContainer extends React.Component {
             <PlanPurchase plans={plans} currentPlan={plan} available={available} purchase={this.openTransaction.bind(this, purchasePlan)} />
             <Grid.Row columns={3}>
               {
-               items.map((d, i) => <Item key={i} page='USER_PAGE' deleteItem={deleteItem} belongToCurrentUser={'true'} purchasePromotion={this.openTransaction.bind(this, purchasePromotion)} promotionSet={promotions} editPost={this.props.editPost} itemInfo={d} />)
+               items.map((d, i) => <Item key={i}
+               page='USER_PAGE'
+               deleteItem={deleteItem}
+               firstName={firstName}
+               lastName={lastName}
+               userEmail={userEmail}
+               province={province}
+               city={city}
+               userType={userType}
+               belongToCurrentUser={'true'}
+               purchasePromotion={this.openTransaction.bind(this, purchasePromotion)}
+               promotionSet={promotions}
+               editPost={this.props.editPost}
+               itemInfo={d} />)
               }
             </Grid.Row>
           </Grid>

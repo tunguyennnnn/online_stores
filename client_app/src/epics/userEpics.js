@@ -12,6 +12,7 @@ export function fetchUser (action$, store) {
     .map(action => action.payload)
     .switchMap(() => {
       const {auth} = store.getState()
+      console.log(store.getState())
       console.log(auth)
       const userId = auth.userId || window.location.href.split('/').last()
       console.log(userId)

@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS ads(
     category varchar(32),
     subCategory varchar(32),
     type varchar(36) DEFAULT NULL,
+    adType varchar(36) DEFAULT 'Sell',
     createdAt datetime DEFAULT CURRENT_TIMESTAMP,
     updatedAt datetime,
     deletedAt datetime DEFAULT NULL,

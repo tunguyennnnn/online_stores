@@ -16,7 +16,8 @@ export default class NewPostForm extends React.Component {
         subCategory: CATEGORY.first().value.split('-')[1],
         province: PROVINCE.first().value.split('-')[0],
         city: PROVINCE.first().value.split('-')[1],
-        type: 'Online ad'
+        type: 'Online ad',
+        adType: 'Sell'
       }
     }
   }
@@ -61,7 +62,7 @@ export default class NewPostForm extends React.Component {
           <div class='col s12'>
             <label>Price</label>
             <br />
-            <Input style={gStyle} id='price' type='text' value={price} onChange={this.onChange.bind(this)} />
+            <Input style={gStyle} id='price' type='number' min='1' value={price} onChange={this.onChange.bind(this)} />
           </div>
           <div class='col s12'>
             <label>Phone Number</label>
@@ -76,10 +77,16 @@ export default class NewPostForm extends React.Component {
                 CATEGORY.map((category, i) => <option key={i} value={category.value}>{category.text}</option>)
               }
             </select>
+            <label>Province - City </label>
+            <br />
             <select id='province' class='ui dropdown' onChange={this.onChange.bind(this)}>
               {
                 PROVINCE.map((province, i) => <option key={i} value={province.value}>{province.text}</option>)
               }
+            </select>
+            <select id='adType' class='ui dropdown' onChange={this.onChange.bind(this)}>
+              <option value='Sell'> Sell </option>
+              <option value='Buy'> Buy </option>
             </select>
           </div>
           <br />

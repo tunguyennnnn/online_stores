@@ -76,7 +76,7 @@ export default class Home extends React.Component {
     console.log('this.props',this.props)
     const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd} = this.props
     const {items} = this.props.data
-    const {email, userId} = userInfo.data
+    const {email, userId, userType} = userInfo.data
     console.log(email)
     console.log(this.props)
     const navbar = () => (
@@ -102,6 +102,7 @@ export default class Home extends React.Component {
               page='HOME_PAGE'
               itemInfo={d}
               rateAd={rateAd.bind(this)}
+              userType={userType}
             />
           )}
         </Grid.Row>

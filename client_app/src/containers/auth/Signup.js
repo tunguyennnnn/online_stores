@@ -22,7 +22,7 @@ class Signup extends React.Component {
       password: '',
       city: 'Montreal',
       province: 'Quebec',
-      userType:'Particular'
+      userType:'Owner'
     }}
     this.onChange = this.onChange.bind(this)
     this.onSave = this.onSave.bind(this)
@@ -88,7 +88,7 @@ class Signup extends React.Component {
           </div>
           <div class='field'>
             <select id='userType' class='ui dropdown' style={{width: '111%'}} onChange={this.onChange}>
-              <option value='Particular'> Particular</option>
+              <option value='Owner'> Owner</option>
               <option value='Business'> Business</option>
             </select>
           </div>
