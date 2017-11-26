@@ -6,6 +6,12 @@ export function fetchUser () {
   }
 }
 
+export function gotoHomePage () {
+  return {
+    type: AN.GOTO_HOME_PAGE
+  }
+}
+
 export function purchasePromotion ({itemId, promotionId}, cardDetail) {
   return {
     type: AN.USER_PURCHASE_PROMOTION,

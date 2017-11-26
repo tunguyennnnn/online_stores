@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 
 export default class UserItemAction extends React.Component {
   promotionTemplate (promotion = this.props.promotion) {
@@ -40,7 +41,7 @@ export default class UserItemAction extends React.Component {
   }
 
   render () {
-    const {promotion, available} = this.props
+    const {promotion, available, deletedAt} = this.props
     return (
       <div>
         {
@@ -48,7 +49,11 @@ export default class UserItemAction extends React.Component {
           ? this.promotionTemplate()
           : this.purchasePromotionTemplate()
         }
-        <Button color='red' onClick={this.props.deleteItem}>Delete</Button>
+        {
+          deletedAt
+          ? <Message negative>Deleted At: {deletedAt}</Message>
+          : <Button color='red' onClick={this.props.deleteItem}>Delete</Button>
+        }
       </div>
     )
   }

@@ -38,6 +38,12 @@ export default function (state = pageState, action) {
         showAll: false
       }
     }
+    case AN.GOTO_HOME_PAGE: {
+      hashHistory.push('/')
+      return {
+        ...state
+      }
+    }
     case AN.EDIT_POST: {
       return {
         ...state,

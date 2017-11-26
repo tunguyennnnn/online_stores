@@ -5,7 +5,7 @@ import UserActionContainer from './personal/UserActionContainer'
 import UserInfoContainer from './personal/UserInfoContainer'
 import {navigateToHomePage, navigateToPersonalPage} from '../actions/navigation-actions'
 import {logout} from '../actions/auth-actions'
-import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, purchasePlan, deleteItem, updateMessage} from '../actions/personalPageAction'
+import {addPost, submitPost, cancelPost, editPost, fetchUser, addRent, purchasePromotion, purchasePlan, deleteItem, updateMessage, gotoHomePage} from '../actions/personalPageAction'
 import {fetchStores} from '../actions/storeAction'
 
 import { Menu, Grid } from 'semantic-ui-react'
@@ -14,7 +14,7 @@ import UserSettings from '../components/userSettings/UserSettings'
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {navigateToHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem, fetchStores, updateMessage}
+  {gotoHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem, fetchStores, updateMessage}
 )
 export default class PersonalPage extends React.Component {
   componentDidMount () {
@@ -23,13 +23,13 @@ export default class PersonalPage extends React.Component {
   }
   render () {
     const style = {marginTop: '2vw'}
-    const {userInfo, navigateToHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem, updateMessage} = this.props
+    const {userInfo, gotoHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem, updateMessage} = this.props
     const {email, userId, firstName, lastName, userType} = userInfo.data
     console.log(this.props)
     return (
       <div>
         <Menu fluid>
-          <Menu.Item header onClick={navigateToHomePage}>
+          <Menu.Item header onClick={gotoHomePage}>
           Home
           </Menu.Item>
           <Menu.Item active={userInfo.showAll && !(userInfo.newPost || userInfo.newRent)} onClick={cancelPost}>
