@@ -6,24 +6,6 @@ import Rate from './rate/Rate'
 
 export default class Item extends React.Component {
   render () {
-    const handleErrorMessage = (error, message) => {
-      console.log('error', error)
-      if (error) {
-        return (
-          <Message
-            negative
-            content={error}
-          />
-        )
-      } else if (message) {
-        return (
-          <Message
-            positive
-            content={error}
-        />
-        )
-      }
-    }
     const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, promotion, score, deletedAt, userType, adType} = this.props.itemInfo
     console.log(deletedAt)
     const forSaleBy = `${firstName} ${lastName}`
@@ -72,7 +54,6 @@ export default class Item extends React.Component {
               ? <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
               : null
             }
-            {handleErrorMessage(this.props.error, this.props.message)}
           </div>
         </div>
       </Grid.Column>
