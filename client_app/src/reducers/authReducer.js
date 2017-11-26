@@ -55,6 +55,13 @@ export default function (state = initialState, action) {
       hashHistory.push('/login')
       return initialState
     }
+    case AN.UPDATE_MESSAGE: {
+      console.log('updated')
+      return {
+        ...state,
+        error: ''
+      }
+    }
     default:
       return state
   }

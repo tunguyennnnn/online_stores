@@ -1,9 +1,8 @@
 import { Message } from 'semantic-ui-react'
+import React from 'react'
 
-export default function handleMessage (error, message) {
-  if (message || error) {
-    setTimeout(() => this.updateMessage, 5000)
-  } else if (message) {
+export function handleMessage (error, message) {
+  if (message) {
     return (
       <Message
         style={{paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}}
@@ -12,7 +11,8 @@ export default function handleMessage (error, message) {
         content={message}
       />
     )
-  } else if (error) {
+  }
+  if (error) {
     return (
       <Message
         style={{paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}}
@@ -21,5 +21,11 @@ export default function handleMessage (error, message) {
         content={error}
       />
     )
+  }
+}
+
+export function handleMessageUpdate (error, message, updateMessage) {
+  if (message || error) {
+    setTimeout(() => updateMessage(), 5000)
   }
 }

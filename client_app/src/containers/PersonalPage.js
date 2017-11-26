@@ -14,7 +14,22 @@ import UserSettings from '../components/userSettings/UserSettings'
 @connect((store) => ({
   userInfo: store.userInfo
 }),
-  {gotoHomePage, addPost, cancelPost, submitPost, editPost, fetchUser, addRent, purchasePromotion, logout, navigateToPersonalPage, purchasePlan, deleteItem, fetchStores, updateMessage}
+  {
+    gotoHomePage,
+    addPost,
+    cancelPost,
+    submitPost,
+    editPost,
+    fetchUser,
+    addRent,
+    purchasePromotion,
+    logout,
+    navigateToPersonalPage,
+    purchasePlan,
+    deleteItem,
+    fetchStores,
+    updateMessage
+  }
 )
 export default class PersonalPage extends React.Component {
   componentDidMount () {

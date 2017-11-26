@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {login} from '../../actions/auth-actions'
 import * as NavigationActions from '../../actions/navigation-actions'
 import {Message, Grid} from 'semantic-ui-react'
+import {handleMessage, handleMessageUpdate} from '../../utils/messageHandling'
+import {updateMessage} from '../../actions/personalPageAction'
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +16,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     login,
-    ...NavigationActions
+    ...NavigationActions,
+    updateMessage
   }, dispatch)
 }
 
@@ -36,19 +39,6 @@ class Login extends React.Component {
   onSave (event) {
     event.preventDefault()
     this.props.login(this.state.credentials)
-  }
-  handleErrorMessage = () => {
-    let errorMessage = this.props.auth.error;
-    console.log('in handleErrorMesage', errorMessage)
-    if(errorMessage){
-      return (
-        <Message
-          negative
-          header='Error!'
-          content={errorMessage}
-        />
-      )
-    }
   }
   render () {
     const style = {
@@ -76,7 +66,8 @@ class Login extends React.Component {
           </div>
           <Grid centered style={{marginLeft: '15px'}}>
             <Grid.Row>
-              {this.handleErrorMessage()}
+              {handleMessage(this.props.auth.error, '')}
+              {handleMessageUpdate(this.props.auth.error, '', this.props.updateMessage)}
             </Grid.Row>
           </Grid>
           <div class='group'>

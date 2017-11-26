@@ -145,6 +145,7 @@ export default function (state = pageState, action) {
       }
     }
     case AN.UPDATE_MESSAGE: {
+      console.log('updatein userInfoRe')
       return {
         ...state,
         message: '',

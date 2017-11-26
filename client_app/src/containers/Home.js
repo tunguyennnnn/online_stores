@@ -11,6 +11,7 @@ import { rateAd } from '../actions/ratingAction'
 import * as PersonalActions from '../actions/personalPageAction'
 import Item from '../components/item'
 import Navbar from '../components/navbar/navbar'
+import {handleMessage, handleMessageUpdate} from '../utils/messageHandling'
 
 const mapStateToProps = (state) => {
   return {
@@ -39,37 +40,11 @@ export default class Home extends React.Component {
   componentDidMount () {
     this.props.navigateToHomePage()
   }
-
-  handleMessage = () => {
-    let {message, error} = this.props.userInfo;
-    console.log('in handleErrorMesage', message)
-    if(this.props.userInfo.message || this.props.userInfo.error){
-      setTimeout(() => this.props.updateMessage(), 5000)
-    }
-    if(message){
-      return (
-        <Message
-          style={{paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}}
-          positive
-          header='Success!'
-          content={message}
-        />
-      )
-    } else if (error) {
-        return (
-          <Message
-            style={{paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}}
-            negative
-            header='Error!'
-            content={error}
-          />
-        )
-      }
-    }
   render () {
     const {showSubcategory, category, province} = this.props.pageState
     console.log('this.props',this.props)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd} = this.props
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd, updateMessage} = this.props
+    console.log
     const {items} = this.props.data
     const {email, userId, userType} = userInfo.data
     console.log(email)
@@ -105,7 +80,8 @@ export default class Home extends React.Component {
 
     const body = (items, filterItems) => (
       <div>
-        {this.handleMessage()}
+        {handleMessage(this.props.userInfo.error, this.props.userInfo.message)}
+        {handleMessageUpdate(this.props.userInfo.error, this.props.userInfo.message, updateMessage)}
         <Grid stackable>
           {listOfItems(items)}
         </Grid>
