@@ -44,7 +44,6 @@ export default class NewRentForm extends React.Component {
     const {title, imageUrl, description, price} = this.props.postInfo || {}
     const {stores} = this.props
     const strategicLocation = `{stores.}`
-    console.log(stores)
     const gStyle = {width: '100%'}
     return (
       <div class='col s12'>

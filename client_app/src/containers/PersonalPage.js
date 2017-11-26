@@ -32,7 +32,7 @@ export default class PersonalPage extends React.Component {
           <Menu.Item header onClick={navigateToHomePage}>
           Home
           </Menu.Item>
-          <Menu.Item active={userInfo.showAll && !(userInfo.newPost || userInfo.newRent)}>
+          <Menu.Item active={userInfo.showAll && !(userInfo.newPost || userInfo.newRent)} onClick={cancelPost}>
             Items
           </Menu.Item>
           <Menu.Item active={userInfo.newPost} onClick={addPost}>

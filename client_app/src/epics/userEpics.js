@@ -119,7 +119,7 @@ export function purchasePromotion (action$, store) {
         }
       }
       return ajax(request)
-        .map(v => purchasePromotionSuccess(v.response))
+        .map(v => receivedUserInfo(v.response))
         .catch(err => Observable.of({
           type: AN.USER_PURCHASED_PROMOTION_FAILED
         }))

@@ -64,7 +64,7 @@ export default class Item extends React.Component {
             <span>Ad type: {`${type} - ${adType}`}</span>
             <br />
             {
-              page === 'USER_PAGE' && deletedAt
+              page === 'USER_PAGE'
               ? <UserItemAction promotionSet={promotionSet} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
               : page === 'ADMIN_PAGE'
               ? <AdminItemAction />

@@ -36,13 +36,8 @@ export default class Home extends React.Component {
     super()
   }
 
-  componentWillMount () {
-    this.props.navigateToHomePage()
-  }
-
   componentDidMount () {
-    console.log(this.props)
-    this.props.fetchUser()
+    this.props.navigateToHomePage()
   }
 
   handleMessage = () => {

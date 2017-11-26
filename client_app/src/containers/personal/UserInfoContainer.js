@@ -33,12 +33,12 @@ export default class UserInfoContainer extends React.Component {
   openTransaction (purchaseFunc, transactionInfo) {
     this.setState({modalStatus: true, purchaseFunc, transactionInfo})
   }
-  handleMessage = () => {
+  handleMessage () {
     if(this.props.userInfo.message || this.props.userInfo.error){
       setTimeout(() => this.props.updateMessage(), 5000)
     }
   }
-  handleSuccessMessage = () => {
+  handleSuccessMessage () {
     let {message, error} = this.props.userInfo;
     console.log('in handleErrorMesage', message)
     if(message){

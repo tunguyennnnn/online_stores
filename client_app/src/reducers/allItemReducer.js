@@ -63,6 +63,7 @@ export default function (state = fetchedItems, action) {
   switch (action.type) {
     case AN.RECEIVED_ALL_ITEM: {
       fetchedItems.items = _.values(action.payload)
+      hashHistory.push('/')
       return {
         ...state,
         items: fetchedItems.items
