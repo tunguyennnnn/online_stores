@@ -39,6 +39,7 @@ export default class Home extends React.Component {
 
   componentDidMount () {
     this.props.navigateToHomePage()
+    setTimeout(() => this.props.fetchUser(), 100)
   }
   render () {
     const {showSubcategory, category, province} = this.props.pageState

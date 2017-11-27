@@ -6,18 +6,19 @@ import { receivedStores } from '../actions/storeAction'
 import { rateSuccess } from '../actions/ratingAction'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs/Observable'
+import jwt from 'jsonwebtoken'
 
 export function fetchUser (action$, store) {
   return action$.ofType(AN.FETCH_USER_ITEMS)
     .map(action => action.payload)
     .switchMap(() => {
       const {auth} = store.getState()
-      console.log(store.getState())
-      console.log(auth)
+      const decoded = window.localStorage.getItem('apiToken') !== null ? jwt.verify(window.localStorage.getItem('apiToken'), 'comp353', (err, decoded) => {
+        return decoded
+      }) : null
       const userId = auth.userId || window.location.href.split('/').last()
-      console.log(userId)
       let request = {
-        url: `/api/users/${userId}`,
+        url: `/api/users/${userId === undefined ? userId : decoded.userId}`,
         crossDomain: true,
         headers: {
           authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
