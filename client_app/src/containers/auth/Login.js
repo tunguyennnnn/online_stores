@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {login} from '../../actions/auth-actions'
 import * as NavigationActions from '../../actions/navigation-actions'
-import {Message, Grid} from 'semantic-ui-react'
+import {Message, Grid, Input, Form, Button, Divider} from 'semantic-ui-react'
 import {handleMessage, handleMessageUpdate} from '../../utils/messageHandling'
 import {updateMessage} from '../../actions/personalPageAction'
 
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 class Login extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {credentials: {email: '', password: ''}}
+    this.state = {credentials: {email: '', password: ''}, emailError: false, passwordError: false}
     this.onChange = this.onChange.bind(this)
     this.onSave = this.onSave.bind(this)
   }
@@ -38,7 +38,20 @@ class Login extends React.Component {
 
   onSave (event) {
     event.preventDefault()
-    this.props.login(this.state.credentials)
+    const {email, password} = this.state.credentials
+    const {emailError, passwordError, errorMessage } = this.state
+    console.log(email. password)
+    if ( !email || email === '' ) {
+      this.setState({emailError: true})
+    }
+    if (!password || password === '') {
+      this.setState({passwordError: true})
+    }
+    if (email !== '' && password !== '')
+    {
+      this.setState({emailError: false, passwordError: false})
+      this.props.login(this.state.credentials)
+    }
   }
   render () {
     const style = {
@@ -55,26 +68,27 @@ class Login extends React.Component {
     const styleButton = {left:'22%', position: 'absolute'}
     return (
       <div style={style}>
-        <span><b><font size='16'>Online Store</font></b></span>
-        <div class='ui divider'/>
-        <form class='ui form'>
-          <div class='field'>
-            <input type='email' placeholder='E-mail address'  onChange={this.onChange} />
-          </div>
-          <div class='field'>
-            <input type='password' placeholder='************' onChange={this.onChange} />
-          </div>
+        <span><b><font size='16'>Kejeje</font></b></span>
+        <Divider horizontal />
+        <Form>
+          <Form.Field>
+            <Form.Input required={true} type='email' placeholder='E-mail Address' onChange={this.onChange} error={this.state.emailError}/>
+          </Form.Field>
+          <Form.Field>
+            <Form.Input required={true} type='password' placeholder='************' onChange={this.onChange} error={this.state.passwordError}/>
+          </Form.Field>
           <Grid centered style={{marginLeft: '15px'}}>
             <Grid.Row>
               {handleMessage(this.props.auth.error, '')}
               {handleMessageUpdate(this.props.auth.error, '', this.props.updateMessage)}
             </Grid.Row>
           </Grid>
-          <div class='group'>
-            <button class='ui button' onClick={this.onSave}>Login</button>
-            <button class='ui button' onClick={this.props.navigateToSignupPage}>Register</button>
-          </div>
-        </form>
+          <Button.Group>
+            <Button primary onClick={this.onSave}>Login</Button>
+            <Button.Or />
+            <Button positive onClick={this.props.navigateToSignupPage}>Register</Button>
+          </Button.Group>
+        </Form>
       </div>
     )
   }
