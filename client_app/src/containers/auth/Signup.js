@@ -74,14 +74,14 @@ class Signup extends React.Component {
       width: '300px',
       height: '200px',
       zIndex: '15',
-      top: '40%',
+      top: '35%',
       left: '50%',
       margin: '-100px 0 0 -150px',
       textAlign: 'center'
     }
     return (
       <div style={style}>
-        <span><b><font size='16'>Online Store</font></b></span>
+        <span><b><font size='16'>Kejeje</font></b></span>
         <div class='ui divider'></div>
         <Form>
           <Form.Field>
@@ -111,9 +111,9 @@ class Signup extends React.Component {
             </select>
           </Form.Field>
           <Button.Group>
-            <Button onClick={this.props.navigateToLoginPage}>Back</Button>
+            <Button negative onClick={this.props.navigateToLoginPage}>Back</Button>
             <Button.Or />
-            <Button onClick={this.onSave}>Signup</Button>
+            <Button positive onClick={this.onSave}>Signup</Button>
           </Button.Group>
         </Form>
       </div>
