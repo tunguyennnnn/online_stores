@@ -64,7 +64,6 @@ class Login extends React.Component {
       margin: '-100px 0 0 -150px',
       textAlign: 'center'
     }
-    console.log(this.props)
     const styleButton = {left:'22%', position: 'absolute'}
     return (
       <div style={style}>

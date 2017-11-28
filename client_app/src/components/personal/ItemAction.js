@@ -52,7 +52,10 @@ export default class UserItemAction extends React.Component {
         {
           deletedAt
           ? <Message negative>Deleted At: {deletedAt}</Message>
-          : <Button color='red' onClick={this.props.deleteItem}>Delete</Button>
+          : <div>
+              <Button color='red' onClick={this.props.deleteItem}>Delete</Button>
+              <Button color='blue' onClick={this.props.editItem}>Edit</Button>
+            </div>
         }
       </div>
     )

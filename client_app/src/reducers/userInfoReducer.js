@@ -27,7 +27,8 @@ export default function (state = pageState, action) {
         ...state,
         newPost: true,
         newRent: false,
-        showAll: false
+        showAll: false,
+        postInfo: null
       }
     }
     case AN.ADD_NEW_RENT: {
@@ -35,7 +36,8 @@ export default function (state = pageState, action) {
         ...state,
         newPost: false,
         newRent: true,
-        showAll: false
+        showAll: false,
+        postInfo: null
       }
     }
     case AN.GOTO_HOME_PAGE: {
@@ -45,10 +47,12 @@ export default function (state = pageState, action) {
       }
     }
     case AN.EDIT_POST: {
+      const {type} = action.payload.postInfo
+      const isOnlineAd = type === 'Online ad'
       return {
         ...state,
-        newPost: true,
-        newRent: false,
+        newPost: isOnlineAd,
+        newRent: !isOnlineAd,
         postInfo: action.payload.postInfo
       }
     }
@@ -82,7 +86,6 @@ export default function (state = pageState, action) {
     }
     case AN.RECEIVED_USER_INFO: {
       const {userInfo} = action.payload
-      console.log(userInfo)
       fetchedData = userInfo
       return {
         ...state,
@@ -130,7 +133,6 @@ export default function (state = pageState, action) {
       }
     }
     case AN.RATE_AD_FAILED: {
-      console.log('in failed ad')
       return {
         ...state,
         message: '',
@@ -138,14 +140,12 @@ export default function (state = pageState, action) {
       }
     }
     case AN.FETCH_STORES_SUCCESS: {
-      console.log('reached fetched success stores')
       return {
         ...state,
         stores: _.values(action.payload)
       }
     }
     case AN.UPDATE_MESSAGE: {
-      console.log('updatein userInfoRe')
       return {
         ...state,
         message: '',

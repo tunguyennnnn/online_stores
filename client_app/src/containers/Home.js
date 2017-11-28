@@ -43,13 +43,9 @@ export default class Home extends React.Component {
   }
   render () {
     const {showSubcategory, category, province} = this.props.pageState
-    console.log('this.props',this.props)
-    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd, updateMessage} = this.props
-    console.log
+    const {navigateToPersonalPage, navigateToHomePage, data, filterItems, userInfo, logout, rateAd, updateMessage, editPost} = this.props
     const {items} = this.props.data
     const {email, userId, userType} = userInfo.data
-    console.log(email)
-    console.log(this.props)
     const navbar = () => (
       <Navbar
       userEmail={email}
@@ -61,6 +57,7 @@ export default class Home extends React.Component {
       province={province}
       category={category}
       filterItems={filterItems}
+      editPost={editPost}
       logout={logout}
       />
     )

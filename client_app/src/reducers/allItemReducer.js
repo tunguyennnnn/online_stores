@@ -8,7 +8,6 @@ function filterItems (state, filterOptions) {
   switch (filterOptions.type) {
     case 'CATEGORY': {
       if (filterOptions.subCategory) {
-        console.log('filterItems subCategories', filterOptions.subCategory)
         return {
           ...state,
           items: fetchedItems.items.filter((item) => item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)

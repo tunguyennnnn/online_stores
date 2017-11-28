@@ -13,7 +13,6 @@ export function fetchUser (action$, store) {
     .switchMap(() => {
       const {auth} = store.getState()
       const userId = auth.userId || window.location.href.split('/').last()
-      console.log(userId)
       let request = {
         url: `/api/users/${userId === '' ? '1' : userId}`,
         crossDomain: true,
@@ -30,7 +29,6 @@ export function fetchUser (action$, store) {
 }
 
 export function rateAd (action$, store) {
-  console.log('reached rateAd')
   return action$.ofType(AN.RATE_AD)
   .map(action => action.payload)
   .switchMap((payload) => {
@@ -55,6 +53,7 @@ export function submitPost (action$, store) {
   return action$.ofType(AN.SUBMIT_NEW_POST)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
+      console.log(formInput)
       const request = {
         url: `/api/ads`,
         crossDomain: true,
@@ -90,7 +89,6 @@ export function purchasePlan (action$, store) {
           cardDetail
         }
       }
-      console.log(request)
       return ajax(request)
         .map(v => receivedUserInfo(v.response))
         .catch(err => Observable.of({
@@ -103,7 +101,6 @@ export function purchasePromotion (action$, store) {
   return action$.ofType(AN.USER_PURCHASE_PROMOTION)
     .map(action => action.payload)
     .switchMap(({promotionId, itemId, cardDetail}) => {
-      console.log(cardDetail)
       const request = {
         url: `/api/promotions/`,
         method: 'POST',
@@ -128,7 +125,6 @@ export function userDeleteItem (action$, store) {
   return action$.ofType(AN.USER_DELETE_ITEM)
     .map(action => action.payload.itemId)
     .switchMap(itemId => {
-      console.log(itemId)
       const request = {
         url: `/api/ads/${itemId}`,
         method: 'DELETE',

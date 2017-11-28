@@ -16,7 +16,6 @@ export function fetchAll (action$, store) {
       }
       return ajax(request)
         .map(v => {
-          console.log(v)
           return receivedAllContent(v.response)
         })
         .catch(error => Observable.of({

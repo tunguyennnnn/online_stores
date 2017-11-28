@@ -3,7 +3,6 @@ import { Image, Item } from 'semantic-ui-react'
 export default class TransactionList extends React.Component {
   render () {
     const {transactions} = this.props
-    console.log(transactions)
     const style = {border: 'solid 2px grey', borderRadius: '5px', margin: '10px', padding: '5px'}
     return (
       <div>

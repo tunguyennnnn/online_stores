@@ -13,14 +13,12 @@ export default function (state = initialState, action) {
       const { filterOptions } = action.payload
       const { type, category, province } = filterOptions
       if (type === 'CATEGORY') {
-        console.log('in if category statement', category)
         return {
           ...state,
           showSubcategory: true,
           category: category
         }
       } else if (type === 'PROVINCE') {
-        console.log('in if provice statement', province)
         return {
           ...state,
           province: province

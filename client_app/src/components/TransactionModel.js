@@ -10,13 +10,11 @@ export default class TransactionModel extends React.Component {
   }
 
   onChange (event) {
-    console.log(this.state)
     this.setState({cardDetail: event.target.value})
   }
 
   render () {
     const {transactionInfo, type, closeModal, purchase} = this.props
-    console.log(transactionInfo, type)
     return (
       <Modal
         open={this.props.status}

@@ -40,7 +40,6 @@ export default class PersonalPage extends React.Component {
     const style = {marginTop: '2vw'}
     const {userInfo, gotoHomePage, navigateToPersonalPage, logout, addPost, cancelPost, submitPost, editPost, addRent, purchasePromotion, purchasePlan, deleteItem, updateMessage} = this.props
     const {email, userId, firstName, lastName, userType} = userInfo.data
-    console.log(this.props)
     return (
       <div>
         <Menu fluid>

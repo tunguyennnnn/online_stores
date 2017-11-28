@@ -17,14 +17,26 @@ function index (req, res, next) {
 function create (req, res, next) {
   const {decoded, pExec} = res
   const {userId} = decoded
-  Ad.createAd(_.assign({}, {userId, exec: pExec}, req.body))
-    .then(items => {
-      res.json(items)
-    })
-    .catch(err => {
-      console.log(err)
-      res.status(500).send()
-    })
+  console.log(req.body.id)
+  if (req.body.id) {
+    Ad.update(_.assign({}, {userId, exec: pExec}, req.body))
+      .then(items => {
+        res.json(items)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).send()
+      })
+  } else {
+    Ad.createAd(_.assign({}, {userId, exec: pExec}, req.body))
+      .then(items => {
+        res.json(items)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).send()
+      })
+  }
 }
 
 function update (req, res, next) {

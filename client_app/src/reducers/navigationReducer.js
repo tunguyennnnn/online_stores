@@ -17,9 +17,7 @@ export default function (state = initialState, action) {
       }
     }
     case AN.NAVIGATE_TO_PERSONAL_PAGE: {
-      console.log(state)
       const {userId} = action.payload
-      console.log(userId)
       hashHistory.push(`/users/${userId}`)
       return {
         ...state

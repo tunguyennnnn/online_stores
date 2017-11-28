@@ -9,7 +9,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case AN.RECEIVED_USER_INFO: {
-      console.log(action.payload)
       const {userId} = action.payload.userInfo
       return {
         userId,
@@ -26,7 +25,6 @@ export default function (state = initialState, action) {
       }
     }
     case AN.LOGIN_FAIL: {
-      console.log(action.payload.error)
       return {
         ...state,
         error: action.payload.error
@@ -34,7 +32,6 @@ export default function (state = initialState, action) {
     }
     case AN.SIGNUP_SUCCESS: {
       const {userId} = action.payload.user
-      console.log(userId)
       hashHistory.push(`/users/${userId}`)
       return {
         ...state,
@@ -49,14 +46,12 @@ export default function (state = initialState, action) {
       }
     }
     case AN.LOGOUT: {
-      console.log(action.type)
       window.localStorage.setItem('apiToken', null)
       window.localStorage.setItem('expiresAt', null)
       hashHistory.push('/login')
       return initialState
     }
     case AN.UPDATE_MESSAGE: {
-      console.log('updated')
       return {
         ...state,
         error: ''

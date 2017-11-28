@@ -3,7 +3,6 @@ import { Rating, Grid } from 'semantic-ui-react'
 
 export default class Rate extends React.Component {
   handleRating (e, {rating}) {
-    console.log(rating)
     const {adId, rateAd} = this.props
     rateAd({adId, score: rating})
   }

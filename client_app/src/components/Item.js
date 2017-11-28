@@ -7,13 +7,9 @@ import Rate from './rate/Rate'
 export default class Item extends React.Component {
   render () {
     const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, promotion, score, deletedAt, userType, adType} = this.props.itemInfo
-    console.log(deletedAt)
     const forSaleBy = `${firstName} ${lastName}`
     const forSaleByPersonal = `${this.props.firstName} ${this.props.lastName}`
-    console.log(forSaleBy)
-    console.log(forSaleByPersonal)
-    const {page, promotionSet, purchasePromotion, deleteItem, rateAd} = this.props
-    console.log(this.props)
+    const {page, promotionSet, purchasePromotion, deleteItem, rateAd, editPost} = this.props
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: 'inherit'}
     const cardStyle = {padding: '0px'}
     const myStyle = {
@@ -48,7 +44,7 @@ export default class Item extends React.Component {
             <br />
             {
               page === 'USER_PAGE'
-              ? <UserItemAction promotionSet={promotionSet} deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
+              ? <UserItemAction promotionSet={promotionSet} editItem={editPost.bind(null, this.props.itemInfo)} deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
               : page === 'ADMIN_PAGE'
               ? <AdminItemAction />
               : type === 'Physical ad' && page !== 'USER_PAGE'

@@ -26,12 +26,10 @@ export function submitAccount (action$, store) {
 export function submitPlan (action$, store) {
   return action$.ofType(AN.SUBMIT_PLAN)
     .map(action => {
-      console.log('reachhhhhh')
       return action.payload.formInput
     })
     .debounceTime(250)
     .mergeMap(formInput => {
-      console.log(formInput)
       const request = {
         url: '/api/planSet/',
         method: 'POST',
@@ -89,7 +87,6 @@ export function deleteItem (action$, store) {
 export function fetchAdmin (action$, store) {
   return action$.ofType(AN.FETCH_ADMIN)
     .switchMap(() => {
-      console.log('reach')
       const {userId} = store.getState().auth || window.location.href.split('/').last()
       const request = {
         url: `/api/users/${userId}`,

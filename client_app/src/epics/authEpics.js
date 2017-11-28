@@ -7,7 +7,6 @@ export function login (action$, store) {
   return action$.ofType(AN.LOGIN)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
-      console.log(formInput)
       const request = {
         url: '/api/auth',
         method: 'POST',
@@ -29,11 +28,9 @@ export function login (action$, store) {
 
 
 export function signup (action$, store) {
-  console.log('reachhhhhhhhhhh')
   return action$.ofType(AN.SIGNUP)
     .map(action => action.payload.formInput)
     .switchMap(formInput => {
-      console.log(formInput)
       const request = {
         url: '/api/users',
         method: 'POST',

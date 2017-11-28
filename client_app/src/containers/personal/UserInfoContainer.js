@@ -36,10 +36,8 @@ export default class UserInfoContainer extends React.Component {
 
   render () {
     const {data, newPost, showAll, newRent, postInfo, stores, message} = this.props.userInfo
-    console.log(data)
     const {promotions, plans, available, plan, province, city} = data
     const {purchasePromotion, purchasePlan, deleteItem, firstName, lastName, userType, userEmail} = this.props
-    console.log('userinfocontainer', this.props)
     const {items} = data
     return (
       <div>

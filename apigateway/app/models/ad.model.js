@@ -18,7 +18,7 @@ function createAd ({exec, userId, title, description, price, imageUrl, phone, ca
 
 function getUserAds ({exec, userId, isAdmin}) {
   if (!isAdmin) {
-    return exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.phone, a.category, a.subCategory, p.startDate, p.endDate, a.deletedAt, a.province, a.city, a.adType',
+    return exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.phone, a.category, a.subCategory, p.startDate, p.endDate, a.deletedAt, a.province, a.city, a.adType, a.store, a.timeSlot',
                  `FROM (SELECT * FROM ads WHERE ads.user_id = ${userId}) as a`,
                  `LEFT OUTER JOIN promotions as p ON p.ad_id = a.id`].join(' '))
           .then(ads => {
@@ -45,4 +45,10 @@ function destroy ({exec, adId, userId, isAdmin}) {
   return exec(`UPDATE ads SET deletedAt = CURRENT_TIMESTAMP() WHERE id = ${adId} AND user_id = ${userId}`)
 }
 
-module.exports = {getAllAds, createAd, getAds, getUserAds, destroy}
+function update ({exec, userId, id, title, description, price, imageUrl, phone, category, subCategory, province, city, store, timeSlot, type, adType}) {
+  console.log(store, timeSlot)
+  return exec(`UPDATE ads SET title = '${title}', description = '${description}', phone='${phone}', imageUrl='${imageUrl}', price=${price}, category='${category}', subCategory='${subCategory}', city='${city}', province='${province}', store='${store}', timeSlot='${timeSlot}' WHERE id=${id}`)
+    .then(() => getUserAds({exec, userId}))
+}
+
+module.exports = {getAllAds, createAd, getAds, getUserAds, destroy, update}

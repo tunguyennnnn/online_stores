@@ -21,12 +21,10 @@ import {logout} from '../actions/auth-actions'
 
 export default class AdminPage extends React.Component {
   componentWillMount () {
-    console.log(this.props)
     setTimeout(() => this.props.fetchAdmin(), 100)
   }
 
   render () {
-    console.log(this.props.pageState)
     const {showItems, logout, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion, showTransaction} = this.props
     const {pageState} = this.props
     const {items, promotions, plans, transactions} = this.props.pageState

@@ -97,7 +97,6 @@ export function postItemSuccess (response) {
 }
 
 export function deleteItem (itemId) {
-  console.log(itemId)
   return {
     type: AN.USER_DELETE_ITEM,
     payload: {
@@ -107,7 +106,6 @@ export function deleteItem (itemId) {
 }
 
 export function updateMessage () {
-  console.log('updating message')
   return {
     type: AN.UPDATE_MESSAGE
   }
