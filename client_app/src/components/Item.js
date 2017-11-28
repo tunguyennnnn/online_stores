@@ -14,14 +14,15 @@ export default class Item extends React.Component {
     console.log(forSaleByPersonal)
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd} = this.props
     console.log(this.props)
-    const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: '1%'}
+    const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: 'inherit'}
     const cardStyle = {padding: '0px'}
     const myStyle = {
       display: 'inline-block',
       width: '100%',
       height: '400px',
-      'backgroundPosition': 'center center',
-      'backgroundSize': 'cover',
+      'backgroundRepeat': 'no-repeat',
+      'backgroundPosition': 'center',
+      'backgroundSize': 'contain',
       'backgroundImage': `url(${imageUrl})`
     }
 
