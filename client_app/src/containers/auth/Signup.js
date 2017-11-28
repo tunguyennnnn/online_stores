@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {signup} from '../../actions/auth-actions'
 import * as NavigationActions from '../../actions/navigation-actions'
-import {Button, Form, Grid, Input} from 'semantic-ui-react'
+import {Button, Form, Grid, Input, Divider} from 'semantic-ui-react'
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
@@ -82,7 +82,7 @@ class Signup extends React.Component {
     return (
       <div style={style}>
         <span><b><font size='16'>Kejeje</font></b></span>
-        <div class='ui divider'></div>
+        <Divider />
         <Form>
           <Form.Field>
             <Form.Input required={true} id='firstName' placeholder='First name' type='text' onChange={this.onChange} error={this.state.firstNameError}/>

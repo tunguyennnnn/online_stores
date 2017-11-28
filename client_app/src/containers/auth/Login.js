@@ -69,7 +69,7 @@ class Login extends React.Component {
     return (
       <div style={style}>
         <span><b><font size='16'>Kejeje</font></b></span>
-        <Divider horizontal />
+        <Divider />
         <Form>
           <Form.Field>
             <Form.Input required={true} type='email' placeholder='E-mail Address' onChange={this.onChange} error={this.state.emailError}/>
