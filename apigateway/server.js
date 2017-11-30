@@ -34,7 +34,7 @@ app.use(expressWinston.logger({
   colorStatus: true
 }))
 app.set('superSecret', config.auth)
-// app.use(express.static(path.join(__dirname, '../client_app/dist')))
+app.use(express.static(path.join(__dirname, '../client_app/dist')))
 // mysqlssh.connect({
 //   host: 'login.encs.concordia.ca',
 //   user: '{username}',
