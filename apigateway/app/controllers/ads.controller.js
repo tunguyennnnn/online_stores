@@ -17,8 +17,7 @@ function index (req, res, next) {
 function create (req, res, next) {
   const {decoded, pExec} = res
   const {userId} = decoded
-  console.log(req.body.id)
-  if (req.body.id) {
+  if (req.body.id !== 'null') {
     Ad.update(_.assign({}, {userId, exec: pExec}, req.body))
       .then(items => {
         res.json(items)
@@ -33,7 +32,6 @@ function create (req, res, next) {
         res.json(items)
       })
       .catch(err => {
-        console.log(err)
         res.status(500).send()
       })
   }

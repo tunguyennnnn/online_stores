@@ -10,6 +10,7 @@ export const CATEGORY = [
   {key: 'services.tutors', value: 'SERVICES-Tutors', text: 'Services - Tutors'},
   {key: 'services.eventplanners', value: 'SERVICES-Event Planners', text: 'Services - Event Planners'},
   {key: 'services.Photographers', value: 'SERVICES-Photographers', text: 'Services - Personal Trainers'},
+  {key: 'services.personaltrainers', value: 'SERVICES-Personal Trainers', text: 'Services - Personal Trainers'},
   {key: 'jobs.accountingmanagement', value: 'JOBS-Accounting Management', text: 'Jobs - Accounting Management'},
   {key: 'jobs.barfoodhospitality', value: 'JOBS-Bar Food Hospitality', text: 'Jobs - Bar Food Hospitality'},
   {key: 'jobs.healthcare', value: 'JOBS-Healthcare', text: 'Jobs - Healthcare'},

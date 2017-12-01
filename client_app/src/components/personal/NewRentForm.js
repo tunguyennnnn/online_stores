@@ -51,96 +51,103 @@ export default class NewRentForm extends React.Component {
 
   render () {
     const {stores} = this.props
-    const gStyle = {width: '100%'}
+    const gStyle = {marginLeft: '5%', marginRight: '15%', marginBottom: '3%'}
+    const inputStyle = {width: '100%'}
     const {category, subCategory, city, province, store, timeSlot} = this.state.formInput
     const selectedStore = store
     const selectedCategory = [category, subCategory].join('-')
     const selectedLocation = [city, province].join('-')
     return (
-      <div class='col s12'>
-        <Form.Field class='col s12'>
-          <div class='col s12'>
-            <label>Title</label>
-            <br />
-            <input style={gStyle} id='title' type='text' value={this.state.formInput.title} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <label>Image Url</label>
-            <br />
-            <input style={gStyle} id='imageUrl' type='text' value={this.state.formInput.imageUrl} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <label>Description Url</label>
-            <br />
-            <TextArea style={gStyle} id='description' value={this.state.formInput.description} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <label>Price</label>
-            <br />
-            <input style={gStyle} id='price' type='text' value={this.state.formInput.price} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <label>Phone Number</label>
-            <br />
-            <input style={gStyle} id='phone' type='text' value={this.state.formInput.phone} onChange={this.onChange.bind(this)} />
-          </div>
-          <div>
-            <label>Choose your Category</label>
-            <br />
-            <select id='category' class='ui dropdown' onChange={this.onChange.bind(this)}>
-              {
-                CATEGORY.map((category, i) => {
-                  if (category.value === selectedCategory) {
-                    return <option key={i} value={category.value} selected>{category.text}</option>
-                  }
-                  return <option key={i} value={category.value}>{category.text}</option>
-                })
-              }
-            </select>
-            <label>Address</label>
-            <br />
-            <select id='province' class='ui dropdown' onChange={this.onChange.bind(this)}>
-              {
-                PROVINCE.map((province, i) => {
-                  if (province.value === selectedLocation) {
-                    return <option key={i} value={province.value} selected>{province.text}</option>
-                  }
-                  return <option key={i} value={province.value}>{province.text}</option>
-                })
-              }
-            </select>
-            <label>Choose a strategic location</label>
-            <br />
-            <select id='store' class='ui dropdown' onChange={this.onChange.bind(this)}>
-              {
-                stores.map((store, i) => {
-                  const concatstrategicLocation = `${store.strategicLocation}-${store.address}`
-                  if (selectedStore === concatstrategicLocation) {
-                    return <option key={i} value={concatstrategicLocation} selected>{concatstrategicLocation}</option>
-                  }
-                  return <option key={i} value={concatstrategicLocation}>{concatstrategicLocation}</option>
-                })
-              }
-            </select>
-            <label>Time slot</label>
-            <select id='timeSlot' class='ui dropdown' onChange={this.onChange.bind(this)}>
-              {
-                TIMES.map((time, i) => {
-                  if (time.value === timeSlot) {
-                    return <option key={i} value={time.value} selected>{time.text}</option>
-                  }
-                  return <option key={i} value={time.value}>{time.text}</option>
-                })
-              }
-            </select>
-          </div>
+      <Form style={gStyle}>
+        <Form.Field>
+          <label>Title</label>
           <br />
-          <div class='col s12'>
-            <Button onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</Button>
-            <Button onClick={this.props.cancelPost}>Cancel</Button>
-          </div>
+          <Form.Input style={inputStyle} id='title' type='text' value={this.state.formInput.title} onChange={this.onChange.bind(this)} />
         </Form.Field>
-      </div>
+        <Form.Field>
+          <label>Image Url</label>
+          <br />
+          <Form.Input style={inputStyle} id='imageUrl' type='text' value={this.state.formInput.imageUrl} onChange={this.onChange.bind(this)} />
+        </Form.Field>
+        <Form.Field>
+          <label>Description</label>
+          <br />
+          <Form.Input style={inputStyle} type='text' id='description' value={this.state.formInput.description} onChange={this.onChange.bind(this)} />
+        </Form.Field>
+        <Form.Field>
+          <label>Price</label>
+          <br />
+          <Form.Input style={inputStyle} id='price' type='number' min='1' value={this.state.formInput.price} onChange={this.onChange.bind(this)} />
+        </Form.Field>
+        <Form.Field>
+          <label>Phone Number</label>
+          <br />
+          <Form.Input style={inputStyle} id='phone' type='text' value={this.state.formInput.phone} onChange={this.onChange.bind(this)} />
+        </Form.Field>
+        <Form.Field>
+          <label>Category</label>
+          <br />
+          <select id='category' class='ui dropdown' onChange={this.onChange.bind(this)}>
+            {
+              CATEGORY.map((category, i) => {
+                console.log(category.value, selectedCategory)
+                if (category.value === selectedCategory) {
+                  return <option key={i} value={category.value} selected>{category.text}</option>
+                }
+                return <option key={i} value={category.value}>{category.text}</option>
+              })
+          }
+          </select>
+        </Form.Field>
+        <Form.Field>
+          <label>Province - City </label>
+          <br />
+          <select id='province' class='ui dropdown' onChange={this.onChange.bind(this)}>
+            {
+              PROVINCE.map((province, i) => {
+                if (province.value === selectedLocation) {
+                  return <option key={i} value={province.value} selected>{province.text}</option>
+                }
+                return <option key={i} value={province.value}>{province.text}</option>
+              })
+            }
+          </select>
+        </Form.Field>
+        <Form.Field>
+          <label>Choose a strategic location</label>
+          <br />
+          <select id='store' class='ui dropdown' onChange={this.onChange.bind(this)}>
+            {
+              stores.map((store, i) => {
+                const concatstrategicLocation = `${store.strategicLocation}-${store.address}`
+                if (selectedStore === concatstrategicLocation) {
+                  return <option key={i} value={concatstrategicLocation} selected>{concatstrategicLocation}</option>
+                }
+                return <option key={i} value={concatstrategicLocation}>{concatstrategicLocation}</option>
+              })
+            }
+          </select>
+        </Form.Field>
+        <Form.Field>
+          <label>Time slot</label>
+          <br />
+          <select id='timeSlot' class='ui dropdown' onChange={this.onChange.bind(this)}>
+            {
+              TIMES.map((time, i) => {
+                if (time.value === timeSlot) {
+                  return <option key={i} value={time.value} selected>{time.text}</option>
+                }
+                return <option key={i} value={time.value}>{time.text}</option>
+              })
+            }
+          </select>
+        </Form.Field>
+        <br />
+        <Button.Group>
+          <Button style={{marginRight: '1%'}} onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</Button>
+          <Button onClick={this.props.cancelPost}>Cancel</Button>
+        </Button.Group>
+      </Form>
     )
   }
 }
