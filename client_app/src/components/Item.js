@@ -36,7 +36,7 @@ export default class Item extends React.Component {
             <div class='meta' style={{color: '#78909c'}}>Phone number: {phone} </div>
           </div>
           <div class='content extra'>
-            <span>For sale by: {`${firstName === undefined ? forSaleByPersonal : forSaleBy} - ${this.props.userType !== undefined ? userType : this.props.userType}`}</span>
+            <span>For sale by: {`${firstName === undefined ? forSaleByPersonal : forSaleBy} - ${this.props.userType !== undefined ? this.props.userType : userType}`}</span>
             <br />
             <span> E-mail address: {email === undefined ? this.props.userEmail : email} </span>
             <br />
