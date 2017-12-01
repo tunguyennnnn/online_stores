@@ -111,9 +111,9 @@ class Signup extends React.Component {
             </select>
           </Form.Field>
           <Button.Group>
-            <Button negative onClick={this.props.navigateToLoginPage}>Back</Button>
-            <Button.Or />
             <Button positive onClick={this.onSave}>Signup</Button>
+            <Button.Or />
+            <Button negative onClick={this.props.navigateToLoginPage}>Back</Button>
           </Button.Group>
         </Form>
       </div>
