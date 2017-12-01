@@ -76,7 +76,7 @@ class Login extends React.Component {
           <Form.Field>
             <Form.Input required={true} type='password' placeholder='************' onChange={this.onChange} error={this.state.passwordError}/>
           </Form.Field>
-          <Grid centered style={{marginLeft: '15px'}}>
+          <Grid centered>
             <Grid.Row>
               {handleMessage(this.props.auth.error, '')}
               {handleMessageUpdate(this.props.auth.error, '', this.props.updateMessage)}

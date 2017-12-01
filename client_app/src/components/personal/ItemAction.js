@@ -42,6 +42,7 @@ export default class UserItemAction extends React.Component {
 
   render () {
     const {promotion, available, deletedAt} = this.props
+    const buttonStyle = {marginRight: '1%', border: 'none'}
     return (
       <div>
         {
@@ -52,10 +53,10 @@ export default class UserItemAction extends React.Component {
         {
           deletedAt
           ? <Message negative>Deleted At: {deletedAt}</Message>
-          : <div>
-              <Button color='red' onClick={this.props.deleteItem}>Delete</Button>
-              <Button color='blue' onClick={this.props.editItem}>Edit</Button>
-            </div>
+          : <Button.Group style={{width: '100%'}}>
+              <Button style={buttonStyle} color='red' onClick={this.props.deleteItem}>Delete</Button>
+              <Button style={{border: 'none'}} color='blue' onClick={this.props.editItem}>Edit</Button>
+            </Button.Group>
         }
       </div>
     )
