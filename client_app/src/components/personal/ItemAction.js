@@ -20,21 +20,22 @@ export default class UserItemAction extends React.Component {
   }
 
   purchasePromotionTemplate () {
-    const {promotionSet = [], purchasePromotion} = this.props
+    const {promotionSet = [], purchasePromotion, deletedAt} = this.props
     const {itemId} = this.props
     return (
-      <div>
-        {
-          promotionSet.map((p, i) => {
+      <div style={{width: '100%'}}>
+        { !deletedAt
+          ? promotionSet.map((p, i) => {
             const {id, duration, price} = p
             return (
               <div key={i}>
-                <span>Duration: {duration}</span>
+                <span>Duration: {duration} | </span>
                 <span>Price: {price}</span>
-                <button onClick={purchasePromotion.bind(null, {itemId, promotionId: id})}>Buy</button>
+                <Button size='tiny' style={{marginLeft: '24%', marginBottom: '1%', width: '46%'}} positive onClick={purchasePromotion.bind(null, {itemId, promotionId: id})}>Buy</Button>
               </div>
             )
           })
+        : null
         }
       </div>
     )
@@ -54,9 +55,9 @@ export default class UserItemAction extends React.Component {
           deletedAt
           ? <Message negative>Deleted At: {deletedAt}</Message>
           : <Button.Group style={{width: '100%'}}>
-              <Button style={buttonStyle} color='red' onClick={this.props.deleteItem}>Delete</Button>
-              <Button style={{border: 'none'}} color='blue' onClick={this.props.editItem}>Edit</Button>
-            </Button.Group>
+            <Button style={buttonStyle} color='red' onClick={this.props.deleteItem}>Delete</Button>
+            <Button style={{border: 'none'}} color='blue' onClick={this.props.editItem}>Edit</Button>
+          </Button.Group>
         }
       </div>
     )

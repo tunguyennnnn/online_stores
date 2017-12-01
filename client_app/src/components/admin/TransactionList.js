@@ -1,12 +1,13 @@
 import React from 'react'
 import { Image, Item } from 'semantic-ui-react'
+
 export default class TransactionList extends React.Component {
   render () {
     const {transactions} = this.props
-    const style = {border: 'solid 2px grey', borderRadius: '5px', margin: '10px', padding: '5px'}
+    const style = {border: 'solid 2px grey', borderRadius: '5px', padding: '5px'}
     return (
       <div>
-        <Item.Group>
+        <Item.Group style={{margin: '2%'}}>
         {
           transactions.map(t => {
             const {user_id, imageUrl, firstName, email, lastName, amount, dateOfPayment, cardDetail, type, title, startDate, endDate, lastDate} = t
@@ -24,7 +25,7 @@ export default class TransactionList extends React.Component {
                     : null
                   }
                   <Item.Meta>{`${firstName} ${lastName}  -- ${email}`}</Item.Meta>
-                  <Item.Meta>Amount Paid: {amount}CAD</Item.Meta>
+                  <Item.Meta>Amount Paid: {amount} CAD</Item.Meta>
                   <Item.Meta>Card Information: {cardDetail}</Item.Meta>
                   <Item.Meta>Paid At: {dateOfPayment}</Item.Meta>
                   <Item.Meta>Valid Until: {endDate || lastDate}</Item.Meta>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Input, Button} from 'semantic-ui-react'
+import {Form, Button, Header} from 'semantic-ui-react'
 
 export default class PlanForm extends React.Component {
   constructor () {
@@ -23,31 +23,32 @@ export default class PlanForm extends React.Component {
   render () {
     const {submitPlan, showItems} = this.props
     const {planName, price, duration} = this.state
-    const gStyle = {width: '100%'}
+    const gStyle = {marginLeft: '5%', marginRight: '15%', marginBottom: '3%'}
+    const inputStyle = {width: '100%'}
+    const buttonStyle = {marginRight: '1%', border: 'none'}
     return (
-      <div class='col s12'>
-        <Form.Field class='col s12'>
-          <div class='col s12'>
-            <label>Name</label>
-            <br />
-            <Input style={gStyle} id='name' type='text' value={planName} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <label>Price</label>
-            <br />
-            <Input style={gStyle} id='price' type='text' value={price} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <label>Duration</label>
-            <br />
-            <Input style={gStyle} id='duration' type='text' value={duration} onChange={this.onChange.bind(this)} />
-          </div>
-          <div class='col s12'>
-            <Button onClick={submitPlan.bind(null, this.state.formInput)}>Add Plan</Button>
-            <Button onClick={showItems}>Cancel</Button>
-          </div>
+      <Form style={gStyle}>
+        <Header as='h1'> Add new plan</Header>
+        <Form.Field>
+          <label>Name</label>
+          <br />
+          <Form.Input style={inputStyle} id='name' type='text' value={planName} onChange={this.onChange.bind(this)} />
         </Form.Field>
-      </div>
+        <Form.Field>
+          <label>Price</label>
+          <br />
+          <Form.Input style={inputStyle} id='price' type='number' value={price} onChange={this.onChange.bind(this)} />
+        </Form.Field>
+        <Form.Field>
+          <label>Duration</label>
+          <br />
+          <Form.Input style={inputStyle} id='duration' type='text' value={duration} onChange={this.onChange.bind(this)} />
+        </Form.Field>
+        <Button.Group style={{width: '100%'}}>
+          <Button style={buttonStyle} onClick={submitPlan.bind(null, this.state.formInput)}>Add Plan</Button>
+          <Button onClick={showItems}>Cancel</Button>
+        </Button.Group>
+      </Form>
     )
   }
 }

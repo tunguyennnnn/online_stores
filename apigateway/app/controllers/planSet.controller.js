@@ -8,6 +8,7 @@ function create (req, res, next) {
       res.json(plans)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).send()
     })
 }

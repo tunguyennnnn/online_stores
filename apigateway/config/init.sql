@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS planSet (
 	id int NOT NULL AUTO_INCREMENT,
   name varchar(32),
   price float,
-  duration varchar(32),
+  duration int,
   PRIMARY KEY(id),
   UNIQUE (name)
 );

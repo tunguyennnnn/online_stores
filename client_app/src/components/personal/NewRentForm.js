@@ -143,7 +143,7 @@ export default class NewRentForm extends React.Component {
           </select>
         </Form.Field>
         <br />
-        <Button.Group>
+        <Button.Group style={{width: '100%'}}>
           <Button style={{marginRight: '1%'}} onClick={this.props.submitPost.bind(null, this.state.formInput)}>Post</Button>
           <Button onClick={this.props.cancelPost}>Cancel</Button>
         </Button.Group>
