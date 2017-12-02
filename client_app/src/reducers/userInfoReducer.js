@@ -81,7 +81,7 @@ export default function (state = pageState, action) {
         newPost: false,
         newRent: false,
         message: '',
-        error: 'Failed to post Ad, please try again!'
+        error: action.payload.error
       }
     }
     case AN.RECEIVED_USER_INFO: {

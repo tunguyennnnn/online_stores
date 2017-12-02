@@ -40,7 +40,7 @@ class Login extends React.Component {
     event.preventDefault()
     const {email, password} = this.state.credentials
     const {emailError, passwordError, errorMessage } = this.state
-    console.log(email. password)
+    console.log(email, password)
     if ( !email || email === '' ) {
       this.setState({emailError: true})
     }
