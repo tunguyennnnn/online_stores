@@ -4,11 +4,11 @@ const settings = {
   },
   db: {
     host: 'localhost',
-    port: '8889',
+    port: '3306',
     user: 'root',
-    password : 'root',
+    password : '',
     database: 'project',
-    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+    // socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   }
 }
 

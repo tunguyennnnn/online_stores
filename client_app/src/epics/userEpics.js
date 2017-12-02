@@ -68,7 +68,8 @@ export function submitPost (action$, store) {
         .catch(err => Observable.of({
           type: AN.POST_ITEM_FAILED,
           payload: {
-            formInput
+            formInput,
+            error: 'Posting failed'
           }
         }))
     })
@@ -116,7 +117,13 @@ export function purchasePromotion (action$, store) {
       return ajax(request)
         .map(v => receivedUserInfo(v.response))
         .catch(err => Observable.of({
-          type: AN.USER_PURCHASED_PROMOTION_FAILED
+          type: AN.USER_PURCHASED_PROMOTION_FAILED,
+          payload: {
+            promotionId,
+            itemId,
+            cardDetail,
+            error: `Purchase for ${promotionId} with ${cardDetail} has been failed.`
+          }
         }))
     })
 }
