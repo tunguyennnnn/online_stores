@@ -15,21 +15,39 @@ function createAd ({exec, userId, title, description, price, imageUrl, phone, ca
           .then(() => getUserAds({exec, userId}))
 }
 
-
-function getUserAds ({exec, userId, isAdmin}) {
-  if (!isAdmin) {
-    return exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.phone, a.category, a.subCategory, p.startDate, p.endDate, a.deletedAt, a.province, a.city, a.adType, a.store, a.timeSlot',
-                 `FROM (SELECT * FROM ads WHERE ads.user_id = ${userId}) as a`,
-                 `LEFT OUTER JOIN promotions as p ON p.ad_id = a.id`].join(' '))
-          .then(ads => {
-            return ads.map(ad => {
-              const {startDate, endDate} = ad
-              const available = endDate ? isUpToDate(endDate) : false
-              return _.assign({}, ad, {available}, {promotion: {startDate, endDate}})
-            })
-          })
-  } else {
-    return exec('SELECT * FROM ads where ads.deletedAt is NULL')
+//
+// function getUserAds ({exec, userId, isAdmin}) {
+//   if (!isAdmin) {
+//     return exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.phone, a.category, a.subCategory, p.startDate, p.endDate, a.deletedAt, a.province, a.city, a.adType, a.store, a.timeSlot',
+//                  `FROM (SELECT * FROM ads WHERE ads.user_id = ${userId}) as a`,
+//                  `LEFT OUTER JOIN promotions as p ON p.ad_id = a.id`].join(' '))
+//           .then(ads => {
+//             return ads.map(ad => {
+//               const {startDate, endDate} = ad
+//               const available = endDate ? isUpToDate(endDate) : false
+//               return _.assign({}, ad, {available}, {promotion: {startDate, endDate}})
+//             })
+//           })
+//   } else {
+//     return exec('SELECT * FROM ads')
+//   }
+// }
+async function getUserAds ({exec, userId, isAdmin}) {
+  try {
+    if (!isAdmin) {
+      const ads = await exec(['SELECT a.user_id, a.id, a.title, a.price, a.description, a.imageUrl, a.type, a.phone, a.category, a.subCategory, p.startDate, p.endDate, a.deletedAt, a.province, a.city, a.adType, a.store, a.timeSlot',
+        `FROM (SELECT * FROM ads WHERE ads.user_id = ${userId}) as a`,
+        `LEFT OUTER JOIN promotions as p ON p.ad_id = a.id`].join(' '))
+      return Promise.all(ads.map(ad => {
+        const {startDate, endDate} = ad
+        const available = endDate ? isUpToDate(endDate) : false
+        return _.assign({}, ad, {available}, {promotion: {startDate, endDate}})
+      }))
+    } else {
+      return exec('SELECT * FROM ads')
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -42,7 +60,7 @@ function getAds ({exec, userId, isAdmin}) {
 }
 
 function destroy ({exec, adId, userId, isAdmin}) {
-  return exec(`UPDATE ads SET deletedAt = CURRENT_TIMESTAMP() WHERE id = ${adId} AND user_id = ${userId}`)
+  return exec(`UPDATE ads SET deletedAt = CURRENT_TIMESTAMP() WHERE id = ${adId}`)
 }
 
 function update ({exec, userId, id, title, description, price, imageUrl, phone, category, subCategory, province, city, store, timeSlot, type, adType}) {

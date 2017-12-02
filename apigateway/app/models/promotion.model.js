@@ -2,7 +2,7 @@ const uuid = require('uuid/v1')
 
 function createSet ({exec, price, duration}) {
   return exec(['INSERT INTO promotionSet (price, duration)',
-    `VALUES(${price}, '${duration}');`].join(' '))
+    `VALUES(${price}, ${duration});`].join(' '))
     .then(() => {
       return getSet({exec})
     })
