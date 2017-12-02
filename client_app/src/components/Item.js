@@ -46,7 +46,7 @@ export default class Item extends React.Component {
               page === 'USER_PAGE'
               ? <UserItemAction promotionSet={promotionSet} editItem={editPost.bind(null, this.props.itemInfo)} deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
               : page === 'ADMIN_PAGE'
-              ? <AdminItemAction />
+              ? <AdminItemAction deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} />
               : type === 'Physical ad' && page !== 'USER_PAGE'
               ? <Rate adId={id} rateAd={rateAd.bind(null)} itemScore={score} />
               : null

@@ -29,7 +29,7 @@ function getUserAds ({exec, userId, isAdmin}) {
             })
           })
   } else {
-    return exec('SELECT * FROM ads where ads.deletedAt is NULL')
+    return exec('SELECT * FROM ads')
   }
 }
 
@@ -42,7 +42,7 @@ function getAds ({exec, userId, isAdmin}) {
 }
 
 function destroy ({exec, adId, userId, isAdmin}) {
-  return exec(`UPDATE ads SET deletedAt = CURRENT_TIMESTAMP() WHERE id = ${adId} AND user_id = ${userId}`)
+  return exec(`UPDATE ads SET deletedAt = CURRENT_TIMESTAMP() WHERE id = ${adId}`)
 }
 
 function update ({exec, userId, id, title, description, price, imageUrl, phone, category, subCategory, province, city, store, timeSlot, type, adType}) {
