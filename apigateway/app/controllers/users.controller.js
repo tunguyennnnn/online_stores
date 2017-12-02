@@ -23,11 +23,11 @@ function createUser (req, res, next) {
     })
 }
 
-function show (req, res, next) {
+async function show (req, res, next) {
   const {decoded} = res
   const exec = res.pExec
   const {userId, isAdmin, email} = decoded
-  const promises = [User.getUser({exec, email}), Ad.getUserAds({exec, isAdmin, userId}), Promotion.getSet({exec, isAdmin}), Plan.getSet({exec, isAdmin}), Transaction.getAll({exec})]
+  const promises = [User.getUser({exec, email}), await Ad.getUserAds({exec, isAdmin, userId}), Promotion.getSet({exec, isAdmin}), Plan.getSet({exec, isAdmin}), Transaction.getAll({exec})]
   Promise.all(promises)
     .then(data => {
       console.log('dada', data)
