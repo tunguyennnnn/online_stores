@@ -72,6 +72,7 @@ export function deleteItem (action$, store) {
     .switchMap(itemId => {
       const request = {
         url: `/api/items/${itemId}`,
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('id_token')}`
         }

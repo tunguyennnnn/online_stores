@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Button, Header} from 'semantic-ui-react'
+import {Form, Button, Header, Message} from 'semantic-ui-react'
 
 export default class PromotionForm extends React.Component {
   constructor () {
@@ -8,6 +8,10 @@ export default class PromotionForm extends React.Component {
       formInput: {
         price: '',
         duration: ''
+      },
+      promotionError: {
+        priceError: false,
+        durationError: false
       }
     }
   }
@@ -17,6 +21,42 @@ export default class PromotionForm extends React.Component {
     const {formInput} = this.state
     formInput[id] = value
     return this.setState({formInput})
+  }
+
+  onSave (event) {
+    event.preventDefault()
+    let priceError, durationError
+    const {price, duration} = this.state.formInput
+
+    priceError = (!price || price === '') ? true : false
+    durationError = (!duration || duration === '') ? true : false
+
+    if (priceError || durationError) {
+      return this.setState({
+        promotionError: {
+          priceError: priceError,
+          durationError: durationError
+        }
+      })
+    } else {
+      this.setState({
+        promotionError: {
+          priceError: false,
+          durationError: false
+        }
+      })
+      this.props.submitPromotion(this.state.formInput)
+    }
+  }
+
+  errorHandler(flag) {
+    if (flag) {
+      return (
+        <Message negative={true} visible={true}>Invalid Input! Check above input field!</Message>
+      )
+    } else {
+      return null
+    }
   }
 
   render () {
@@ -31,15 +71,17 @@ export default class PromotionForm extends React.Component {
         <Form.Field>
           <label>Price</label>
           <br />
-          <Form.Input style={inputStyle} id='price' type='text' value={price} onChange={this.onChange.bind(this)} />
+          <Form.Input style={inputStyle} id='price' type='text' value={price} onChange={this.onChange.bind(this)} error={this.state.promotionError.priceError} />
+          {this.errorHandler(this.state.promotionError.priceError)}
         </Form.Field>
         <Form.Field>
           <label>Duration</label>
           <br />
-          <Form.Input style={inputStyle} id='duration' type='text' value={duration} onChange={this.onChange.bind(this)} />
+          <Form.Input style={inputStyle} id='duration' type='text' value={duration} onChange={this.onChange.bind(this)} error={this.state.promotionError.durationError} />
+          {this.errorHandler(this.state.promotionError.durationError)}
         </Form.Field>
         <Button.Group style={{width: '100%'}}>
-          <Button style={buttonStyle} onClick={submitPromotion.bind(null, this.state.formInput)}>Add Plan</Button>
+          <Button style={buttonStyle} onClick={this.onSave.bind(this)}>Add Plan</Button>
           <Button onClick={showItems}>Cancel</Button>
         </Button.Group>
       </Form>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Input, TextArea, Select, Button} from 'semantic-ui-react'
+import {Form, Input, TextArea, Select, Button, Message} from 'semantic-ui-react'
 import { CATEGORY, PROVINCE } from '../../../constants'
 
 export default class NewPostForm extends React.Component {
@@ -20,7 +20,6 @@ export default class NewPostForm extends React.Component {
         adType: 'Sell'
       },
       postError: {
-        error: false,
         titleError: false,
         imageERror: false,
         descriptionError: false,
@@ -56,83 +55,18 @@ export default class NewPostForm extends React.Component {
 
   onSave (event) {
     event.preventDefault()
-    let err = false, titleError = false, imageError = false, descriptionError = false, phoneError = false, priceError = false
-    const {title, imageUrl, description, phone, price, category, subCategory, province, city, type, adType} = this.state.formInput
-    _.forEach(this.state.formInput, (key, value) => {
-      if (!title || title === '') {
-        this.setState({
-          postError: {
-            error: true,
-            titleError: true
-          }
-          })
-        err = true
-        titleError = true
-      }
-      if (!imageUrl || imageUrl === '') {
-        this.setState({
-          postError: {
-            error: true,
-            imageError: true
-          }
-          })
-        err = true
-        imageError = true
-      }
-      if (!description || description === '') {
-        this.setState({
-          postError: {
-            error: true,
-            descriptionError: true
-          }
-          })
-        err = true
-        descriptionError = true
-      }
-      if (!phone || phone === '') {
-        this.setState({
-          postError: {
-            error: true,
-            phoneError: true
-          }
-          })
-        err = true
-        phoneError = true
-      }
-      if (!price || price === '') {
-        this.setState({
-          postError: {
-            error: true,
-            priceError: true
-          }
-          })
-        err = true
-        priceError = true
-      }
-      if (!category || category === '') {
-        // this.setState({postError: true})
-      }
-      if (!subCategory || subCategory === '') {
-        // this.setState({postError: true})
-      }
-      if (!province || province === '') {
-        // this.setState({postError: true})
-      }
-      if (!city || city === '') {
-        // this.setState({postError: true})
-      }
-      if (!type || type === '') {
-        // this.setState({postError: true})
-      }
-      if (!adType || adType === '') {
-        // this.setState({postError: true})
-      }
-    })
-    console.log(this.state.postError, err)
-    if (err) {
+    let titleError, imageError, descriptionError, phoneError, priceError
+    const {title, imageUrl, description, phone, price} = this.state.formInput
+
+    titleError = (!title || title === '') ? true : false
+    imageError = (!imageUrl || imageUrl === '') ? true : false
+    descriptionError = (!description || description === '') ? true : false
+    phoneError = (!phone || phone === '') ? true : false
+    priceError = (!price || price === '') ? true : false
+
+    if (titleError || imageError || descriptionError || phoneError || priceError) {
       return this.setState({
         postError: {
-          error: err,
           titleError: titleError,
           imageError: imageError,
           descriptionError: descriptionError,
@@ -141,7 +75,26 @@ export default class NewPostForm extends React.Component {
         }
       })
     } else {
+      this.setState({
+        postError: {
+          titleError: false,
+          imageError: false,
+          descriptionError: false,
+          phoneError: false,
+          priceError: false
+        }
+      })
       this.props.submitPost(this.state.formInput)
+    }
+  }
+
+  errorHandler(flag) {
+    if (flag) {
+      return (
+        <Message negative={true} visible={true}>Invalid Input! Check above input field!</Message>
+      )
+    } else {
+      return null
     }
   }
 
@@ -159,26 +112,31 @@ export default class NewPostForm extends React.Component {
           <label>Title</label>
           <br />
           <Form.Input style={inputStyle} id='title' type='text' value={this.state.formInput.title} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.titleError}/>
+          {this.errorHandler(this.state.postError.titleError)}
         </Form.Field>
         <Form.Field>
           <label>Image Url</label>
           <br />
           <Form.Input style={inputStyle} id='imageUrl' type='text' value={this.state.formInput.imageUrl} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.imageError}/>
+          {this.errorHandler(this.state.postError.imageError)}
         </Form.Field>
         <Form.Field>
           <label>Description</label>
           <br />
-          <Form.Input style={inputStyle} id='description' type='text' value={this.state.formInput.description} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.imageError}/>
+          <Form.Input style={inputStyle} id='description' type='text' value={this.state.formInput.description} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.descriptionError}/>
+          {this.errorHandler(this.state.postError.descriptionError)}
         </Form.Field>
         <Form.Field>
           <label>Price</label>
           <br />
-          <Form.Input style={inputStyle} id='price' type='number' min='1' value={this.state.formInput.price} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.imageError}/>
+          <Form.Input style={inputStyle} id='price' type='number' min='1' value={this.state.formInput.price} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.priceError}/>
+          {this.errorHandler(this.state.postError.priceError)}
         </Form.Field>
         <Form.Field>
           <label>Phone Number</label>
           <br />
-          <Form.Input style={inputStyle} id='phone' type='text' value={this.state.formInput.phone} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.imageError}/>
+          <Form.Input style={inputStyle} id='phone' type='text' value={this.state.formInput.phone} onChange={this.onChange.bind(this)} required={true} error={this.state.postError.phoneError}/>
+          {this.errorHandler(this.state.postError.phoneError)}
         </Form.Field>
         <Form.Field>
           <label>Category</label>
@@ -221,6 +179,9 @@ export default class NewPostForm extends React.Component {
           <Button style={{marginRight: '1%'}} onClick={this.onSave.bind(this)}>Post</Button>
           <Button onClick={this.props.cancelPost}>Cancel</Button>
         </Button.Group>
+
+
+
       </Form>
     )
   }
