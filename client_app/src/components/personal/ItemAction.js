@@ -22,7 +22,7 @@ export default class UserItemAction extends React.Component {
   purchasePromotionTemplate () {
     const {promotionSet = [], purchasePromotion, deletedAt, sltype} = this.props
     const {itemId} = this.props
-    
+
     const type = sltype.charAt(3)
     let extraCharge
     switch(type) {
@@ -47,7 +47,7 @@ export default class UserItemAction extends React.Component {
         { !deletedAt
           ? promotionSet.map((p, i) => {
             const {id, duration, price} = p
-            const totalPrice = (price * 2 * 7) + (price * extraCharge)
+            const totalPrice = (price * 2 * 7) + (price * 2 * extraCharge)
             return (
               <div key={i}>
                 <span>Duration: 7 | </span>
