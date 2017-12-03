@@ -6,7 +6,7 @@ import Rate from './rate/Rate'
 
 export default class Item extends React.Component {
   render () {
-    const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, promotion, score, deletedAt, userType, adType} = this.props.itemInfo
+    const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, store, promotion, score, deletedAt, userType, adType} = this.props.itemInfo
     const forSaleBy = `${firstName} ${lastName}`
     const forSaleByPersonal = `${this.props.firstName} ${this.props.lastName}`
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd, editPost} = this.props
@@ -45,7 +45,7 @@ export default class Item extends React.Component {
             <br />
             {
               page === 'USER_PAGE'
-              ? <UserItemAction promotionSet={promotionSet} editItem={editPost.bind(null, this.props.itemInfo)} deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} />
+              ? <UserItemAction promotionSet={promotionSet} editItem={editPost.bind(null, this.props.itemInfo)} deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} available={available} purchasePromotion={purchasePromotion.bind(null)} itemId={id} promotion={promotion} sltype={store}/>
               : page === 'ADMIN_PAGE'
               ? <AdminItemAction deletedAt={deletedAt} deleteItem={deleteItem.bind(null, id)} />
               : type === 'Physical ad' && page !== 'USER_PAGE'

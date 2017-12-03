@@ -20,17 +20,38 @@ export default class UserItemAction extends React.Component {
   }
 
   purchasePromotionTemplate () {
-    const {promotionSet = [], purchasePromotion, deletedAt} = this.props
+    const {promotionSet = [], purchasePromotion, deletedAt, sltype} = this.props
     const {itemId} = this.props
+    
+    const type = sltype.charAt(3)
+    let extraCharge
+    switch(type) {
+      case 1:
+        extraCharge = 0.2
+        break
+      case 2:
+        extraCharge = 0.15
+        break
+      case 3:
+        extraCharge = 0.1
+        break
+      case 4:
+        extraCharge = 0.05
+        break
+      default:
+        extraCharge = 0
+    }
+
     return (
       <div style={{width: '100%'}}>
         { !deletedAt
           ? promotionSet.map((p, i) => {
             const {id, duration, price} = p
+            const totalPrice = (price * 2 * 7) + (price * extraCharge)
             return (
               <div key={i}>
-                <span>Duration: {duration} | </span>
-                <span>Price: {price}</span>
+                <span>Duration: 7 | </span>
+                <span>Price: {totalPrice}</span>
                 <Button size='tiny' style={{marginLeft: '24%', marginBottom: '1%', width: '46%'}} positive onClick={purchasePromotion.bind(null, {itemId, promotionId: id})}>Buy</Button>
               </div>
             )

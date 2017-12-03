@@ -4,7 +4,6 @@ import {Button, Message} from 'semantic-ui-react'
 export default class AdminItemAction extends React.Component {
   render () {
     const {deleteItem, showTransaction, deletedAt} = this.props
-    console.log(this.props)
     return (
       <div>
         {

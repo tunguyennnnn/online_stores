@@ -29,7 +29,6 @@ export default class AdminPage extends React.Component {
     const {showItems, logout, fetchAdmin, createAdminAccount, createPlan, createPromotion, deleteItem, submitPlan, submitAccount, submitPromotion, showTransaction} = this.props
     const {pageState} = this.props
     const {items, promotions, plans, transactions} = this.props.pageState
-    console.log(items)
     return (
       <div class='row'>
         <Menu>

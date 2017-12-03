@@ -40,7 +40,6 @@ export default class NewPostForm extends React.Component {
   onChange (event) {
     const {id, value} = event.target
     const {formInput, postError} = this.state
-    console.log(postError)
     if (id === 'category') {
       formInput.category = value.split('-')[0]
       formInput.subCategory = value.split('-')[1]
@@ -99,7 +98,6 @@ export default class NewPostForm extends React.Component {
   }
 
   render () {
-    console.log(this.state.postError)
     const gStyle = {marginLeft: '5%', marginRight: '15%', marginBottom: '3%'}
     const inputStyle = {width: '100%'}
     const isSellType = this.state.formInput === 'Sell'
