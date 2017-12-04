@@ -30,7 +30,6 @@ export default class PlanForm extends React.Component {
     event.preventDefault()
     let nameError, priceError, durationError
     const {name, price, duration} = this.state.formInput
-    description.match(/^[0-9]*$/gm)
 
     nameError = (!name || name === '') ? true : false
     priceError = (!price || price === '') ? true : false
