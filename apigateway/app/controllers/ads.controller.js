@@ -6,10 +6,12 @@ function index (req, res, next) {
   const {pExec, decoded} = res
   Ad.getAds({exec: pExec})
     .then(items => {
-      res.json(items)
+      console.log('JSON', _.sortBy(items, 'pPrice'))
+      // _.sortBy(items, (x,y) => x.pri)
+      res.json(_.orderBy(items, ['pPrice'], ['desc']))
     })
     .catch(err => {
-      console.log(err)
+      console.log('ERROR', err)
       res.status(500).send()
     })
 }
@@ -17,9 +19,10 @@ function index (req, res, next) {
 function create (req, res, next) {
   const {decoded, pExec} = res
   const {userId} = decoded
-  if (req.body.id !== 'null') {
+  if (req.body.id || req.body.id === 0) {
     Ad.update(_.assign({}, {userId, exec: pExec}, req.body))
       .then(items => {
+        console.log('UPDATE ITEMS', items)
         res.json(items)
       })
       .catch(err => {
@@ -29,9 +32,11 @@ function create (req, res, next) {
   } else {
     Ad.createAd(_.assign({}, {userId, exec: pExec}, req.body))
       .then(items => {
+        console.log('ITEMS', items)
         res.json(items)
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send()
       })
   }

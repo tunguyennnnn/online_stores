@@ -14,8 +14,8 @@ export default class NewPostForm extends React.Component {
         price: '',
         category: CATEGORY.first().value.split('-')[0],
         subCategory: CATEGORY.first().value.split('-')[1],
-        province: PROVINCE.first().value.split('-')[0],
-        city: PROVINCE.first().value.split('-')[1],
+        province: PROVINCE.first().value.split('-')[1],
+        city: PROVINCE.first().value.split('-')[0],
         type: 'Online ad',
         adType: 'Sell'
       },

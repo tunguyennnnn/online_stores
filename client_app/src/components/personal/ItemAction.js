@@ -50,8 +50,8 @@ export default class UserItemAction extends React.Component {
             const totalPrice = (price * 2 * 7) + (price * 2 * extraCharge)
             return (
               <div key={i}>
-                <span>Duration: 7 | </span>
-                <span>Price: {totalPrice}</span>
+                <span>Duration: {duration} </span>
+                <span>Price: {price}</span>
                 <Button size='tiny' style={{marginLeft: '24%', marginBottom: '1%', width: '46%'}} positive onClick={purchasePromotion.bind(null, {itemId, promotionId: id})}>Buy</Button>
               </div>
             )

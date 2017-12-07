@@ -8,6 +8,7 @@ export default class Item extends React.Component {
   render () {
     const {id, email, firstName, lastName, imageUrl, title, description, price, phone, type, province, city, available, store, promotion, score, deletedAt, userType, adType} = this.props.itemInfo
     const forSaleBy = `${firstName} ${lastName}`
+    console.log(this.props.itemInfo)
     const forSaleByPersonal = `${this.props.firstName} ${this.props.lastName}`
     const {page, promotionSet, purchasePromotion, deleteItem, rateAd, editPost} = this.props
     const columnStyle = {paddingLeft: '1.5%', paddingRight: '1.5%', paddingBottom: 'inherit'}

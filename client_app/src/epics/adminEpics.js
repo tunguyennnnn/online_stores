@@ -10,6 +10,7 @@ export function submitAccount (action$, store) {
     .switchMap(formInput => {
       const request = {
         url: '/api/users/',
+        method: 'POST',
         header: {
           Authorization: `Bearer ${window.localStorage.getItem('apiToken')}`
         },

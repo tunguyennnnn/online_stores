@@ -63,7 +63,7 @@ export default class Navbar extends React.Component {
       this.setState({subCategory: subCategory})
       this.props.filterItems({type, category, subCategory})
     } else {
-      const province = data.value.split('-')[0]
+      const province = data.value.split('-')[1]
       this.props.filterItems({type, province, category: this.props.category, subCategory: this.state.subCategory})
     }
   }

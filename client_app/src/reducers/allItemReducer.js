@@ -21,7 +21,9 @@ function filterItems (state, filterOptions) {
     }
     case 'PROVINCE': {
       if (filterOptions.province !== 'All') {
+        console.log(filterOptions.province)
         if (filterOptions.category && filterOptions.subCategory) {
+          console.log(filterOptions.province)
           return {
             ...state,
             items: fetchedItems.items.filter((item) => item.province === filterOptions.province && item.category === filterOptions.category && item.subCategory === filterOptions.subCategory)
@@ -33,6 +35,7 @@ function filterItems (state, filterOptions) {
           }
         }
       } else {
+        console.log(filterOptions.province)
         if (filterOptions.category && filterOptions.subCategory) {
           return {
             ...state,

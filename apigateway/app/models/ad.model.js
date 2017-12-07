@@ -10,7 +10,7 @@ function getAllAds (exec) {
 }
 
 function createAd ({exec, userId, title, description, price, imageUrl, phone, category, subCategory, province, city, store, timeSlot, type, adType}) {
-  return exec(['INSERT INTO ads(user_id, title, description, price, imageUrl, phone, category, subCategory, province, city, store, timeSlot, type, adType)',
+  return exec(['INSERT INTO ads(user_id, title, description, price, imageUrl, phone, category, subCategory, province, city, store, timeslot, type, adType)',
     `VALUES(${userId}, '${title}', '${description}', '${price}', '${imageUrl}', '${phone}', '${category}', '${subCategory}', '${province}', '${city}', '${store}', '${timeSlot}', '${type}', '${adType}');`].join(' '))
           .then(() => getUserAds({exec, userId}))
 }
@@ -55,8 +55,15 @@ function getAds ({exec, userId, isAdmin}) {
   const where = isAdmin
               ? `JOIN users as u ON u.id = ${userId} LEFT JOIN rates as r  ON r.ad_id = a.id  GROUP BY a.id`
               : userId
-              ? `LEFT JOIN users as u ON u.id = '${userId}' LEFT JOIN rates as r on r.ad_id = a.id where a.deletedAt is null GROUP BY a.id` : 'LEFT JOIN users as u ON a.user_id = u.id LEFT JOIN rates as r on r.ad_id = a.id where a.deletedAt is null GROUP BY a.id'
-  return exec(`SELECT DISTINCT a.*, u.firstName, u.lastName, u.email, u.userType, ROUND(AVG(CASE WHEN r.score IS NULL THEN 0 ELSE r.score END)) as score FROM ads as a ${where}`)
+              ? `LEFT JOIN users as u ON u.id = '${userId}' LEFT JOIN rates as r on r.ad_id = a.id where a.deletedAt is null GROUP BY a.id`
+              : `LEFT JOIN users as u ON a.user_id = u.id
+                LEFT JOIN rates as r on r.ad_id = a.id
+                LEFT JOIN plans as p ON p.user_id = u.id
+                LEFT JOIN promotions as pro ON pro.ad_id = a.id
+                LEFT JOIN promotionSet as proSet ON proSet.id = pro.set_id
+                where a.deletedAt is null and p.startDate is not null and  p.lastDate > CURRENT_TIMESTAMP()
+                GROUP BY a.id, proSet.price`
+  return exec(`SELECT DISTINCT a.*, u.firstName, u.lastName, u.email, u.userType, COALESCE(proSet.price, 0) as pPrice, ROUND(AVG(CASE WHEN r.score IS NULL THEN 0 ELSE r.score END)) as score FROM ads as a ${where}`)
 }
 
 function destroy ({exec, adId, userId, isAdmin}) {
