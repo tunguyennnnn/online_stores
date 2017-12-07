@@ -12,6 +12,8 @@ import configStore from './Store'
 import { Signup } from './containers/auth/Signup'
 import { Login } from './containers/auth/Login'
 import AdminPage from './containers/adminPage'
+import Report from './containers/Reports'
+
 const store = configStore()
 
 const app = document.getElementById('app')
@@ -27,6 +29,7 @@ ReactDom.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path='/' component={Home} />
+      <Route path='/report' component={Report} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
       <Route path='/users/:userId' component={PersonalPage} />
