@@ -67,7 +67,7 @@ FROM stores, ads;`)
 }
 
 function report8 (exec) {
-  return exec(`SELECT * FROM ads WHERE ads.store = (SELECT DISTINCT id FROM stores) AND city = 'Montreal' GROUP BY category;`)
+  return exec(`select DISTINCT(category), title, price, province from ads where type = 'Physical Store' group by province`)
 }
 
 function report9 (exec) {
