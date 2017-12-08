@@ -21,14 +21,20 @@ function report1 (exec) {
                             where u.id = a.user_id and a.category = 'JOBS'
                             group by a.category
                             ) as r`)
-
-  return Promise.all(buyAndSell, service, job)
+  const rent = exec(`select MAX(r.counting) as count, r.firstName, r.lastName, r.category
+                            from(
+                            select count(a.id) as counting, u.id, a.category, u.firstName, u.lastName
+                            from users as u, ads as a
+                            where u.id = a.user_id and a.category = 'RENT'
+                            group by a.category
+                            ) as r`)
+  return Promise.all([buyAndSell, service, job, rent])
 }
 
 function report2 (exec) {
   return exec(`SELECT *
 FROM ads
-WHERE category = 'Buy and Sell'
+WHERE category = 'BUY_AND_SELL'
 AND createdAt > (SELECT DATE_SUB(NOW(), INTERVAL 10 DAY));`)
 }
 

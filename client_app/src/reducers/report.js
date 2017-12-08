@@ -8,7 +8,8 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case AN.FETCH_REPORT_SUCCESS: {
-      const { report = [] } = action.payload
+      console.log(action.payload)
+      const report = _.flattenDeep(action.payload) || []
       return {
         ...state,
         report

@@ -15,7 +15,8 @@ import Report from '../components/Reports/Report'
 
 export default class Reports extends React.Component {
   render () {
-    const {reportData} = this.props
+    const {report} = this.props.reportData
+    console.log(report)
     return (
       <div>
         <Header>Report</Header>
@@ -29,7 +30,7 @@ export default class Reports extends React.Component {
         <Divider horizontal hidden />
         <Button onClick={this.props.report.bind(null, {id:'5'})}>all categories that indicates the sellers whose items, sold in a given city, have the highest average rating for all items posted in that category and in the specified city.</Button>
         {
-          <Report data={reportData} />
+            <Report data={report} />
         }
         }
       </div>

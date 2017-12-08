@@ -8,6 +8,7 @@ export function report (payload) {
 }
 
 export function receivedReport (payload) {
+  console.log(payload)
   return {
     type: AN.FETCH_REPORT_SUCCESS,
     payload
