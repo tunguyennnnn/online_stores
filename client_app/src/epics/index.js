@@ -3,6 +3,7 @@ import {fetchUser, submitPost, purchasePromotion, purchasePlan, userDeleteItem, 
 import { fetchAll } from './fetchAll'
 import {submitAccount, submitPlan, submitPromotion, deleteItem, fetchAdmin} from './adminEpics'
 import {login, signup} from './authEpics'
+import {fetchReport} from './reportEpics'
 
 export default combineEpics(
   fetchAdmin,
@@ -19,5 +20,6 @@ export default combineEpics(
   submitPromotion,
   deleteItem,
   rateAd,
-  fetchStores
+  fetchStores,
+  fetchReport
 )

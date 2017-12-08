@@ -5,6 +5,7 @@ import allItemReducer from './allItemReducer'
 import navigationReducer from './navigationReducer'
 import adminReducer from './adminReducer'
 import mainPageReducer from './mainPageReducer'
+import report from './report'
 
 const allReducers = combineReducers({
   allItems: allItemReducer,
@@ -13,6 +14,7 @@ const allReducers = combineReducers({
   navigation: navigationReducer,
   adminPage: adminReducer,
   mainPageState: mainPageReducer,
+  report: report
 })
 
 export default allReducers
