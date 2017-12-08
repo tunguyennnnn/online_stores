@@ -86,26 +86,26 @@ CREATE TABLE IF NOT EXISTS ads(
 );
 
 INSERT IGNORE INTO ads (user_id, title, price, imageUrl, description, category, subCategory, createdAt, forBuySale, city, store, province, type)
-VALUES (2, 'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'QC', 'Physical Store'),
-				(2, 'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'QC', 'Physical Store'),
-                (2,'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '2', 'QC', 'Physical Store'),
-                (2,'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'QC', 'Physical Store'),
-                (2, 'A Tale of Two Cities', 20.00, null, 'description', 'Buy and Sell', 'Books', '2017-12-01 12:00:00', 1, 'Montreal', '2', 'QC', 'Physical Store'),
-                (2,'Sony Radio', 20.00, null, 'description', 'Buy and Sell', 'Electronics', '2017-12-01 12:00:00', 1, 'Montreal', '3', 'QC', 'Physical Store'),
-                (2,'Pride and Prejudice', 20.00, null, 'description', 'Buy and Sell', 'Books', '2017-12-01 12:00:00', 1, 'Montreal', '4', 'QC', 'Physical Store'),
-                (2,'Math Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal', '1','BC', null),
-                (3,'French Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal', '3','BC', null),
-                (4,'English Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'BC', 'Physical Store'),
-                (5, 'Databases Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Toronto', '2', 'BC', 'Physical Store'),
-                (6,'Wedding Photographer', 20.00, null, 'description', 'Services', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto', '3', 'BC', 'Physical Store'),
-                (7, 'Special Events Photographer', 20.00, null, 'description', 'Services', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto', '1','ON', null),
-                (2,'Nature Photographer', 20.00, null, 'description', 'Services', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto', '1', 'ON', 'Physical Store'),
-                (5,'Mega Subwoofer', 20.00, null, 'description', 'Rent', 'Electronics', '2017-12-01 12:00:00', 1, 'Toronto', '2', 'ON', 'Physical Store'),
-                (2,'Toyota 2016', 20.00, null, 'description', 'Rent', 'Car', '2017-12-01 12:00:00', 1, 'Toronto', '1', 'ON', 'Physical Store'),
-                (2,'Westmount Apartment', 20.00, null, 'description', 'Rent', 'Apartments', '2017-12-01 12:00:00', 1, 'Toronto', '2','BC', null),
-                (6,'Vera Wang Dress', 20.00, null, 'description', 'Rent', 'Wedding Dresses', '2017-12-01 12:00:00', 1, 'Toronto', '3', 'ON', 'Physical Store'),
-                (5,'Digital Art', 20.00, null, 'description', 'Commission', 'Art', '2017-12-01 12:00:00', 1, 'Toronto', '1','ON', null),
-                (3, 'Mural Painter', 20.00, null, 'description', 'Commission', 'Art', '2017-12-01 12:00:00', 1, 'Toronto', '1','ON', null);
+VALUES (2, 'Winter Coat', 20.00, null, 'description', 'BUY_AND_SELL', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'QC', 'Physical Store'),
+				(2, 'Winter Coat', 20.00, null, 'description', 'BUY_AND_SELL', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'QC', 'Physical Store'),
+                (2,'Winter Coat', 20.00, null, 'description', 'BUY_AND_SELL', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '2', 'QC', 'Physical Store'),
+                (2,'Winter Coat', 20.00, null, 'description', 'BUY_AND_SELL', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'QC', 'Physical Store'),
+                (2, 'A Tale of Two Cities', 20.00, null, 'description', 'BUY_AND_SELL', 'Books', '2017-12-01 12:00:00', 1, 'Montreal', '2', 'QC', 'Physical Store'),
+                (2,'Sony Radio', 20.00, null, 'description', 'BUY_AND_SELL', 'Electronics', '2017-12-01 12:00:00', 1, 'Montreal', '3', 'QC', 'Physical Store'),
+                (2,'Pride and Prejudice', 20.00, null, 'description', 'BUY_AND_SELL', 'Books', '2017-12-01 12:00:00', 1, 'Montreal', '4', 'QC', 'Physical Store'),
+                (2,'Math Tutor', 20.00, null, 'description', 'SERVICES', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal', '1','BC', null),
+                (3,'French Tutor', 20.00, null, 'description', 'SERVICES', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal', '3','BC', null),
+                (4,'English Tutor', 20.00, null, 'description', 'SERVICES', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal', '1', 'BC', 'Physical Store'),
+                (5, 'Databases Tutor', 20.00, null, 'description', 'SERVICES', 'Tutors', '2017-12-01 12:00:00', 1, 'Toronto', '2', 'BC', 'Physical Store'),
+                (6,'Wedding Photographer', 20.00, null, 'description', 'SERVICES', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto', '3', 'BC', 'Physical Store'),
+                (7, 'Special Events Photographer', 20.00, null, 'description', 'SERVICES', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto', '1','ON', null),
+                (2,'Nature Photographer', 20.00, null, 'description', 'SERVICES', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto', '1', 'ON', 'Physical Store'),
+                (5,'Mega Subwoofer', 20.00, null, 'description', 'RENT', 'Electronics', '2017-12-01 12:00:00', 1, 'Toronto', '2', 'ON', 'Physical Store'),
+                (2,'Toyota 2016', 20.00, null, 'description', 'RENT', 'Car', '2017-12-01 12:00:00', 1, 'Toronto', '1', 'ON', 'Physical Store'),
+                (2,'Westmount Apartment', 20.00, null, 'description', 'RENT', 'Apartments', '2017-12-01 12:00:00', 1, 'Toronto', '2','BC', null),
+                (6,'Vera Wang Dress', 20.00, null, 'description', 'RENT', 'Wedding Dresses', '2017-12-01 12:00:00', 1, 'Toronto', '3', 'ON', 'Physical Store'),
+                (5,'Digital Art', 20.00, null, 'description', 'JOBS', 'Art', '2017-12-01 12:00:00', 1, 'Toronto', '1','ON', null),
+                (3, 'Mural Painter', 20.00, null, 'description', 'JOBS', 'Art', '2017-12-01 12:00:00', 1, 'Toronto', '1','ON', null);
 
 CREATE TABLE IF NOT EXISTS promotionSet (
     id int NOT NULL AUTO_INCREMENT,
@@ -144,3 +144,13 @@ VALUES (001, "SL-1", "123 Marketplace, Montreal, QC"),
 				(002, "SL-2", "456 Marketplace, Montreal, QC"),
 				(003, "SL-3", "789 Marketplace, Montreal, QC"),
 				(004, "SL-4", "001 Marketplace, Montreal, QC");
+
+
+INSERT IGNORE INTO transactions (user_id, transaction_id, type, amount, cardDetail, dateOfPayment)
+VALUES (2, 10101, 'ad promotion', 10.00, 'visa card', '2017-12-01'),
+				(2, 10102, 'ad promotion',10.00, 'master card', '2017-12-01'),
+                (2, 10103, 'ad promotion', 10.00, 'visa card', '2017-12-01'),
+                (2, 10104, 'ad promotion', 10.00, 'master card', '2017-12-01'),
+                (3, 10105, 'ad promotion', 50.00, 'visa card', '2017-12-01'),
+                (3, 10106, 'ad promotion', 50.00, 'master card', '2017-12-01'),
+                (3, 10107, 'ad promotion', 50.00, 'visa card', '2017-12-01');

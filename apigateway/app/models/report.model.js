@@ -42,6 +42,7 @@ function report3 (exec) {
   return exec(`SELECT u.firstName, u.lastName, u.email
 FROM users as u, ads as a
 where u.id = a.user_id and a.title = 'Winter Coat'
+group by u.email
 `)
 }
 
@@ -66,7 +67,7 @@ FROM stores, ads;`)
 }
 
 function report8 (exec) {
-  return exec(`SELECT * FROM ads WHERE ads.store = (SELECT DISTINCT id FROM stores) AND city = "Montreal" GROUP BY category;`)
+  return exec(`SELECT * FROM ads WHERE ads.store = (SELECT DISTINCT id FROM stores) AND city = 'Montreal' GROUP BY category;`)
 }
 
 function report9 (exec) {
