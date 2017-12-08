@@ -27,18 +27,16 @@ function report1 (exec) {
 
 function report2 (exec) {
   return exec(`SELECT *
-        FROM ads
-        WHERE category = 'Buy and Sell'
-        AND createdAt < (SELECT NOW());`)
+FROM ads
+WHERE category = 'Buy and Sell'
+AND createdAt > (SELECT DATE_SUB(NOW(), INTERVAL 10 DAY));`)
 }
 
 function report3 (exec) {
-  return exec(`SELECT *
-FROM users
-WHERE province = 'QC'
-AND users.id =  (SELECT DISTINCT ads.user_id
-			FROM ads
-            WHERE title = 'Winter Coat');`)
+  return exec(`SELECT u.firstName, u.lastName, u.email
+FROM users as u, ads as a
+where u.id = a.user_id and a.title = 'Winter Coat'
+`)
 }
 
 function report4 (exec) {
@@ -70,7 +68,9 @@ function report9 (exec) {
 }
 
 function report10 (exec) {
-
+  return exec(`SELECT sum(amount), user_id
+FROM transactions
+GROUP BY user_id;`)
 }
 
 module.exports = {report1, report2, report3, report4, report5, report6, report7, report8, report9, report10}

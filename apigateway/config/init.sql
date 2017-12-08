@@ -12,8 +12,19 @@ CREATE TABLE IF NOT EXISTS users(
     UNIQUE (email)
 );
 
-INSERT IGNORE INTO users (firstName, lastName, email, password, isAdmin, userType)
-VALUES ('Super Admin', '', 'admin@bestseller.com', 'admin', true, null);
+INSERT IGNORE INTO users (firstName, lastName, email, password, isAdmin, userType, province)
+VALUES ('Super Admin', 'Admin', 'admin@bestseller.com', 'admin', 1, null, 'QC'),
+				('Lily', 'Flowers', 'flowers@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Benny', 'Flour', 'flour@seller.com', 'pass', 0, 'owner', 'QC'),
+                ('Wendy', 'Burger', 'wendy@seller.com', 'pass', 0, 'business', 'QC'),
+                ('Charlie', 'Smith', 'smith@seller.com', 'pass', 0, 'owner', 'QC'),
+                ('Richard', 'Lionheart', 'lion@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Daisy', 'Dandelion', 'daisy@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Emiliy', 'Dickens', 'emily@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Eric', 'Miller', 'eric@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Mark', 'Flint', 'flint@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Nathaniel', 'Grant', 'nate@seller.com', 'pw', 0, 'owner', 'QC'),
+                ('Owen', 'Holmes', 'owen@seller.com', 'pw', 0, 'owner', 'QC');
 
 CREATE TABLE IF NOT EXISTS locations (
     province varchar(32),
@@ -73,6 +84,28 @@ CREATE TABLE IF NOT EXISTS ads(
     timeslot varchar(255),
     PRIMARY KEY(id)
 );
+
+INSERT IGNORE INTO ads (user_id, title, price, imageUrl, description, category, subCategory, createdAt, forBuySale, city)
+VALUES (2, 'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal'),
+				(2, 'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (2,'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (2,'Winter Coat', 20.00, null, 'description', 'Buy and Sell', 'Clothing', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (2, 'A Tale of Two Cities', 20.00, null, 'description', 'Buy and Sell', 'Books', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (2,'Sony Radio', 20.00, null, 'description', 'Buy and Sell', 'Electronics', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (2,'Pride and Prejudice', 20.00, null, 'description', 'Buy and Sell', 'Books', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (2,'Math Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (3,'French Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (4,'English Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Montreal'),
+                (5, 'Databases Tutor', 20.00, null, 'description', 'Services', 'Tutors', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (6,'Wedding Photographer', 20.00, null, 'description', 'Services', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (7, 'Special Events Photographer', 20.00, null, 'description', 'Services', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (2,'Nature Photographer', 20.00, null, 'description', 'Services', 'Photographers', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (5,'Mega Subwoofer', 20.00, null, 'description', 'Rent', 'Electronics', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (2,'Toyota 2016', 20.00, null, 'description', 'Rent', 'Car', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (2,'Westmount Apartment', 20.00, null, 'description', 'Rent', 'Apartments', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (6,'Vera Wang Dress', 20.00, null, 'description', 'Rent', 'Wedding Dresses', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (5,'Digital Art', 20.00, null, 'description', 'Commission', 'Art', '2017-12-01 12:00:00', 1, 'Toronto'),
+                (3, 'Mural Painter', 20.00, null, 'description', 'Commission', 'Art', '2017-12-01 12:00:00', 1, 'Toronto');
 
 CREATE TABLE IF NOT EXISTS promotionSet (
     id int NOT NULL AUTO_INCREMENT,
